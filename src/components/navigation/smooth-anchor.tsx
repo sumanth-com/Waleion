@@ -2,6 +2,7 @@
 
 import { useCallback, type MouseEvent } from "react";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { scrollToId } from "@/constants/homepage";
 import { cn } from "@/lib/utils";
 
@@ -9,22 +10,48 @@ type SmoothAnchorProps = {
   href: string;
   className?: string;
   children: React.ReactNode;
+  onNavigate?: () => void;
 };
 
+function getHash(href: string): string | null {
+  if (href.startsWith("#")) return href.slice(1);
+  if (href.startsWith("/#")) return href.slice(2);
+  const i = href.indexOf("#");
+  if (i >= 0) return href.slice(i + 1);
+  return null;
+}
+
 /**
- * Smooth anchor navigation — uses Lenis-friendly scrollIntoView for hash links.
+ * Smooth in-page navigation for homepage sections.
+ * Handles `#id` and `/#id` from any route.
  */
-export function SmoothAnchor({ href, className, children }: SmoothAnchorProps) {
-  const isHash = href.startsWith("#");
+export function SmoothAnchor({
+  href,
+  className,
+  children,
+  onNavigate,
+}: SmoothAnchorProps) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const hash = getHash(href);
+  const isHomeHash = Boolean(hash) && (href === `/#${hash}` || href === `#${hash}`);
 
   const onClick = useCallback(
     (e: MouseEvent<HTMLAnchorElement>) => {
-      if (!isHash) return;
+      if (!isHomeHash || !hash) return;
+
       e.preventDefault();
-      scrollToId(href);
-      window.history.pushState(null, "", href);
+      onNavigate?.();
+
+      if (pathname === "/") {
+        scrollToId(hash);
+        window.history.pushState(null, "", `/#${hash}`);
+        return;
+      }
+
+      router.push(`/#${hash}`);
     },
-    [href, isHash]
+    [hash, isHomeHash, onNavigate, pathname, router]
   );
 
   return (

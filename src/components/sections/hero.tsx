@@ -1,10 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
-import { HeroAtmosphere } from "@/components/sections/hero-atmosphere";
 import { Container } from "@/components/layout/container";
+import { SmoothAnchor } from "@/components/navigation/smooth-anchor";
 import { buttonVariants } from "@/components/ui/button";
 import { usePrefersReducedMotion } from "@/hooks/use-media-query";
 import { CTA_NAV } from "@/constants/navigation";
@@ -35,9 +34,7 @@ export function Hero() {
   const prefersReducedMotion = usePrefersReducedMotion();
 
   return (
-    <section className="relative isolate flex min-h-dvh items-center overflow-hidden bg-[var(--hero-bg)]">
-      <HeroAtmosphere />
-
+    <section className="relative flex min-h-dvh items-center bg-transparent">
       <Container
         size="wide"
         className="relative z-10 flex w-full flex-col items-center justify-center py-[calc(var(--header-height)+2rem)] text-center"
@@ -104,7 +101,7 @@ export function Hero() {
             animate="visible"
             className="mt-8 flex flex-wrap items-center justify-center gap-3"
           >
-            <Link
+            <SmoothAnchor
               href={CTA_NAV.href}
               className={cn(
                 buttonVariants({ size: "lg" }),
@@ -114,9 +111,9 @@ export function Hero() {
               )}
             >
               Start Your Project
-            </Link>
-            <Link
-              href="/work"
+            </SmoothAnchor>
+            <SmoothAnchor
+              href="/#work"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
                 "rounded-full border-border/80 bg-background/30 px-6 backdrop-blur-md transition-all duration-300",
@@ -125,7 +122,7 @@ export function Hero() {
               )}
             >
               Explore Our Work
-            </Link>
+            </SmoothAnchor>
           </motion.div>
 
           <motion.p

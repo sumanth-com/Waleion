@@ -1,3 +1,4 @@
+import { HashScroll } from "@/components/navigation/hash-scroll";
 import { Hero } from "@/components/sections/hero";
 import { Trust } from "@/components/sections/trust";
 import { WhatWeBuild } from "@/components/sections/what-we-build";
@@ -10,6 +11,7 @@ import { FinalCta } from "@/components/sections/final-cta";
 export default function HomePage() {
   return (
     <>
+      <HashScroll />
       <Hero />
       <Trust />
       <WhatWeBuild />

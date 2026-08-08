@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { Container } from "@/components/layout/container";
-import { SectionAtmosphere } from "@/components/sections/hero-atmosphere";
 import { Eyebrow } from "@/components/ui/typography";
 import { FadeUp } from "@/components/animations/reveal";
 import { buttonVariants } from "@/components/ui/button";
@@ -13,8 +12,7 @@ export function IndustriesHero() {
   const { hero } = industriesPageCopy;
 
   return (
-    <section className="relative isolate overflow-hidden border-b border-border/40 bg-[var(--hero-bg)]">
-      <SectionAtmosphere />
+    <section className="relative bg-transparent">
       <Container
         size="wide"
         className="relative z-10 flex min-h-[70vh] flex-col items-center justify-center py-[calc(var(--header-height)+3rem)] text-center"
@@ -29,7 +27,7 @@ export function IndustriesHero() {
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link
-              href="/contact"
+              href="/#contact"
               className={cn(
                 buttonVariants({ size: "lg" }),
                 "rounded-full px-6 dark:bg-white dark:text-neutral-950 dark:hover:bg-white/90"
@@ -38,7 +36,7 @@ export function IndustriesHero() {
               Discuss Your Project
             </Link>
             <Link
-              href="/work"
+              href="/#work"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
                 "rounded-full px-6 dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"

@@ -1,8 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import { SITE } from "@/constants/site";
 import { FOOTER_NAV } from "@/constants/navigation";
 import { Container } from "@/components/layout/container";
-import { SectionAtmosphere } from "@/components/sections/hero-atmosphere";
+import { SmoothAnchor } from "@/components/navigation/smooth-anchor";
 import { Text } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
 
@@ -10,21 +12,41 @@ type SiteFooterProps = {
   className?: string;
 };
 
+function FooterLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
+  const isHash = href.includes("#");
+  const className =
+    "text-sm text-foreground/80 transition-colors hover:text-foreground";
+
+  if (isHash) {
+    return (
+      <SmoothAnchor href={href} className={className}>
+        {children}
+      </SmoothAnchor>
+    );
+  }
+
+  return (
+    <Link href={href} className={className}>
+      {children}
+    </Link>
+  );
+}
+
 /**
- * Footer shell — structure only; expand when building pages.
+ * Footer on the shared continuous canvas — no band / border cut.
  */
 export function SiteFooter({ className }: SiteFooterProps) {
   const year = new Date().getFullYear();
 
   return (
-    <footer
-      className={cn(
-        "relative overflow-hidden border-t border-border/60 bg-[var(--hero-bg)]",
-        className
-      )}
-    >
-      <SectionAtmosphere />
-      <Container size="wide" className="relative z-[1] section-space-sm">
+    <footer className={cn("relative z-[1] bg-transparent", className)}>
+      <Container size="wide" className="section-space-sm">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div className="space-y-3">
             <p className="text-sm font-semibold tracking-tight">{SITE.name}</p>
@@ -48,12 +70,7 @@ export function SiteFooter({ className }: SiteFooterProps) {
               <ul className="space-y-2">
                 {items.map((item) => (
                   <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className="text-sm text-foreground/80 transition-colors hover:text-foreground"
-                    >
-                      {item.label}
-                    </Link>
+                    <FooterLink href={item.href}>{item.label}</FooterLink>
                   </li>
                 ))}
               </ul>
@@ -61,11 +78,9 @@ export function SiteFooter({ className }: SiteFooterProps) {
           ))}
         </div>
 
-        <div className="divider-subtle mt-12 mb-6" />
-
-        <Text size="xs" muted>
+        <p className="mt-12 text-xs text-muted-foreground">
           © {year} {SITE.legalName}. All rights reserved.
-        </Text>
+        </p>
       </Container>
     </footer>
   );

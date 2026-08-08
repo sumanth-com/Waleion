@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import type { NavItem } from "@/constants/navigation";
+import { SmoothAnchor } from "@/components/navigation/smooth-anchor";
 import { cn } from "@/lib/utils";
 import { easings } from "@/lib/animations";
 
@@ -14,13 +15,15 @@ type NavDropdownProps = {
 };
 
 function isActivePath(pathname: string, href: string) {
-  if (href.startsWith("/#")) return false;
+  if (href.startsWith("/#") || href.startsWith("#")) {
+    return pathname === "/";
+  }
   if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
 /**
- * Accessible desktop dropdown with elegant open/close motion.
+ * Desktop nav item — plain link or dropdown when children exist.
  */
 export function NavDropdown({ item }: NavDropdownProps) {
   const pathname = usePathname();
@@ -59,16 +62,15 @@ export function NavDropdown({ item }: NavDropdownProps) {
   }, []);
 
   if (!item.children?.length) {
+    const linkClass = cn(
+      "relative rounded-full px-3 py-1.5 text-sm transition-colors duration-300",
+      "text-muted-foreground hover:text-foreground",
+      "dark:text-white/75 dark:hover:text-white",
+      active && "text-foreground dark:text-white"
+    );
+
     return (
-      <Link
-        href={item.href}
-        className={cn(
-          "relative rounded-full px-3 py-1.5 text-sm transition-colors duration-300",
-          "text-muted-foreground hover:text-foreground",
-          "dark:text-white/75 dark:hover:text-white",
-          active && "text-foreground dark:text-white"
-        )}
-      >
+      <SmoothAnchor href={item.href} className={linkClass}>
         {item.label}
         {active ? (
           <span
@@ -76,7 +78,7 @@ export function NavDropdown({ item }: NavDropdownProps) {
             className="absolute inset-x-3 -bottom-0.5 h-px bg-foreground/40 dark:bg-white/50"
           />
         ) : null}
-      </Link>
+      </SmoothAnchor>
     );
   }
 

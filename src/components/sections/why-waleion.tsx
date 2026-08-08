@@ -124,7 +124,7 @@ export function WhyWaleion() {
             Let&apos;s Build Something That Lasts
           </p>
           <Link
-            href="/contact"
+            href="/#contact"
             className={cn(
               buttonVariants({ size: "lg" }),
               "rounded-full px-6",

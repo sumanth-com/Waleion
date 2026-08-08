@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { SectionAtmosphere } from "@/components/sections/hero-atmosphere";
 import { Container } from "@/components/layout/container";
 import { cn } from "@/lib/utils";
 import type { ContainerSize } from "@/types";
@@ -12,14 +11,14 @@ type PageSectionProps = {
   /** default = 120–180px rhythm; sm = tighter; none = custom */
   spacing?: "default" | "sm" | "none";
   contain?: boolean;
-  /** Soft hero-like glow + particles (default true). */
+  /** @deprecated Atmosphere is site-wide — ignored for continuous canvas */
   atmosphere?: boolean;
   children: ReactNode;
 };
 
 /**
- * Continuous homepage section on the shared hero canvas.
- * Uses whitespace rhythm — no colored band breaks by default.
+ * Continuous homepage section — transparent on the shared page canvas.
+ * Rhythm via whitespace only; no background bands or borders.
  */
 export function PageSection({
   id,
@@ -28,7 +27,6 @@ export function PageSection({
   size = "wide",
   spacing = "default",
   contain = true,
-  atmosphere = true,
   children,
 }: PageSectionProps) {
   const spacingClass =
@@ -39,26 +37,23 @@ export function PageSection({
         : undefined;
 
   const content = contain ? (
-    <Container
-      size={size}
-      className={cn("relative z-[1]", containerClassName)}
-    >
+    <Container size={size} className={containerClassName}>
       {children}
     </Container>
   ) : (
-    <div className="relative z-[1]">{children}</div>
+    children
   );
 
   return (
     <section
       id={id}
       className={cn(
-        "relative overflow-hidden bg-[var(--hero-bg)]",
+        "relative bg-transparent",
+        id && "scroll-mt-[calc(var(--header-height)+1rem)]",
         spacingClass,
         className
       )}
     >
-      {atmosphere ? <SectionAtmosphere /> : null}
       {content}
     </section>
   );

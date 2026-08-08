@@ -43,7 +43,7 @@ export function FinalCta() {
           Start Your Project
         </Link>
         <Link
-          href="/contact"
+          href="/#contact"
           className={cn(
             buttonVariants({ variant: "outline", size: "lg" }),
             "rounded-full px-6",
@@ -124,7 +124,7 @@ export function FinalCta() {
           <p className="text-sm text-muted-foreground">Let&apos;s build yours.</p>
         </div>
         <Link
-          href="/contact"
+          href="/#contact"
           className={cn(
             buttonVariants({ size: "lg" }),
             "rounded-full px-6",

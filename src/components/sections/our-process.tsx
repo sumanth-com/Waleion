@@ -81,7 +81,7 @@ export function OurProcess() {
           Have an idea you&apos;d like to build?
         </p>
         <Link
-          href="/contact"
+          href="/#contact"
           className={cn(
             buttonVariants({ size: "lg" }),
             "rounded-full px-6",

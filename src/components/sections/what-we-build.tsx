@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { PageSection } from "@/components/layout/page-section";
 import { SectionHeader } from "@/components/layout/section-header";
@@ -14,15 +13,15 @@ import {
   Stagger,
   StaggerItem,
 } from "@/components/animations/reveal";
+import { SmoothAnchor } from "@/components/navigation/smooth-anchor";
 import { solutionCategories } from "@/data/solutions";
 
 /**
- * What We Build — product categories as business solutions.
- * Leads naturally into Work / case studies next.
+ * Expertise — product categories as business solutions.
  */
 export function WhatWeBuild() {
   return (
-    <PageSection id="capabilities" containerClassName="space-y-12 md:space-y-14">
+    <PageSection id="expertise" containerClassName="space-y-12 md:space-y-14">
       <SectionHeader
         label="Our Expertise"
         title="Building Digital Products That Power Modern Businesses."
@@ -37,13 +36,13 @@ export function WhatWeBuild() {
               <PremiumCardBody className="flex-1 text-[0.875rem] leading-relaxed">
                 {item.description}
               </PremiumCardBody>
-              <Link
+              <SmoothAnchor
                 href={item.href}
                 className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-foreground/80 transition-colors duration-300 hover:text-foreground"
               >
                 Learn More
                 <ArrowUpRight className="size-3.5 opacity-70" aria-hidden />
-              </Link>
+              </SmoothAnchor>
             </PremiumCard>
           </StaggerItem>
         ))}

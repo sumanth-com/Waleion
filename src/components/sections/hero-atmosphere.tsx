@@ -74,79 +74,19 @@ export function HeroAtmosphere({
         className
       )}
     >
-      {/* Base wash */}
+      {/* Soft ambient wash — no top glow behind the navbar */}
       <div
         className="absolute inset-0"
         style={{
-          background: isHero
-            ? `
-              radial-gradient(ellipse 90% 55% at 50% -8%, var(--hero-glow-soft), transparent 58%),
-              radial-gradient(ellipse 50% 40% at 18% 30%, color-mix(in oklch, var(--hero-glow) 18%, transparent), transparent 70%),
-              radial-gradient(ellipse 45% 35% at 82% 42%, color-mix(in oklch, var(--hero-glow) 14%, transparent), transparent 72%),
-              radial-gradient(ellipse 70% 50% at 50% 100%, color-mix(in oklch, var(--hero-glow) 12%, transparent), transparent 65%),
-              var(--hero-bg)
-            `
-            : `
-              radial-gradient(ellipse 85% 45% at 50% -5%, color-mix(in oklch, var(--hero-glow-soft) 70%, transparent), transparent 60%),
-              radial-gradient(ellipse 55% 40% at 20% 40%, color-mix(in oklch, var(--hero-glow) 12%, transparent), transparent 72%),
-              radial-gradient(ellipse 50% 35% at 80% 55%, color-mix(in oklch, var(--hero-glow) 10%, transparent), transparent 74%),
-              radial-gradient(ellipse 65% 45% at 50% 110%, color-mix(in oklch, var(--hero-glow) 10%, transparent), transparent 68%),
-              transparent
-            `,
+          background: `
+            radial-gradient(ellipse 45% 35% at 12% 45%, color-mix(in oklch, var(--hero-glow) 10%, transparent), transparent 72%),
+            radial-gradient(ellipse 40% 30% at 88% 55%, color-mix(in oklch, var(--hero-glow) 8%, transparent), transparent 74%),
+            radial-gradient(ellipse 60% 40% at 50% 100%, color-mix(in oklch, var(--hero-glow) 8%, transparent), transparent 68%)
+          `,
         }}
       />
 
-      {/* Top glow arc */}
-      <div
-        className={cn(
-          "absolute left-1/2 -translate-x-1/2",
-          isHero
-            ? "top-[-2%] h-[42%] w-[120%] max-w-[1400px]"
-            : "top-[-8%] h-[36%] w-[110%] max-w-[1200px] opacity-70"
-        )}
-      >
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `
-              radial-gradient(
-                ellipse 55% 35% at 50% 18%,
-                var(--hero-glow-core) 0%,
-                var(--hero-glow-soft) ${isHero ? "48%" : "42%"},
-                transparent 72%
-              )
-            `,
-            filter: isHero
-              ? "blur(2px)"
-              : "blur(4px)",
-            opacity: isHero ? 1 : 0.75,
-          }}
-        />
-        <div
-          className={cn(
-            "absolute left-1/2 -translate-x-1/2 rounded-[100%]",
-            isHero
-              ? "top-[18%] h-px w-[58%] max-w-[720px]"
-              : "top-[22%] h-px w-[48%] max-w-[560px]"
-          )}
-          style={{
-            background:
-              "linear-gradient(90deg, transparent, var(--hero-glow-core), var(--hero-glow), var(--hero-glow-core), transparent)",
-            boxShadow: isHero
-              ? `
-                0 0 18px 2px var(--hero-glow-soft),
-                0 0 48px 8px color-mix(in oklch, var(--hero-glow) 45%, transparent),
-                0 12px 60px 4px color-mix(in oklch, var(--hero-glow) 25%, transparent)
-              `
-              : `
-                0 0 14px 1px color-mix(in oklch, var(--hero-glow-soft) 80%, transparent),
-                0 0 36px 6px color-mix(in oklch, var(--hero-glow) 30%, transparent)
-              `,
-          }}
-        />
-      </div>
-
-      {/* Soft beams */}
+      {/* Soft side beams — kept low so they don't sit behind the nav */}
       <div
         ref={layerRef}
         className={cn(
@@ -155,33 +95,17 @@ export function HeroAtmosphere({
         )}
       >
         <div
-          className={cn(
-            "absolute top-[8%] left-[12%] h-[55%] w-[28%] -rotate-[18deg] rounded-full blur-3xl",
-            isHero ? "opacity-100" : "opacity-50"
-          )}
+          className="absolute top-[28%] left-[8%] h-[40%] w-[24%] -rotate-[18deg] rounded-full opacity-40 blur-3xl"
           style={{
             background:
               "linear-gradient(180deg, var(--hero-beam), transparent 70%)",
           }}
         />
         <div
-          className={cn(
-            "absolute top-[6%] right-[10%] h-[50%] w-[26%] rotate-[16deg] rounded-full blur-3xl",
-            isHero ? "opacity-100" : "opacity-45"
-          )}
+          className="absolute top-[32%] right-[6%] h-[36%] w-[22%] rotate-[16deg] rounded-full opacity-35 blur-3xl"
           style={{
             background:
               "linear-gradient(180deg, var(--hero-beam), transparent 70%)",
-          }}
-        />
-        <div
-          className={cn(
-            "absolute top-[4%] left-1/2 h-[48%] w-[18%] -translate-x-1/2 rounded-full blur-3xl",
-            isHero ? "opacity-100" : "opacity-40"
-          )}
-          style={{
-            background:
-              "linear-gradient(180deg, color-mix(in oklch, var(--hero-glow) 35%, transparent), transparent 75%)",
           }}
         />
       </div>
@@ -203,17 +127,6 @@ export function HeroAtmosphere({
             }}
           />
         ))}
-
-      {/* Bottom fade — hero only, blends into next section */}
-      {isHero && (
-        <div
-          className="absolute inset-x-0 bottom-0 h-32"
-          style={{
-            background:
-              "linear-gradient(180deg, transparent, var(--hero-bg))",
-          }}
-        />
-      )}
     </div>
   );
 }
@@ -221,4 +134,19 @@ export function HeroAtmosphere({
 /** Soft continuous atmosphere for content sections */
 export function SectionAtmosphere({ className }: { className?: string }) {
   return <HeroAtmosphere variant="section" className={className} />;
+}
+
+/** One fixed canvas glow for the whole site — no per-section bands */
+export function SiteAtmosphere({ className }: { className?: string }) {
+  return (
+    <div
+      aria-hidden
+      className={cn(
+        "pointer-events-none fixed inset-0 z-0 overflow-hidden",
+        className
+      )}
+    >
+      <HeroAtmosphere variant="hero" className="!absolute inset-0" />
+    </div>
+  );
 }

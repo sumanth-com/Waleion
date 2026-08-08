@@ -4,14 +4,16 @@ import { useEffect, useId, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X, ArrowUpRight } from "lucide-react";
 import { MAIN_NAV, CTA_NAV } from "@/constants/navigation";
-import { buttonVariants } from "@/components/ui/button";
+import { SmoothAnchor } from "@/components/navigation/smooth-anchor";
 import { cn } from "@/lib/utils";
 import { easings } from "@/lib/animations";
 
 function isActivePath(pathname: string, href: string) {
-  if (href.startsWith("/#")) return false;
+  if (href.startsWith("/#") || href.startsWith("#")) {
+    return pathname === "/";
+  }
   if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(`${href}/`);
 }
@@ -93,7 +95,7 @@ export function MobileNav() {
                   if (!hasChildren) {
                     return (
                       <li key={item.href}>
-                        <Link
+                        <SmoothAnchor
                           href={item.href}
                           className={cn(
                             "block rounded-xl px-3 py-3 text-sm font-medium text-foreground",
@@ -101,10 +103,10 @@ export function MobileNav() {
                             isActivePath(pathname, item.href) &&
                               "bg-foreground/[0.04] dark:bg-white/[0.06]"
                           )}
-                          onClick={() => setOpen(false)}
+                          onNavigate={() => setOpen(false)}
                         >
                           {item.label}
-                        </Link>
+                        </SmoothAnchor>
                       </li>
                     );
                   }
@@ -160,17 +162,23 @@ export function MobileNav() {
                 })}
               </ul>
 
-              <Link
+              <SmoothAnchor
                 href={CTA_NAV.href}
                 className={cn(
-                  buttonVariants({ size: "lg" }),
-                  "mt-4 w-full rounded-full",
+                  "mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-neutral-950 py-3 pl-5 pr-2",
+                  "text-sm font-medium text-white",
                   "dark:bg-white dark:text-neutral-950"
                 )}
-                onClick={() => setOpen(false)}
+                onNavigate={() => setOpen(false)}
               >
                 {CTA_NAV.label}
-              </Link>
+                <span
+                  aria-hidden
+                  className="grid size-8 place-items-center rounded-full bg-white/15 dark:bg-neutral-950/10"
+                >
+                  <ArrowUpRight className="size-3.5" />
+                </span>
+              </SmoothAnchor>
             </motion.nav>
           </>
         ) : null}

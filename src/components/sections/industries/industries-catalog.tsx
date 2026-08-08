@@ -21,7 +21,7 @@ function IndustryBlock({
   return (
     <FadeUp
       id={industry.id}
-      className="scroll-mt-[calc(var(--header-height)+1.5rem)] border-t border-border/50 py-12 md:py-16 first:border-t-0 first:pt-0"
+      className="scroll-mt-[calc(var(--header-height)+1.5rem)] py-12 md:py-16 first:pt-0"
     >
       <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-4">
@@ -45,7 +45,7 @@ function IndustryBlock({
             ))}
           </div>
           <Link
-            href="/contact"
+            href="/#contact"
             className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
           >
             Talk about {industry.name.toLowerCase()}

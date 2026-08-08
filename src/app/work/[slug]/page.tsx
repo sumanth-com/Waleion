@@ -6,7 +6,6 @@ import { createPageMetadata } from "@/lib/seo";
 import { caseStudies, getCaseStudy } from "@/data/work";
 import { Container } from "@/components/layout/container";
 import { PageSection } from "@/components/layout/page-section";
-import { SectionAtmosphere } from "@/components/sections/hero-atmosphere";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -47,14 +46,13 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
   return (
     <>
-      <section className="relative isolate overflow-hidden border-b border-border/40 bg-[var(--hero-bg)]">
-        <SectionAtmosphere />
+      <section className="relative bg-transparent">
         <Container
           size="wide"
           className="relative z-[1] py-[calc(var(--header-height)+2.5rem)] pb-12 md:pb-16"
         >
           <Link
-            href="/work"
+            href="/#work"
             className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
             <ArrowLeft className="size-3.5" aria-hidden />
@@ -191,7 +189,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
         <div className="flex flex-wrap gap-3 border-t border-border/50 pt-8">
           <Link
-            href="/contact"
+            href="/#contact"
             className={cn(
               buttonVariants({ size: "lg" }),
               "rounded-full px-6 dark:bg-white dark:text-neutral-950"
@@ -201,7 +199,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
             <ArrowUpRight className="size-3.5" aria-hidden />
           </Link>
           <Link
-            href="/work"
+            href="/#work"
             className={cn(
               buttonVariants({ variant: "outline", size: "lg" }),
               "rounded-full px-6"
