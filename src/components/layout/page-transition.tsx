@@ -45,19 +45,24 @@ export function PageTransition({ children }: { children: ReactNode }) {
       <AnimatePresence initial={false}>
         <motion.div
           key={transitionKey}
-          initial={{ opacity: 1, scaleX: 0.92, scaleY: 0.92, y: 24 }}
-          animate={{ opacity: 1, scaleX: 1, scaleY: 1, y: 0 }}
-          exit={() => ({
-            opacity: 0,
-            scaleX: 0.42,
-            scaleY: 0.14,
-            y: 80,
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            transformOrigin: dockOrigin(),
-          })}
+          initial="enter"
+          animate="rest"
+          exit="leave"
+          variants={{
+            enter: { opacity: 1, scaleX: 0.92, scaleY: 0.92, y: 24 },
+            rest: { opacity: 1, scaleX: 1, scaleY: 1, y: 0 },
+            leave: () => ({
+              opacity: 0,
+              scaleX: 0.42,
+              scaleY: 0.14,
+              y: 80,
+              position: "absolute" as const,
+              top: 0,
+              left: 0,
+              right: 0,
+              transformOrigin: dockOrigin(),
+            }),
+          }}
           transition={{
             duration: 0.38,
             ease: EASE,

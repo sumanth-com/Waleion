@@ -41,7 +41,7 @@ export {
 export type {
   SolutionDetail,
   AudienceItem,
-  WhyChooseItem,
+  WhyChooseItem as SolutionsWhyChooseItem,
   TechStackGroup,
   FaqItem,
 } from "./solutions-page";
