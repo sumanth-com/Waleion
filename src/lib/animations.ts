@@ -12,6 +12,7 @@ export const easings = {
 export const durations = {
   fast: 0.2,
   base: 0.35,
+  genie: 0.38,
   slow: 0.55,
   reveal: 0.8,
   count: 1.4,

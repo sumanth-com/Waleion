@@ -26,6 +26,7 @@ export function useLenis({ enabled = true }: UseLenisOptions = {}) {
     });
 
     lenisRef.current = lenis;
+    (window as Window & { __lenis?: Lenis }).__lenis = lenis;
 
     let frame = 0;
     const raf = (time: number) => {
@@ -39,6 +40,7 @@ export function useLenis({ enabled = true }: UseLenisOptions = {}) {
       cancelAnimationFrame(frame);
       lenis.destroy();
       lenisRef.current = null;
+      delete (window as Window & { __lenis?: Lenis }).__lenis;
     };
   }, [enabled, prefersReducedMotion]);
 

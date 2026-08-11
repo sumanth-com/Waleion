@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { SmoothAnchor } from "@/components/navigation/smooth-anchor";
 import { Container } from "@/components/layout/container";
 import { Eyebrow } from "@/components/ui/typography";
 import { FadeUp } from "@/components/animations/reveal";
@@ -27,7 +28,7 @@ export function IndustriesHero() {
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link
-              href="/#contact"
+              href="/contact"
               className={cn(
                 buttonVariants({ size: "lg" }),
                 "rounded-full px-6 dark:bg-white dark:text-neutral-950 dark:hover:bg-white/90"
@@ -35,15 +36,15 @@ export function IndustriesHero() {
             >
               Discuss Your Project
             </Link>
-            <Link
-              href="/#work"
+            <SmoothAnchor
+              href="/work"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
                 "rounded-full px-6 dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
               )}
             >
               View Our Work
-            </Link>
+            </SmoothAnchor>
           </div>
         </FadeUp>
       </Container>

@@ -45,7 +45,7 @@ function IndustryBlock({
             ))}
           </div>
           <Link
-            href="/#contact"
+            href="/contact"
             className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
           >
             Talk about {industry.name.toLowerCase()}

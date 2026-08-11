@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { SITE } from "@/constants/site";
 import { FOOTER_NAV } from "@/constants/navigation";
 import { Container } from "@/components/layout/container";
@@ -42,7 +43,10 @@ function FooterLink({
  * Footer on the shared continuous canvas — no band / border cut.
  */
 export function SiteFooter({ className }: SiteFooterProps) {
+  const pathname = usePathname();
   const year = new Date().getFullYear();
+
+  if (pathname.startsWith("/projects")) return null;
 
   return (
     <footer className={cn("relative z-[1] bg-transparent", className)}>

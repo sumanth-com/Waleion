@@ -15,13 +15,13 @@ export const defaultMetadata: Metadata = {
   creator: SITE.name,
   publisher: SITE.name,
   keywords: [
+    "custom software development",
     "software product studio",
-    "SaaS development",
-    "AI products",
+    "SaaS development company",
+    "AI product development",
     "enterprise software",
-    "automation systems",
-    "marketplace development",
-    "internal tools",
+    "business software",
+    "startup MVP development",
     "Waleion",
   ],
   robots: {

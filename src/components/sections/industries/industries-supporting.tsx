@@ -167,7 +167,7 @@ export function IndustriesFinalCta() {
           {finalCta.description}
         </p>
         <Link
-          href="/#contact"
+          href="/contact"
           className={cn(
             buttonVariants({ size: "lg" }),
             "rounded-full px-6 dark:bg-white dark:text-neutral-950 dark:hover:bg-white/90"

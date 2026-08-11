@@ -7,3 +7,4 @@ export { SectionHeader } from "./section-header";
 export { SiteHeader } from "./site-header";
 export { SiteFooter } from "./site-footer";
 export { SiteShell } from "./site-shell";
+export { PageTransition } from "./page-transition";

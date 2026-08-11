@@ -1,9 +1,15 @@
 export { Hero } from "./hero";
+export { WorkShowcase } from "./work-showcase";
 export { HeroAtmosphere } from "./hero-atmosphere";
 export { HeroPreview } from "./hero-preview";
 export { Trust } from "./trust";
 export { WhatWeBuild } from "./what-we-build";
 export { FeaturedWork } from "./featured-work";
+export { WhyChoose } from "./why-choose";
+export { GetStarted } from "./get-started";
+export { Compare } from "./compare";
+export { FaqChat } from "./faq-chat";
+export { SolutionsGrid } from "./solutions-grid";
 export { WhyWaleion } from "./why-waleion";
 export { OurProcess } from "./our-process";
 export { Testimonials } from "./testimonials";

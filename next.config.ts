@@ -15,19 +15,20 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/capabilities",
-        destination: "/",
+        destination: "/expertise",
         permanent: true,
       },
       {
-        source: "/work",
-        destination: "/",
+        source: "/projects",
+        destination: "/work",
         permanent: true,
       },
-      {
-        source: "/contact",
-        destination: "/",
-        permanent: true,
-      },
+    ];
+  },
+  async rewrites() {
+    return [
+      { source: "/work", destination: "/" },
+      { source: "/expertise", destination: "/" },
     ];
   },
 };

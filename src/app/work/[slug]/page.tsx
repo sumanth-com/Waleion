@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { SmoothAnchor } from "@/components/navigation/smooth-anchor";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { createPageMetadata } from "@/lib/seo";
 import { caseStudies, getCaseStudy } from "@/data/work";
@@ -51,13 +52,13 @@ export default async function CaseStudyPage({ params }: PageProps) {
           size="wide"
           className="relative z-[1] py-[calc(var(--header-height)+2.5rem)] pb-12 md:pb-16"
         >
-          <Link
-            href="/#work"
+          <SmoothAnchor
+            href="/work"
             className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
             <ArrowLeft className="size-3.5" aria-hidden />
             All work
-          </Link>
+          </SmoothAnchor>
 
           <div className="mt-8 max-w-3xl">
             <div className="flex flex-wrap gap-2">
@@ -189,7 +190,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
         <div className="flex flex-wrap gap-3 border-t border-border/50 pt-8">
           <Link
-            href="/#contact"
+            href="/contact"
             className={cn(
               buttonVariants({ size: "lg" }),
               "rounded-full px-6 dark:bg-white dark:text-neutral-950"
@@ -198,15 +199,15 @@ export default async function CaseStudyPage({ params }: PageProps) {
             Start a similar project
             <ArrowUpRight className="size-3.5" aria-hidden />
           </Link>
-          <Link
-            href="/#work"
+          <SmoothAnchor
+            href="/work"
             className={cn(
               buttonVariants({ variant: "outline", size: "lg" }),
               "rounded-full px-6"
             )}
           >
             Back to all work
-          </Link>
+          </SmoothAnchor>
         </div>
       </PageSection>
     </>

@@ -3,7 +3,12 @@
 import { useCallback, type MouseEvent } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { scrollToId } from "@/constants/homepage";
+import {
+  HOME_SECTIONS,
+  isHomeCanvas,
+  scrollToId,
+  type HomeSectionPath,
+} from "@/constants/homepage";
 import { cn } from "@/lib/utils";
 
 type SmoothAnchorProps = {
@@ -13,17 +18,20 @@ type SmoothAnchorProps = {
   onNavigate?: () => void;
 };
 
-function getHash(href: string): string | null {
-  if (href.startsWith("#")) return href.slice(1);
-  if (href.startsWith("/#")) return href.slice(2);
-  const i = href.indexOf("#");
-  if (i >= 0) return href.slice(i + 1);
+function resolveHomeSection(
+  href: string
+): { path: HomeSectionPath; section: string } | null {
+  if (href in HOME_SECTIONS) {
+    const path = href as HomeSectionPath;
+    return { path, section: HOME_SECTIONS[path] };
+  }
   return null;
 }
 
 /**
- * Smooth in-page navigation for homepage sections.
- * Handles `#id` and `/#id` from any route.
+ * Homepage section links use real URLs (`/work`, `/expertise`).
+ * On the home canvas: smooth-scroll and update the URL in place.
+ * From other pages: navigate, then land on that section.
  */
 export function SmoothAnchor({
   href,
@@ -33,25 +41,26 @@ export function SmoothAnchor({
 }: SmoothAnchorProps) {
   const pathname = usePathname();
   const router = useRouter();
-  const hash = getHash(href);
-  const isHomeHash = Boolean(hash) && (href === `/#${hash}` || href === `#${hash}`);
+  const home = resolveHomeSection(href);
 
   const onClick = useCallback(
     (e: MouseEvent<HTMLAnchorElement>) => {
-      if (!isHomeHash || !hash) return;
+      if (!home) return;
 
       e.preventDefault();
       onNavigate?.();
 
-      if (pathname === "/") {
-        scrollToId(hash);
-        window.history.pushState(null, "", `/#${hash}`);
+      if (isHomeCanvas(pathname)) {
+        scrollToId(home.section);
+        if (pathname !== home.path) {
+          router.replace(home.path, { scroll: false });
+        }
         return;
       }
 
-      router.push(`/#${hash}`);
+      router.push(home.path);
     },
-    [hash, isHomeHash, onNavigate, pathname, router]
+    [home, onNavigate, pathname, router]
   );
 
   return (

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { createPageMetadata } from "@/lib/seo";
 import { SITE } from "@/constants/site";
+import { Trust } from "@/components/sections/trust";
 import {
   AboutHero,
   AboutWhoWeAre,
@@ -26,6 +27,7 @@ export default function AboutPage() {
   return (
     <>
       <AboutHero />
+      <Trust />
       <AboutWhoWeAre />
       <AboutMissionVision />
       <AboutBeliefs />

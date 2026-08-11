@@ -21,11 +21,11 @@ import { solutionCategories } from "@/data/solutions";
  */
 export function WhatWeBuild() {
   return (
-    <PageSection id="expertise" containerClassName="space-y-12 md:space-y-14">
+    <PageSection id="expertise" spacing="sm" containerClassName="space-y-8">
       <SectionHeader
         label="Our Expertise"
-        title="Building Digital Products That Power Modern Businesses."
-        description="From startup MVPs to enterprise platforms, we design and develop scalable software that helps businesses launch faster, operate smarter, and grow with confidence."
+        title="Solutions Tailored for Your Growth"
+        description="Full-service software for startups and enterprises—custom SaaS, AI products, and business platforms built for reliability, scalability, and lasting results."
       />
 
       <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">

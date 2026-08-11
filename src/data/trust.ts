@@ -17,12 +17,15 @@ export type TrustAchievement = {
  * Add entries here as assets become available.
  */
 export const clientLogos: ClientLogo[] = [
-  { id: "aurora", name: "Aurora" },
+  { id: "learnwell", name: "Learnwell" },
   { id: "northline", name: "Northline" },
-  { id: "vertex", name: "Vertex" },
+  { id: "harbor", name: "Harbor" },
   { id: "lumen", name: "Lumen" },
   { id: "cascade", name: "Cascade" },
-  { id: "harbor", name: "Harbor" },
+  { id: "vertex", name: "Vertex" },
+  { id: "fieldline", name: "Fieldline" },
+  { id: "bookwell", name: "Bookwell" },
+  { id: "aurora", name: "Aurora" },
 ];
 
 export const trustAchievements: TrustAchievement[] = [

@@ -11,11 +11,11 @@ export type NavItem = NavLink & {
 export const MAIN_NAV: NavItem[] = [
   {
     label: "Expertise",
-    href: "/#expertise",
+    href: "/expertise",
   },
   {
     label: "Work",
-    href: "/#work",
+    href: "/work",
   },
   {
     label: "About",
@@ -23,24 +23,24 @@ export const MAIN_NAV: NavItem[] = [
   },
   {
     label: "Contact",
-    href: "/#contact",
+    href: "/contact",
   },
 ];
 
 export const CTA_NAV: NavLink = {
   label: "Book a Call",
-  href: "/#contact",
+  href: "/contact",
 };
 
 export const FOOTER_NAV = {
   company: [
     { label: "About", href: "/about" },
-    { label: "Expertise", href: "/#expertise" },
-    { label: "Contact", href: "/#contact" },
+    { label: "Expertise", href: "/expertise" },
+    { label: "Contact", href: "/contact" },
   ],
   work: [
-    { label: "Featured work", href: "/#work" },
-    { label: "Process", href: "/#process" },
+    { label: "Selected work", href: "/work" },
+    { label: "Get started", href: "/get-started" },
   ],
   legal: [
     { label: "Privacy", href: "/privacy" },

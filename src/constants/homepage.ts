@@ -35,9 +35,54 @@ export const HOMEPAGE = {
   ],
 } as const;
 
+/** Clean homepage section URLs — persist on refresh, no hash. */
+export const HOME_SECTIONS = {
+  "/expertise": "expertise",
+  "/work": "work",
+} as const;
+
+export type HomeSectionPath = keyof typeof HOME_SECTIONS;
+
+export function isHomeCanvas(pathname: string) {
+  return pathname === "/" || pathname in HOME_SECTIONS;
+}
+
+export function sectionForPath(pathname: string) {
+  if (pathname in HOME_SECTIONS) {
+    return HOME_SECTIONS[pathname as HomeSectionPath];
+  }
+  return null;
+}
+
+type LenisLike = {
+  scrollTo: (
+    target: HTMLElement,
+    options?: { offset?: number; immediate?: boolean; duration?: number }
+  ) => void;
+};
+
 /** Smooth in-page navigation (works with Lenis) */
-export function scrollToId(id: string) {
+export function scrollToId(id: string, behavior: ScrollBehavior = "smooth") {
   const el = document.getElementById(id.replace(/^#/, ""));
   if (!el) return;
-  el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  const header =
+    parseFloat(
+      getComputedStyle(document.documentElement).getPropertyValue(
+        "--header-height"
+      )
+    ) || 72;
+  const offset = -(header + 8);
+  const lenis = (window as Window & { __lenis?: LenisLike }).__lenis;
+
+  if (lenis) {
+    lenis.scrollTo(el, {
+      offset,
+      immediate: behavior === "auto",
+      duration: 1.05,
+    });
+    return;
+  }
+
+  el.scrollIntoView({ behavior, block: "start" });
 }

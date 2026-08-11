@@ -1,12 +1,21 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/constants/site";
 import { caseStudies } from "@/data/work";
+import { shippedProjects } from "@/data/projects";
 
 /**
- * Core routes for SEO. Homepage sections cover Expertise / Work / Contact.
+ * Core routes for SEO.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/about", "/industries"];
+  const routes = [
+    "",
+    "/about",
+    "/industries",
+    "/expertise",
+    "/work",
+    "/contact",
+    "/get-started",
+  ];
 
   const staticEntries = routes.map((route) => ({
     url: `${SITE.url}${route}`,
@@ -21,8 +30,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${SITE.url}/work/${project.id}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
-    priority: 0.6,
+    priority: 0.5,
   }));
 
-  return [...staticEntries, ...workEntries];
+  const projectEntries = shippedProjects.map((project) => ({
+    url: `${SITE.url}/projects/${project.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  return [...staticEntries, ...projectEntries, ...workEntries];
 }

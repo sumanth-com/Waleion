@@ -4,6 +4,7 @@ import { useReducedMotion } from "framer-motion";
 import { useEffect, useMemo, useRef } from "react";
 
 import { cn } from "@/lib/utils";
+import { HeroFx } from "@/components/sections/hero-fx";
 
 type AtmosphereVariant = "hero" | "section";
 
@@ -147,6 +148,7 @@ export function SiteAtmosphere({ className }: { className?: string }) {
       )}
     >
       <HeroAtmosphere variant="hero" className="!absolute inset-0" />
+      <HeroFx />
     </div>
   );
 }

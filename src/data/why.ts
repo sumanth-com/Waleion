@@ -1,3 +1,52 @@
+export type WhyChooseItem = {
+  id:
+    | "impact"
+    | "delivery"
+    | "pricing"
+    | "experts"
+    | "collaboration"
+    | "talent";
+  title: string;
+  description: string;
+};
+
+export const whyChooseItems: WhyChooseItem[] = [
+  {
+    id: "impact",
+    title: "Impact-Driven Solutions",
+    description:
+      "Every product we build is custom-crafted to create real business impact.",
+  },
+  {
+    id: "delivery",
+    title: "Fast & Reliable Delivery",
+    description: "Get high-quality results in weeks, not months.",
+  },
+  {
+    id: "pricing",
+    title: "Transparent & Fair Pricing",
+    description: "Honest, customized pricing with no hidden fees or surprises.",
+  },
+  {
+    id: "experts",
+    title: "Expert Problem Solvers",
+    description:
+      "We tackle technical and creative challenges with innovative solutions.",
+  },
+  {
+    id: "collaboration",
+    title: "Seamless Collaboration",
+    description:
+      "Clear communication and feedback at every stage of the project.",
+  },
+  {
+    id: "talent",
+    title: "Direct Access to Senior Talent",
+    description:
+      "Work directly with the people building your product—no layers in between.",
+  },
+];
+
 export type WhyPrinciple = {
   id: string;
   title: string;

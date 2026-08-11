@@ -1,5 +1,6 @@
 import { SITE } from "@/constants/site";
 import type { OrganizationJsonLd, WebSiteJsonLd } from "@/types";
+import type { HomeFaq } from "@/data/faq";
 
 export function organizationJsonLd(): OrganizationJsonLd {
   return {
@@ -27,6 +28,21 @@ export function websiteJsonLd(): WebSiteJsonLd {
       "@type": "Organization",
       name: SITE.legalName,
     },
+  };
+}
+
+export function faqPageJsonLd(faqs: HomeFaq[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
   };
 }
 

@@ -46,6 +46,10 @@ export type {
   FaqItem,
 } from "./solutions-page";
 export { featuredProjects, caseStudies, getCaseStudy } from "./work";
+export { shippedProjects, getShippedProject } from "./projects";
+export type { ShippedProject } from "./projects";
+export { workShowcase } from "./work-showcase";
+export type { WorkShowcaseItem } from "./work-showcase";
 export type { FeaturedProject, CaseStudy } from "./work";
 export {
   workCategories,
@@ -81,8 +85,12 @@ export {
   aboutStats,
   aboutPageCopy,
 } from "./about-page";
-export { whyPrinciples, whyComparison } from "./why";
-export type { WhyPrinciple, ComparisonRow } from "./why";
+export { whyChooseItems, whyPrinciples, whyComparison } from "./why";
+export type { WhyChooseItem, WhyPrinciple, ComparisonRow } from "./why";
+export { solutionGridItems } from "./solutions-grid";
+export type { SolutionGridItem } from "./solutions-grid";
+export { getStartedSteps } from "./get-started";
+export type { GetStartedStep } from "./get-started";
 export { processPhases, processHighlights } from "./process";
 export type { ProcessPhase, ProcessHighlight } from "./process";
 export { testimonials } from "./testimonials";

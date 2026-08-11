@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { geistSans, geistMono } from "@/lib/fonts";
+import { geistSans, geistMono, inter } from "@/lib/fonts";
 import { defaultMetadata } from "@/lib/seo";
 import {
   organizationJsonLd,
@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable}`}
+      className={`${geistSans.variable} ${geistMono.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
       <head>

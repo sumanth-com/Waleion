@@ -93,9 +93,9 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-full: 9999px;
 
-  /* ── Spacing rhythm (homepage: 120–180px sections) ─── */
-  --space-section: clamp(7.5rem, 12vw, 11.25rem);
-  --space-section-sm: clamp(4.5rem, 8vw, 7rem);
+  /* ── Spacing rhythm (tighter continuous page) ──────── */
+  --space-section: clamp(3.5rem, 6vw, 5.5rem);
+  --space-section-sm: clamp(2.25rem, 4vw, 3.5rem);
   --space-block: clamp(2rem, 4vw, 3.5rem);
   --space-stack: 1.5rem;
 
@@ -104,7 +104,7 @@
   --container-wide: 80rem;
   --container-narrow: 42rem;
   --container-padding: clamp(1.25rem, 4vw, 2rem);
-  --header-height: 4.5rem;
+  --header-height: 5.5rem;
 
   /* ── Typography scale ──────────────────────────────── */
   --text-display: clamp(3rem, 7vw, 5.5rem);
