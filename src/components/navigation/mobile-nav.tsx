@@ -4,8 +4,9 @@ import { useEffect, useId, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, Menu, X, ArrowUpRight } from "lucide-react";
-import { MAIN_NAV, CTA_NAV } from "@/constants/navigation";
+import { ChevronDown, Menu, X } from "lucide-react";
+import { MAIN_NAV } from "@/constants/navigation";
+import { NavBookCallCta } from "@/components/navigation/nav-book-call-cta";
 import { SmoothAnchor } from "@/components/navigation/smooth-anchor";
 import { cn } from "@/lib/utils";
 import { easings } from "@/lib/animations";
@@ -166,25 +167,11 @@ export function MobileNav() {
                 })}
               </ul>
 
-              <SmoothAnchor
-                href={CTA_NAV.href}
-                title={CTA_NAV.description}
-                aria-label={CTA_NAV.description}
-                className={cn(
-                  "mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-neutral-950 py-3 pl-5 pr-2",
-                  "text-sm font-medium text-white",
-                  "dark:bg-white dark:text-neutral-950"
-                )}
+              <NavBookCallCta
+                fullWidth
+                className="mt-4"
                 onNavigate={() => setOpen(false)}
-              >
-                {CTA_NAV.label}
-                <span
-                  aria-hidden
-                  className="grid size-8 place-items-center rounded-full bg-white/15 dark:bg-neutral-950/10"
-                >
-                  <ArrowUpRight className="size-3.5" />
-                </span>
-              </SmoothAnchor>
+              />
             </motion.nav>
           </>
         ) : null}

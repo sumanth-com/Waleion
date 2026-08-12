@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { SITE } from "@/constants/site";
-import { MAIN_NAV, CTA_NAV } from "@/constants/navigation";
+import { MAIN_NAV } from "@/constants/navigation";
 import { Container } from "@/components/layout/container";
 import { MobileNav } from "@/components/navigation/mobile-nav";
+import { NavBookCallCta } from "@/components/navigation/nav-book-call-cta";
 import { SmoothAnchor } from "@/components/navigation/smooth-anchor";
+import { useHeaderScroll } from "@/hooks/use-header-scroll";
 import { cn } from "@/lib/utils";
 
 type SiteHeaderProps = {
@@ -23,30 +24,46 @@ function isActivePath(pathname: string, href: string) {
 }
 
 /**
- * Floating pill navbar — larger, cleaner, more presence.
+ * Site header — transparent on the hero, solid after scroll.
  */
 export function SiteHeader({ className }: SiteHeaderProps) {
   const pathname = usePathname();
+  const { scrolled, prefersReducedMotion } = useHeaderScroll({
+    pathname,
+  });
 
   if (/^\/projects\/[^/]+$/.test(pathname)) return null;
 
   return (
-    <header className={cn("fixed inset-x-0 top-0 z-50", className)}>
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 isolate",
+        className
+      )}
+    >
+      <div
+        aria-hidden
+        className={cn(
+          "pointer-events-none absolute inset-0 bg-[var(--hero-bg)] dark:bg-[#12100e]",
+          prefersReducedMotion ? "transition-none" : "transition-opacity duration-300 ease-out",
+          scrolled ? "opacity-100" : "opacity-0"
+        )}
+      />
       <Container
         size="wide"
-        className="flex h-[var(--header-height)] items-center justify-between gap-4"
+        className="relative z-10 flex h-[var(--header-height)] items-center gap-6 md:gap-8"
       >
         <Link
           href="/"
-          className="group flex shrink-0 items-center gap-3 text-[1.05rem] font-semibold tracking-tight text-foreground"
+          className="group flex shrink-0 items-center gap-2.5 text-[0.9875rem] font-semibold tracking-tight text-foreground"
           aria-label={`${SITE.name} — ${SITE.tagline}`}
           title={`${SITE.name} home`}
         >
           <span
             aria-hidden
             className={cn(
-              "grid size-9 place-items-center rounded-full",
-              "bg-foreground text-sm font-bold text-background",
+              "grid size-8 place-items-center rounded-full",
+              "bg-foreground text-xs font-bold text-background",
               "transition-transform duration-300 group-hover:scale-105",
               "dark:bg-white dark:text-neutral-950"
             )}
@@ -57,15 +74,10 @@ export function SiteHeader({ className }: SiteHeaderProps) {
         </Link>
 
         <nav
-          className={cn(
-            "absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 md:block",
-            "rounded-full px-2 py-2",
-            "border border-black/[0.05] bg-white shadow-[0_10px_40px_rgba(0,0,0,0.08)]",
-            "dark:border-black/5 dark:bg-white dark:shadow-[0_10px_40px_rgba(0,0,0,0.28)]"
-          )}
+          className="hidden flex-1 justify-center md:flex"
           aria-label="Main site navigation"
         >
-          <ul className="flex items-center gap-1">
+          <ul className="flex items-center gap-6 lg:gap-8">
             {MAIN_NAV.map((item) => {
               const active = isActivePath(pathname, item.href);
 
@@ -75,9 +87,9 @@ export function SiteHeader({ className }: SiteHeaderProps) {
                     href={item.href}
                     title={item.description}
                     className={cn(
-                      "block rounded-full px-5 py-2.5 text-[15px] font-medium tracking-tight transition-colors duration-200",
+                      "block py-1 text-[13px] font-medium tracking-[0.04em] transition-colors duration-200",
                       "text-neutral-500 hover:text-neutral-950",
-                      active && "bg-neutral-100 text-neutral-950"
+                      active && "text-neutral-950"
                     )}
                     aria-current={active ? "page" : undefined}
                   >
@@ -89,26 +101,8 @@ export function SiteHeader({ className }: SiteHeaderProps) {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-2">
-          <SmoothAnchor
-            href={CTA_NAV.href}
-            title={CTA_NAV.description}
-            aria-label={CTA_NAV.description}
-            className={cn(
-              "inline-flex items-center gap-2 rounded-full bg-neutral-950 py-2 pl-4 pr-2 sm:gap-2.5 sm:pl-5",
-              "text-sm font-medium text-white transition-colors duration-300 sm:text-[15px]",
-              "hover:bg-neutral-800",
-              "dark:bg-neutral-950 dark:text-white dark:hover:bg-neutral-800"
-            )}
-          >
-            <span className="whitespace-nowrap">{CTA_NAV.label}</span>
-            <span
-              aria-hidden
-              className="grid size-7 place-items-center rounded-full bg-white/15 text-white sm:size-8"
-            >
-              <ArrowUpRight className="size-3.5 sm:size-4" />
-            </span>
-          </SmoothAnchor>
+        <div className="ml-auto flex items-center gap-1.5">
+          <NavBookCallCta className="max-md:hidden" />
           <MobileNav />
         </div>
       </Container>
