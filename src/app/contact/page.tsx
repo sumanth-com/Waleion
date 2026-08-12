@@ -1,23 +1,30 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Clock, Mail, MapPin } from "lucide-react";
-import { createPageMetadata } from "@/lib/seo";
+import { createPageMetadata, webPageJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { PAGE_SEO } from "@/constants/seo";
+import { JsonLd } from "@/components/seo/json-ld";
 import { SITE } from "@/constants/site";
 import { Container } from "@/components/layout/container";
 import { ContactForm } from "@/components/sections/contact-form";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Contact",
-  description: `Start a project with ${SITE.name}. ${SITE.responseTime}.`,
-  path: "/contact",
-});
+export const metadata: Metadata = createPageMetadata(PAGE_SEO.contact);
 
 export default function ContactPage() {
   return (
     <section className="relative bg-transparent">
+      <JsonLd
+        data={webPageJsonLd({ ...PAGE_SEO.contact, type: "ContactPage" })}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" },
+        ])}
+      />
       <Container
         size="wide"
-        className="relative z-10 py-[calc(var(--header-height)+2.5rem)] pb-16 md:pb-20"
+        className="relative z-10 py-[calc(var(--header-height)+1.75rem)] pb-16 md:py-[calc(var(--header-height)+2.5rem)] md:pb-20"
       >
         <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch lg:gap-12">
           <div className="flex h-full min-h-0 flex-col">

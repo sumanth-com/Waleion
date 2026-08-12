@@ -116,7 +116,7 @@ export function AboutExperience() {
                       className="size-1 shrink-0 rounded-full bg-emerald-500/70"
                       aria-hidden
                     />
-                    <span className="whitespace-nowrap">{item}</span>
+                    <span className="max-md:whitespace-normal md:whitespace-nowrap">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -194,7 +194,7 @@ function AboutActionButtons({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex flex-nowrap items-center justify-center gap-2 sm:gap-3",
+        "flex flex-wrap items-center justify-center gap-2 sm:flex-nowrap sm:gap-3",
         className
       )}
     >

@@ -46,7 +46,7 @@ export function FolderCard({
       <span className="relative block w-full shrink-0 overflow-hidden bg-neutral-100">
         <Image
           src={project.cover}
-          alt=""
+          alt={`${project.name} product`}
           width={1600}
           height={1000}
           sizes={wide ? "(min-width: 768px) 30rem, 92vw" : "260px"}

@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SmoothAnchor } from "@/components/navigation/smooth-anchor";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
-import { createPageMetadata } from "@/lib/seo";
+import { createPageMetadata, webPageJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
 import {
   getAdjacentProjects,
   getShippedProject,
@@ -34,7 +35,7 @@ export async function generateMetadata({
   if (!project) return {};
 
   return createPageMetadata({
-    title: project.name,
+    title: `${project.name} | Software & Digital Product Work | Waleion`,
     description: project.promise,
     path: `/projects/${project.slug}`,
   });
@@ -50,6 +51,19 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
   return (
     <ProjectsShell variant="hero">
+      <JsonLd
+        data={webPageJsonLd({
+          title: `${project.name} | Software & Digital Product Work | Waleion`,
+          description: project.promise,
+          path: `/projects/${project.slug}`,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: project.name, path: `/projects/${project.slug}` },
+        ])}
+      />
       <header className="sticky top-0 z-50 border-b border-black/[0.04] bg-[var(--hero-bg)]/80 backdrop-blur-md">
         <ProjectsContainer className="flex h-14 items-center justify-between md:h-16">
           <SmoothAnchor

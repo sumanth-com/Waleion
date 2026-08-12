@@ -1,27 +1,28 @@
 import type { Metadata } from "next";
 import { SITE } from "@/constants/site";
+import { PAGE_SEO, absoluteUrl } from "@/constants/seo";
 
-const ogImageUrl = `${SITE.url}${SITE.ogImage}`;
+const ogImageUrl = absoluteUrl(SITE.ogImage);
 
 export const defaultMetadata: Metadata = {
-  metadataBase: new URL(SITE.url),
+  metadataBase: new URL(absoluteUrl()),
   title: {
-    default: `${SITE.name} — ${SITE.tagline}`,
-    template: `%s · ${SITE.name}`,
+    default: PAGE_SEO.home.title,
+    template: `%s | ${SITE.name}`,
   },
-  description: SITE.description,
+  description: PAGE_SEO.home.description,
   applicationName: SITE.name,
-  authors: [{ name: SITE.name, url: SITE.url }],
+  authors: [{ name: SITE.name, url: absoluteUrl() }],
   creator: SITE.name,
   publisher: SITE.name,
   keywords: [
+    "software development company in India",
+    "digital product agency",
     "custom software development",
-    "software product studio",
-    "SaaS development company",
-    "AI product development",
-    "enterprise software",
-    "business software",
-    "startup MVP development",
+    "UI/UX design",
+    "full-stack development",
+    "SaaS development",
+    "web application development",
     "Waleion",
   ],
   robots: {
@@ -35,32 +36,37 @@ export const defaultMetadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  icons: {
+    icon: [{ url: "/images/logo.svg", type: "image/svg+xml" }],
+    shortcut: ["/images/logo.svg"],
+    apple: [{ url: "/images/logo.svg", type: "image/svg+xml" }],
+  },
   openGraph: {
     type: "website",
     locale: SITE.locale,
-    url: SITE.url,
+    url: absoluteUrl(),
     siteName: SITE.name,
-    title: `${SITE.name} — ${SITE.tagline}`,
-    description: SITE.description,
+    title: PAGE_SEO.home.title,
+    description: PAGE_SEO.home.description,
     images: [
       {
         url: ogImageUrl,
         width: 1200,
         height: 630,
-        alt: `${SITE.name} — ${SITE.tagline}`,
+        alt: PAGE_SEO.home.title,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} — ${SITE.tagline}`,
-    description: SITE.description,
+    title: PAGE_SEO.home.title,
+    description: PAGE_SEO.home.description,
     site: SITE.twitter,
     creator: SITE.twitter,
     images: [ogImageUrl],
   },
   alternates: {
-    canonical: SITE.url,
+    canonical: absoluteUrl(),
   },
   category: "technology",
 };
@@ -68,7 +74,7 @@ export const defaultMetadata: Metadata = {
 export function createPageMetadata({
   title,
   description,
-  path = "",
+  path = "/",
   image,
   noIndex = false,
 }: {
@@ -78,26 +84,42 @@ export function createPageMetadata({
   image?: string;
   noIndex?: boolean;
 }): Metadata {
-  const url = `${SITE.url}${path}`;
-  const ogImage = image ? `${SITE.url}${image}` : ogImageUrl;
+  const url = absoluteUrl(path);
+  const ogImage = image ? absoluteUrl(image) : ogImageUrl;
 
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: { canonical: url },
+    robots: noIndex
+      ? { index: false, follow: false, nocache: true }
+      : {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            "max-video-preview": -1,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+          },
+        },
     openGraph: {
+      type: "website",
+      locale: SITE.locale,
+      siteName: SITE.name,
       title,
       description,
       url,
       images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
     },
     twitter: {
+      card: "summary_large_image",
       title,
       description,
+      site: SITE.twitter,
+      creator: SITE.twitter,
       images: [ogImage],
     },
-    ...(noIndex && {
-      robots: { index: false, follow: false },
-    }),
   };
 }

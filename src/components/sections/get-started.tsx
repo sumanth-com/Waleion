@@ -144,7 +144,7 @@ function StepVisual({ id }: { id: GetStartedStep["id"] }) {
 /**
  * How to get started — hover a step, left visual slides up.
  */
-export function GetStarted() {
+export function GetStarted({ asPage = false }: { asPage?: boolean }) {
   const [active, setActive] = useState<GetStartedStep["id"]>("vision");
   const reduceMotion = usePrefersReducedMotion();
   const current = getStartedSteps.find((s) => s.id === active)!;
@@ -155,6 +155,7 @@ export function GetStarted() {
         label="Getting started"
         title={`How to Get Started with ${SITE.name}`}
         description="Skip the old hiring-and-managing loop. Three clear steps from first conversation to a live product."
+        headingAs={asPage ? "h1" : "h2"}
       />
 
       <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">

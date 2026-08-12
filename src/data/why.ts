@@ -1,14 +1,16 @@
 export type WhyChooseItem = {
-  id:
-    | "impact"
-    | "delivery"
-    | "pricing"
-    | "experts"
-    | "collaboration"
-    | "talent";
+  id: WhyChooseIconId;
   title: string;
   description: string;
 };
+
+export type WhyChooseIconId =
+  | "impact"
+  | "delivery"
+  | "pricing"
+  | "experts"
+  | "collaboration"
+  | "talent";
 
 export const whyChooseItems: WhyChooseItem[] = [
   {

@@ -11,6 +11,8 @@ type SectionHeaderProps = {
   className?: string;
   /** Constrain copy width */
   narrow?: boolean;
+  /** Heading element. Keep h2 on the homepage; use h1 when this is the page title. */
+  headingAs?: "h1" | "h2";
 };
 
 /**
@@ -24,7 +26,11 @@ export function SectionHeader({
   align = "center",
   className,
   narrow = true,
+  headingAs = "h2",
 }: SectionHeaderProps) {
+  const headingClassName =
+    "text-balance font-semibold tracking-[var(--tracking-tight)] text-[clamp(1.65rem,3.4vw,2.75rem)] leading-[1.12] text-foreground";
+
   return (
     <Reveal
       className={cn(
@@ -35,10 +41,11 @@ export function SectionHeader({
         className
       )}
     >
-      <Eyebrow>{label}</Eyebrow>
-      <h2 className="text-balance font-semibold tracking-[var(--tracking-tight)] text-[clamp(1.65rem,3.4vw,2.75rem)] leading-[1.12] text-foreground">
-        {title}
-      </h2>
+      {headingAs === "h1" ? (
+        <h1 className={headingClassName}>{title}</h1>
+      ) : (
+        <h2 className={headingClassName}>{title}</h2>
+      )}
       {description ? (
         <p
           className={cn(

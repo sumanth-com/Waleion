@@ -18,7 +18,7 @@ function ShowcaseCard({ item }: { item: WorkShowcaseItem }) {
       <div className="relative aspect-[4/3] overflow-hidden rounded-[1.25rem] bg-neutral-100 dark:bg-white/5">
         <Image
           src={item.image}
-          alt=""
+          alt={`${item.name} product screenshot`}
           fill
           sizes="336px"
           className="object-cover"

@@ -2,6 +2,7 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "../styles/tokens.css";
+@import "../styles/mobile.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -261,53 +262,138 @@
   }
 }
 
-.why-icon-float {
-  animation: why-icon-float 4.5s ease-in-out infinite;
+.why-alive {
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform, opacity, filter;
 }
 
-.why-icon-flicker {
-  animation: why-icon-flicker 1.4s ease-in-out infinite;
+.why-alive-impact {
+  transform-origin: center bottom;
+  animation: why-alive-sprout 2.8s ease-in-out infinite;
 }
 
-.why-icon-spark {
-  animation: why-icon-spark 2.2s ease-in-out infinite;
+.why-alive-delivery {
+  animation: why-alive-send 2.4s ease-in-out infinite;
 }
 
-@keyframes why-icon-float {
+.why-alive-pricing {
+  transform-origin: top center;
+  animation: why-alive-tag 2.6s ease-in-out infinite;
+}
+
+.why-alive-experts {
+  animation: why-alive-bulb 2s ease-in-out infinite;
+}
+
+.dark .why-alive-experts {
+  animation: why-alive-bulb-dark 2s ease-in-out infinite;
+}
+
+.why-alive-collaboration {
+  animation: why-alive-users 2.8s ease-in-out infinite;
+}
+
+.why-alive-talent {
+  animation: why-alive-check 2.2s ease-in-out infinite;
+}
+
+@keyframes why-alive-sprout {
   0%,
   100% {
-    transform: translateY(0);
+    transform: scale(0.92);
   }
   50% {
-    transform: translateY(-5px);
+    transform: scale(1.1);
   }
 }
 
-@keyframes why-icon-flicker {
+@keyframes why-alive-send {
   0%,
   100% {
-    opacity: 0.35;
+    transform: translateY(3px) rotate(-8deg);
   }
   50% {
+    transform: translateY(-5px) rotate(8deg);
+  }
+}
+
+@keyframes why-alive-tag {
+  0%,
+  100% {
+    transform: rotate(-8deg);
+  }
+  50% {
+    transform: rotate(8deg);
+  }
+}
+
+@keyframes why-alive-bulb {
+  0%,
+  100% {
+    transform: scale(0.96);
+    filter: drop-shadow(0 0 0 transparent);
+    opacity: 0.78;
+  }
+  50% {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.28));
     opacity: 1;
   }
 }
 
-@keyframes why-icon-spark {
+@keyframes why-alive-bulb-dark {
   0%,
   100% {
-    opacity: 0.4;
+    transform: scale(0.96);
+    filter: drop-shadow(0 0 0 transparent);
+    opacity: 0.78;
   }
   50% {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 7px rgba(255, 255, 255, 0.45));
     opacity: 1;
+  }
+}
+
+@keyframes why-alive-users {
+  0%,
+  100% {
+    transform: scale(0.96) translateY(1px);
+  }
+  50% {
+    transform: scale(1.06) translateY(-2px);
+  }
+}
+
+@keyframes why-alive-check {
+  0%,
+  100% {
+    transform: scale(0.94);
+  }
+  40% {
+    transform: scale(1.1);
+  }
+  55% {
+    transform: scale(1.02);
+  }
+  70% {
+    transform: scale(1.08);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .why-icon-float,
-  .why-icon-flicker,
-  .why-icon-spark {
+  .why-alive,
+  .why-alive-impact,
+  .why-alive-delivery,
+  .why-alive-pricing,
+  .why-alive-experts,
+  .why-alive-collaboration,
+  .why-alive-talent {
     animation: none;
+    filter: none;
+    opacity: 1;
+    transform: none;
   }
 }
 

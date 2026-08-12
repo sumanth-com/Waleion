@@ -29,12 +29,12 @@ export function FinalCta() {
             turn ideas into scalable products.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <SmoothAnchor
               href={CTA_NAV.href}
               className={cn(
                 buttonVariants({ size: "lg" }),
-                "rounded-full px-6",
+                "rounded-full px-6 max-md:w-full",
                 "dark:bg-white dark:text-neutral-950 dark:hover:bg-white/90"
               )}
             >
@@ -44,7 +44,7 @@ export function FinalCta() {
               href={`mailto:${SITE.email}`}
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
-                "rounded-full px-6",
+                "rounded-full px-6 max-md:w-full",
                 "dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
               )}
             >

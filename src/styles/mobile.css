@@ -1,0 +1,79 @@
+/* Mobile-only. Desktop (768px+) is unchanged. */
+
+@media (max-width: 767px) {
+  :root {
+    --header-height: 3.75rem;
+    --container-padding: 1.125rem;
+    --space-section: 3rem;
+    --space-section-sm: 2rem;
+  }
+
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  body {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Keep tap targets comfortable without changing desktop controls */
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .container-site,
+  .container-wide,
+  .container-narrow {
+    padding-inline: max(var(--container-padding), env(safe-area-inset-left))
+      max(var(--container-padding), env(safe-area-inset-right));
+  }
+}
+
+@media (max-width: 767px) and (orientation: landscape) {
+  :root {
+    --header-height: 3.15rem;
+    --space-section: 2.25rem;
+    --space-section-sm: 1.5rem;
+  }
+
+  #main-content section:first-child .container-wide {
+    padding-top: calc(var(--header-height) + 0.75rem);
+    padding-bottom: 1.25rem;
+  }
+
+  .about-hero {
+    min-height: 0;
+    padding-top: calc(var(--header-height) + 1rem);
+    padding-bottom: 1.25rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .mobile-nav-panel {
+    padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 767px) and (orientation: landscape) {
+  .mobile-nav-panel {
+    display: grid;
+    grid-template-columns: 1fr minmax(12.5rem, 16rem);
+    align-items: start;
+    gap: 1rem 1.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+
+  .mobile-nav-panel > ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 0.75rem;
+  }
+
+  .mobile-nav-panel > a {
+    margin-top: 0;
+    align-self: center;
+  }
+}

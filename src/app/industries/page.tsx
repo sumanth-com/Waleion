@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { createPageMetadata } from "@/lib/seo";
-import { SITE } from "@/constants/site";
+import { createPageMetadata, webPageJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { PAGE_SEO } from "@/constants/seo";
+import { JsonLd } from "@/components/seo/json-ld";
 import { HashScroll } from "@/components/navigation/hash-scroll";
 import {
   IndustriesHero,
@@ -12,15 +13,18 @@ import {
   IndustriesFinalCta,
 } from "@/components/sections/industries";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Industries",
-  description: `${SITE.name} builds software for startups, healthcare, finance, education, retail, manufacturing, logistics, enterprise, and more—tailored to each sector's real challenges.`,
-  path: "/industries",
-});
+export const metadata: Metadata = createPageMetadata(PAGE_SEO.industries);
 
 export default function IndustriesPage() {
   return (
     <>
+      <JsonLd data={webPageJsonLd(PAGE_SEO.industries)} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Industries", path: "/industries" },
+        ])}
+      />
       <HashScroll />
       <IndustriesHero />
       <IndustriesCatalog />

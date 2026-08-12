@@ -54,7 +54,7 @@ function SolutionPreview({ item }: { item: SolutionGridItem }) {
       />
       <PreviewFrame
         src={front}
-        alt=""
+        alt={`${item.title} product interface`}
         className={cn(
           "right-0 top-2 h-[4.9rem] w-[6.4rem] rotate-[8deg]",
           "origin-center transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",

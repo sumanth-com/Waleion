@@ -107,7 +107,7 @@ export function Hero() {
     <section className="relative isolate bg-transparent">
       <Container
         size="wide"
-        className="relative z-10 flex w-full flex-col items-center justify-center pt-[calc(var(--header-height)+2.5rem)] pb-16 text-center md:pb-24"
+        className="relative z-10 flex w-full flex-col items-center justify-center pt-[calc(var(--header-height)+1.5rem)] pb-12 text-center md:pb-24 md:pt-[calc(var(--header-height)+2.5rem)]"
       >
         <div className="mx-auto flex w-full max-w-3xl flex-col items-center">
           <motion.div
@@ -142,7 +142,7 @@ export function Hero() {
             variants={fadeUp}
             initial={prefersReducedMotion ? false : "hidden"}
             animate="visible"
-            className="font-semibold tracking-[var(--tracking-tight)] text-[clamp(2.15rem,5.4vw,3.75rem)] leading-[1.08] text-foreground"
+            className="font-semibold tracking-[var(--tracking-tight)] text-[clamp(1.85rem,8.2vw,3.75rem)] leading-[1.08] text-foreground md:text-[clamp(2.15rem,5.4vw,3.75rem)]"
           >
             <span className="block">We Build Software</span>
             <span className="block">That Grows Businesses.</span>
@@ -153,7 +153,7 @@ export function Hero() {
             variants={fadeUp}
             initial={prefersReducedMotion ? false : "hidden"}
             animate="visible"
-            className="mt-5 max-w-lg text-pretty text-[0.9875rem] leading-relaxed text-muted-foreground md:text-base"
+            className="mt-4 max-w-lg px-1 text-pretty text-[0.9375rem] leading-relaxed text-muted-foreground md:mt-5 md:text-base"
           >
             Custom SaaS, AI products, and business software for startups and
             enterprises—designed, built, and launched as lasting products.
@@ -164,13 +164,13 @@ export function Hero() {
             variants={fadeUp}
             initial={prefersReducedMotion ? false : "hidden"}
             animate="visible"
-            className="mt-8 flex flex-col items-center"
+            className="mt-7 flex flex-col items-center md:mt-8"
           >
             <HeroCta />
 
             <div
               className={cn(
-                "mt-5 inline-flex items-center gap-3 rounded-full border border-border/60 bg-background/50 px-3 py-1.5",
+                "mt-5 inline-flex max-w-full flex-wrap items-center justify-center gap-x-3 gap-y-1.5 rounded-full border border-border/60 bg-background/50 px-3 py-1.5",
                 "backdrop-blur-md dark:border-white/12 dark:bg-white/5"
               )}
             >

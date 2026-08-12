@@ -3,7 +3,7 @@ export const SITE = {
   legalName: "Waleion",
   tagline: "We build software that grows businesses",
   description:
-    "Waleion is a software product studio for startups and enterprises. We design and build custom SaaS platforms, AI products, and business software—from idea to launch.",
+    "Waleion is a software development and digital product agency in India, combining UI/UX design, full-stack development, web and mobile applications, SaaS, e-commerce and business technology solutions.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://waleion.com",
   locale: "en_US",
   twitter: "@waleion",

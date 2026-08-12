@@ -45,6 +45,7 @@ export const FOOTER_NAV = {
   ],
   work: [
     { label: "Selected work", href: "/work" },
+    { label: "Insights", href: "/insights" },
     { label: "Get started", href: "/get-started" },
   ],
   legal: [

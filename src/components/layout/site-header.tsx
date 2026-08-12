@@ -51,11 +51,11 @@ export function SiteHeader({ className }: SiteHeaderProps) {
       />
       <Container
         size="wide"
-        className="relative z-10 flex h-[var(--header-height)] items-center gap-6 md:gap-8"
+        className="relative z-10 flex h-[var(--header-height)] items-center gap-3 md:gap-8"
       >
         <Link
           href="/"
-          className="group flex shrink-0 items-center gap-2.5 text-[0.9875rem] font-semibold tracking-tight text-foreground"
+          className="group flex min-w-0 shrink-0 items-center gap-2 md:gap-2.5 text-[0.9375rem] font-semibold tracking-tight text-foreground md:text-[0.9875rem]"
           aria-label={`${SITE.name} — ${SITE.tagline}`}
           title={`${SITE.name} home`}
         >
@@ -70,7 +70,7 @@ export function SiteHeader({ className }: SiteHeaderProps) {
           >
             {SITE.name.charAt(0)}
           </span>
-          <span className="hidden sm:inline">{SITE.name}</span>
+          <span className="truncate">{SITE.name}</span>
         </Link>
 
         <nav
@@ -102,7 +102,7 @@ export function SiteHeader({ className }: SiteHeaderProps) {
         </nav>
 
         <div className="ml-auto flex items-center gap-1.5">
-          <NavBookCallCta className="max-md:hidden" />
+          <NavBookCallCta className="max-md:h-8 max-md:gap-1.5 max-md:pl-1 max-md:pr-1 max-[400px]:[&>span:first-of-type]:hidden" />
           <MobileNav />
         </div>
       </Container>

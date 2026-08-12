@@ -42,7 +42,7 @@ export function NavBookCallCta({
       {!fullWidth ? (
         <span
           aria-hidden
-          className="grid size-7 shrink-0 place-items-center rounded-full bg-white text-[11px] font-bold text-neutral-950"
+          className="grid size-7 shrink-0 place-items-center rounded-full bg-white text-[11px] font-bold text-neutral-950 max-md:size-6"
         >
           {SITE.name.charAt(0)}
         </span>
@@ -51,7 +51,7 @@ export function NavBookCallCta({
       <span
         className={cn(
           "text-[13px] font-medium tracking-tight text-white",
-          fullWidth ? "whitespace-nowrap" : "hidden pr-0.5 sm:inline"
+          fullWidth ? "whitespace-nowrap" : "pr-0.5 max-md:text-[12px]"
         )}
       >
         {CTA_NAV.label}

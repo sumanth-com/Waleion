@@ -61,7 +61,7 @@ export function WorkSlideshow({ projects }: WorkSlideshowProps) {
         <ChevronLeft className="size-4" strokeWidth={1.75} />
       </button>
 
-      <div className="relative mx-11 overflow-hidden h-[25.5rem] sm:mx-12 sm:h-[28rem]">
+      <div className="relative mx-8 overflow-hidden h-[22.5rem] sm:mx-12 sm:h-[28rem]">
         {projects.map((project, index) => {
           const offset = wrapOffset(index, active, count);
           const isCenter = offset === 0;

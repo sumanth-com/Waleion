@@ -9,7 +9,7 @@ export const homeFaqs: HomeFaq[] = [
     id: "who",
     question: "Who’s behind Waleion?",
     answer:
-      "Waleion is a remote-first software product studio — designers, engineers, and operators who build custom SaaS, AI products, and business software. We work with startups and enterprises worldwide, with core hours in IST and overlap for US, UK, and EU teams.",
+      "Waleion is a digital product and software development company. We combine business understanding, digital experience, UI/UX design, and full-stack engineering to build websites, web applications, mobile apps, SaaS, and custom software for startups, SMEs, and enterprises in India and internationally.",
   },
   {
     id: "custom",
@@ -33,7 +33,19 @@ export const homeFaqs: HomeFaq[] = [
     id: "geo",
     question: "Can you work with teams outside India?",
     answer:
-      "Yes. We’re remote-first and serve clients worldwide. Hours are Mon–Fri, 9:00 AM–6:00 PM IST, with peak weekend availability on Sat & Sun (high demand). We typically reply within one business day.",
+      "Yes. We are based around Indian working hours (Mon–Fri, 9:00 AM–6:00 PM IST) and work remotely with businesses across India and internationally. We typically reply within one business day.",
+  },
+  {
+    id: "services",
+    question: "What software development services does Waleion provide?",
+    answer:
+      "Custom software, website and web application development, mobile apps, UI/UX and product design, SaaS, e-commerce, APIs and integrations, automation, and ongoing maintenance. Scope follows the problem — not a fixed package.",
+  },
+  {
+    id: "idea-to-launch",
+    question: "Can Waleion build a product from idea to launch?",
+    answer:
+      "Yes. We take work from the first conversation through design, engineering, testing, and launch, then stay for iteration. You do not need a separate team for each stage.",
   },
   {
     id: "pricing",

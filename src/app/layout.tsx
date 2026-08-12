@@ -1,11 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { geistSans, geistMono, inter } from "@/lib/fonts";
 import { defaultMetadata } from "@/lib/seo";
-import {
-  organizationJsonLd,
-  websiteJsonLd,
-  serializeJsonLd,
-} from "@/lib/seo";
+import { siteGraphJsonLd, serializeJsonLd } from "@/lib/seo";
 import { Providers } from "@/components/layout/providers";
 import { SiteShell } from "@/components/layout/site-shell";
 import "./globals.css";
@@ -21,6 +17,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -38,13 +35,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: serializeJsonLd(organizationJsonLd()),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: serializeJsonLd(websiteJsonLd()),
+            __html: serializeJsonLd(siteGraphJsonLd()),
           }}
         />
       </head>

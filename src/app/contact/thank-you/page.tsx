@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { createPageMetadata } from "@/lib/seo";
+import { PAGE_SEO } from "@/constants/seo";
 import { ContactThankYou } from "@/components/sections/contact-thank-you";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Thank you",
-  description: "Your message was sent successfully. We'll be in touch soon.",
-  path: "/contact/thank-you",
-  noIndex: true,
-});
+export const metadata: Metadata = createPageMetadata(PAGE_SEO.thankYou);
 
 export default function ContactThankYouPage() {
   return (

@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SmoothAnchor } from "@/components/navigation/smooth-anchor";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
-import { createPageMetadata } from "@/lib/seo";
+import { createPageMetadata, webPageJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
 import { caseStudies, getCaseStudy } from "@/data/work";
 import { Container } from "@/components/layout/container";
 import { PageSection } from "@/components/layout/page-section";
@@ -26,7 +27,7 @@ export async function generateMetadata({
   if (!project) return {};
 
   return createPageMetadata({
-    title: project.name,
+    title: `${project.name} | Software & Digital Product Work | Waleion`,
     description: project.overview,
     path: `/work/${project.id}`,
   });
@@ -47,6 +48,19 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
   return (
     <>
+      <JsonLd
+        data={webPageJsonLd({
+          title: `${project.name} | Software & Digital Product Work | Waleion`,
+          description: project.overview,
+          path: `/work/${project.id}`,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: project.name, path: `/work/${project.id}` },
+        ])}
+      />
       <section className="relative bg-transparent">
         <Container
           size="wide"

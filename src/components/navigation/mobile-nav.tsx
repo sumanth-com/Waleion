@@ -37,12 +37,15 @@ export function MobileNav() {
     if (!open) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    const lenis = (window as Window & { __lenis?: { stop: () => void; start: () => void } }).__lenis;
+    lenis?.stop();
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
     document.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = prev;
+      lenis?.start();
       document.removeEventListener("keydown", onKey);
     };
   }, [open]);
@@ -52,7 +55,7 @@ export function MobileNav() {
       <button
         type="button"
         className={cn(
-          "inline-flex size-10 items-center justify-center rounded-full text-foreground",
+          "inline-flex size-11 items-center justify-center rounded-full text-foreground",
           "transition-colors hover:bg-foreground/5 dark:hover:bg-white/8",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
         )}
@@ -69,7 +72,7 @@ export function MobileNav() {
           <>
             <motion.div
               aria-hidden
-              className="fixed inset-0 top-[var(--header-height)] z-40 bg-background/40 backdrop-blur-sm"
+              className="fixed inset-0 top-[var(--header-height)] z-40 bg-[var(--hero-bg)]/70 backdrop-blur-sm dark:bg-black/50"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -79,16 +82,17 @@ export function MobileNav() {
               id={panelId}
               aria-label="Mobile"
               className={cn(
-                "fixed inset-x-0 top-[var(--header-height)] z-50 max-h-[calc(100dvh-var(--header-height))] overflow-y-auto",
-                "border-b border-border/60 bg-background/95 px-4 py-4 shadow-soft-lg backdrop-blur-xl",
-                "dark:border-white/10 dark:bg-[#0b1220]/96"
+                "mobile-nav-panel",
+                "fixed inset-x-0 top-[var(--header-height)] z-50 max-h-[calc(100dvh-var(--header-height))] overflow-y-auto overscroll-contain",
+                "border-b border-black/[0.06] bg-[var(--hero-bg)] px-4 py-5 shadow-[0_16px_40px_rgba(0,0,0,0.08)]",
+                "dark:border-white/10 dark:bg-[#12100e]"
               )}
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.25, ease: easings.outExpo }}
             >
-              <ul className="flex flex-col gap-1">
+              <ul className="flex flex-col gap-0.5">
                 {MAIN_NAV.map((item) => {
                   const hasChildren = !!item.children?.length;
                   const isExpanded = expanded === item.label;
@@ -100,10 +104,10 @@ export function MobileNav() {
                           href={item.href}
                           title={item.description}
                           className={cn(
-                            "block rounded-xl px-3 py-3 text-sm font-medium text-foreground",
+                            "block rounded-2xl px-3.5 py-3.5 text-[15px] font-medium tracking-tight text-foreground",
                             "hover:bg-foreground/[0.04] dark:hover:bg-white/[0.06]",
                             isActivePath(pathname, item.href) &&
-                              "bg-foreground/[0.04] dark:bg-white/[0.06]"
+                              "bg-foreground/[0.05] dark:bg-white/[0.07]"
                           )}
                           aria-current={
                             isActivePath(pathname, item.href) ? "page" : undefined
@@ -117,10 +121,10 @@ export function MobileNav() {
                   }
 
                   return (
-                    <li key={item.href} className="rounded-xl">
+                    <li key={item.href} className="rounded-2xl">
                       <button
                         type="button"
-                        className="flex w-full items-center justify-between rounded-xl px-3 py-3 text-left text-sm font-medium text-foreground hover:bg-foreground/[0.04] dark:hover:bg-white/[0.06]"
+                        className="flex min-h-11 w-full items-center justify-between rounded-2xl px-3.5 py-3.5 text-left text-[15px] font-medium tracking-tight text-foreground hover:bg-foreground/[0.04] dark:hover:bg-white/[0.06]"
                         aria-expanded={isExpanded}
                         onClick={() =>
                           setExpanded((v) =>
@@ -152,7 +156,7 @@ export function MobileNav() {
                               <li key={child.href}>
                                 <Link
                                   href={child.href}
-                                  className="block rounded-lg px-3 py-2.5 text-sm text-muted-foreground hover:text-foreground"
+                                  className="block rounded-xl px-3.5 py-2.5 text-sm text-muted-foreground hover:text-foreground"
                                   onClick={() => setOpen(false)}
                                 >
                                   {child.label}
@@ -169,7 +173,7 @@ export function MobileNav() {
 
               <NavBookCallCta
                 fullWidth
-                className="mt-4"
+                className="mt-5"
                 onNavigate={() => setOpen(false)}
               />
             </motion.nav>

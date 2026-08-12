@@ -15,7 +15,7 @@ export function AboutHero() {
   const { hero } = aboutPageCopy;
 
   return (
-    <section className="relative box-border flex h-svh max-h-svh w-full shrink-0 flex-col overflow-hidden bg-[#f5f0e8] pt-[var(--header-height)] dark:bg-[#12100e]">
+    <section className="about-hero relative box-border flex h-auto min-h-[70svh] w-full shrink-0 flex-col overflow-hidden bg-[#f5f0e8] py-16 pt-[calc(var(--header-height)+2.5rem)] dark:bg-[#12100e] md:h-svh md:max-h-svh md:min-h-0 md:py-0 md:pt-[var(--header-height)]">
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <Image
           src={aboutHeroBg}
@@ -51,12 +51,12 @@ export function AboutHero() {
           <p className="mt-3 max-w-2xl text-pretty text-sm leading-relaxed text-muted-foreground md:text-[0.9875rem]">
             {hero.supporting}
           </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-8 flex w-full max-w-sm flex-col items-stretch gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
             <Link
               href="/contact"
               className={cn(
                 buttonVariants({ size: "lg" }),
-                "rounded-full px-6 dark:bg-white dark:text-neutral-950 dark:hover:bg-white/90"
+                "rounded-full px-6 max-md:w-full dark:bg-white dark:text-neutral-950 dark:hover:bg-white/90"
               )}
             >
               {hero.primaryCta}
@@ -65,7 +65,7 @@ export function AboutHero() {
               href="/work"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
-                "rounded-full border-black/10 bg-white/70 px-6 backdrop-blur-sm hover:bg-white/90 dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/15"
+                "rounded-full border-black/10 bg-white/70 px-6 backdrop-blur-sm hover:bg-white/90 max-md:w-full dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/15"
               )}
             >
               {hero.secondaryCta}

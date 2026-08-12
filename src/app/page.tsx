@@ -6,18 +6,27 @@ import { GetStarted } from "@/components/sections/get-started";
 import { Compare } from "@/components/sections/compare";
 import { FaqChat } from "@/components/sections/faq-chat";
 import { FinalCta } from "@/components/sections/final-cta";
-import { faqPageJsonLd, serializeJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import {
+  createPageMetadata,
+  faqPageJsonLd,
+  webPageJsonLd,
+  breadcrumbJsonLd,
+} from "@/lib/seo";
+import { PAGE_SEO } from "@/constants/seo";
 import { homeFaqs } from "@/data/faq";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = createPageMetadata(PAGE_SEO.home);
 
 export default function HomePage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: serializeJsonLd(faqPageJsonLd(homeFaqs)),
-        }}
+      <JsonLd data={webPageJsonLd(PAGE_SEO.home)} />
+      <JsonLd
+        data={breadcrumbJsonLd([{ name: "Home", path: "/" }])}
       />
+      <JsonLd data={faqPageJsonLd(homeFaqs)} />
       <Hero />
       <SolutionsGrid />
       <FeaturedWork />
