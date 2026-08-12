@@ -32,7 +32,7 @@ function PreviewFrame({
         alt={alt}
         fill
         sizes="160px"
-        className="object-cover"
+        className="object-cover object-top"
       />
     </div>
   );
@@ -66,7 +66,7 @@ function SolutionPreview({ item }: { item: SolutionGridItem }) {
 }
 
 /**
- * Solutions grid — two real product images per item, no clipped overlap.
+ * Solutions grid — two product images per item from kept assets.
  */
 export function SolutionsGrid() {
   return (
