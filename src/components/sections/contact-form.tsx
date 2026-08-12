@@ -7,6 +7,7 @@ import {
   useState,
   type FormEvent,
 } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ArrowUpRight, ChevronDown, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -350,8 +351,22 @@ export function ContactForm() {
           )}
         </button>
 
-        <p className="text-center text-[12px] text-muted-foreground">
-          We typically reply within 1 business day.
+        <p className="text-center text-[12px] leading-relaxed text-muted-foreground">
+          We typically reply within 1 business day. By sending, you agree to our{" "}
+          <Link
+            href="/privacy"
+            className="text-foreground/80 underline-offset-2 hover:underline"
+          >
+            Privacy Policy
+          </Link>{" "}
+          and{" "}
+          <Link
+            href="/terms"
+            className="text-foreground/80 underline-offset-2 hover:underline"
+          >
+            Terms of Use
+          </Link>
+          .
         </p>
       </div>
     </form>

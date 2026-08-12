@@ -71,12 +71,14 @@ export const PAGE_SEO = {
   },
   privacy: {
     title: "Privacy Policy | Waleion",
-    description: "How Waleion collects, uses, and protects information submitted through this website.",
+    description:
+      "Read how Waleion collects, uses, retains, and protects personal information submitted through our website and contact forms.",
     path: "/privacy",
   },
   terms: {
     title: "Terms of Use | Waleion",
-    description: "Terms for using the Waleion website and contacting us about software and digital product work.",
+    description:
+      "Terms governing use of the Waleion website, inquiries, intellectual property, and limitations of liability.",
     path: "/terms",
   },
 } as const satisfies Record<string, PageSeo>;

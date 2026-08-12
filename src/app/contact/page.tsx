@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Suspense } from "react";
 import { Clock, Mail, MapPin } from "lucide-react";
 import { createPageMetadata, webPageJsonLd, breadcrumbJsonLd } from "@/lib/seo";
@@ -7,12 +8,13 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { SITE } from "@/constants/site";
 import { Container } from "@/components/layout/container";
 import { ContactForm } from "@/components/sections/contact-form";
+import aboutHeroBg from "@/assets/about.png";
 
 export const metadata: Metadata = createPageMetadata(PAGE_SEO.contact);
 
 export default function ContactPage() {
   return (
-    <section className="relative bg-transparent">
+    <section className="relative box-border flex min-h-svh w-full flex-col overflow-hidden bg-[#f5f0e8] dark:bg-[#12100e]">
       <JsonLd
         data={webPageJsonLd({ ...PAGE_SEO.contact, type: "ContactPage" })}
       />
@@ -22,9 +24,25 @@ export default function ContactPage() {
           { name: "Contact", path: "/contact" },
         ])}
       />
+
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <Image
+          src={aboutHeroBg}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center dark:brightness-[0.92]"
+        />
+      </div>
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_75%_60%_at_50%_45%,rgba(255,252,247,0.55),transparent_68%)] dark:bg-[radial-gradient(ellipse_75%_60%_at_50%_45%,rgba(18,16,14,0.45),transparent_68%)]"
+        aria-hidden
+      />
+
       <Container
         size="wide"
-        className="relative z-10 py-[calc(var(--header-height)+1.75rem)] pb-16 md:py-[calc(var(--header-height)+2.5rem)] md:pb-20"
+        className="relative z-10 flex flex-1 flex-col justify-center py-[calc(var(--header-height)+1.75rem)] pb-14 md:py-[calc(var(--header-height)+2.5rem)] md:pb-20"
       >
         <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch lg:gap-12">
           <div className="flex h-full min-h-0 flex-col">
@@ -45,7 +63,7 @@ export default function ContactPage() {
               <li>
                 <a
                   href={`mailto:${SITE.email}`}
-                  className="flex items-center gap-3 rounded-2xl border border-black/[0.06] bg-white/80 px-3.5 py-3 transition-colors hover:border-black/10 dark:border-white/10 dark:bg-white/[0.04]"
+                  className="flex items-center gap-3 rounded-2xl border border-black/[0.06] bg-white/80 px-3.5 py-3 backdrop-blur-sm transition-colors hover:border-black/10 dark:border-white/10 dark:bg-white/[0.06]"
                 >
                   <span className="grid size-9 shrink-0 place-items-center rounded-full border border-black/[0.06] bg-white text-foreground dark:border-white/10 dark:bg-white/5">
                     <Mail className="size-3.5" aria-hidden />
@@ -62,7 +80,7 @@ export default function ContactPage() {
               </li>
 
               <li>
-                <div className="flex items-start gap-3 rounded-2xl border border-black/[0.06] bg-white/80 px-3.5 py-3 dark:border-white/10 dark:bg-white/[0.04]">
+                <div className="flex items-start gap-3 rounded-2xl border border-black/[0.06] bg-white/80 px-3.5 py-3 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.06]">
                   <span className="grid size-9 shrink-0 place-items-center rounded-full border border-black/[0.06] bg-white text-foreground dark:border-white/10 dark:bg-white/5">
                     <Clock className="size-3.5" aria-hidden />
                   </span>
@@ -87,7 +105,7 @@ export default function ContactPage() {
               </li>
 
               <li>
-                <div className="flex items-center gap-3 rounded-2xl border border-black/[0.06] bg-white/80 px-3.5 py-3 dark:border-white/10 dark:bg-white/[0.04]">
+                <div className="flex items-center gap-3 rounded-2xl border border-black/[0.06] bg-white/80 px-3.5 py-3 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.06]">
                   <span className="grid size-9 shrink-0 place-items-center rounded-full border border-black/[0.06] bg-white text-foreground dark:border-white/10 dark:bg-white/5">
                     <MapPin className="size-3.5" aria-hidden />
                   </span>
@@ -104,7 +122,7 @@ export default function ContactPage() {
             </ul>
           </div>
 
-          <div className="flex h-full min-h-0 flex-col rounded-[1.75rem] border border-black/[0.06] bg-white/90 p-5 shadow-[0_20px_50px_rgba(0,0,0,0.05)] backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.06] sm:p-7">
+          <div className="flex h-full min-h-0 flex-col rounded-[1.75rem] border border-black/[0.06] bg-white/90 p-5 shadow-[0_20px_50px_rgba(0,0,0,0.05)] backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.08] sm:p-7">
             <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
               Project inquiry
             </p>
