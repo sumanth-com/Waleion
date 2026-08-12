@@ -15,6 +15,9 @@ type SmoothAnchorProps = {
   href: string;
   className?: string;
   children: React.ReactNode;
+  title?: string;
+  "aria-label"?: string;
+  "aria-current"?: "page" | undefined;
   onNavigate?: () => void;
 };
 
@@ -37,6 +40,9 @@ export function SmoothAnchor({
   href,
   className,
   children,
+  title,
+  "aria-label": ariaLabel,
+  "aria-current": ariaCurrent,
   onNavigate,
 }: SmoothAnchorProps) {
   const pathname = usePathname();
@@ -64,7 +70,14 @@ export function SmoothAnchor({
   );
 
   return (
-    <Link href={href} onClick={onClick} className={cn(className)}>
+    <Link
+      href={href}
+      onClick={onClick}
+      className={cn(className)}
+      title={title}
+      aria-label={ariaLabel}
+      aria-current={ariaCurrent}
+    >
       {children}
     </Link>
   );

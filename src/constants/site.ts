@@ -10,7 +10,7 @@ export const SITE = {
   email: "hello@waleion.com",
   linkedin: "https://www.linkedin.com/company/waleion",
   location: "Remote-first · Serving clients worldwide",
-  businessHours: "Mon–Fri, 9:00–18:00 IST",
+  businessHours: "Mon–Fri, 9:00 AM–6:00 PM IST",
   responseTime: "We typically reply within 1 business day",
   ogImage: "/og/default.png",
 } as const;

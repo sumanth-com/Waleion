@@ -12,24 +12,29 @@ export const MAIN_NAV: NavItem[] = [
   {
     label: "Expertise",
     href: "/expertise",
+    description: "Custom SaaS, AI products, and software development services",
   },
   {
     label: "Work",
     href: "/work",
+    description: "Selected software projects and case studies",
   },
   {
     label: "About",
     href: "/about",
+    description: "About Waleion — our story, experience, and approach",
   },
   {
     label: "Contact",
     href: "/contact",
+    description: "Contact Waleion to start a project or ask a question",
   },
 ];
 
 export const CTA_NAV: NavLink = {
   label: "Book a Call",
   href: "/contact",
+  description: "Schedule a free discovery call with Waleion",
 };
 
 export const FOOTER_NAV = {

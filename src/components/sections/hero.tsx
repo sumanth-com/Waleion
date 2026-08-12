@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Star } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { SmoothAnchor } from "@/components/navigation/smooth-anchor";
 import { WorkShowcase } from "@/components/sections/work-showcase";
@@ -31,14 +30,33 @@ const AVATARS = [
   "/images/reviews/3.png",
 ] as const;
 
+/** Sharp 5-point star — solid black, no soft lucide curves. */
+function SharpStar({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden
+      className={cn("size-3 shrink-0", className)}
+    >
+      <path
+        fill="currentColor"
+        d="M12 1.6 14.94 8.3l7.26.74-5.46 4.72 1.6 7.12L12 17.28 5.66 20.88l1.6-7.12L1.8 9.04l7.26-.74L12 1.6Z"
+      />
+    </svg>
+  );
+}
+
 function HeroCta() {
+  const reduceMotion = usePrefersReducedMotion();
+
   return (
     <SmoothAnchor
       href={CTA_NAV.href}
       className={cn(
         "group inline-flex items-center rounded-full bg-neutral-950 py-1.5 pl-1.5 pr-5",
         "shadow-[0_10px_30px_rgba(0,0,0,0.18)]",
-        "transition-transform duration-300 hover:-translate-y-0.5",
+        "transition-[transform,box-shadow] duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]",
+        "hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(0,0,0,0.22)]",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
         "dark:bg-neutral-950"
       )}
@@ -50,16 +68,32 @@ function HeroCta() {
         {SITE.name.charAt(0)}
       </span>
 
-      <span className="grid grid-cols-[0fr] transition-[grid-template-columns] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:grid-cols-[1fr] group-focus-visible:grid-cols-[1fr]">
+      <span
+        className={cn(
+          "grid min-w-0 overflow-hidden transition-[grid-template-columns,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+          reduceMotion
+            ? "grid-cols-[1fr] opacity-100"
+            : "grid-cols-[0fr] opacity-90 group-hover:grid-cols-[1fr] group-hover:opacity-100 group-focus-visible:grid-cols-[1fr] group-focus-visible:opacity-100"
+        )}
+      >
         <span className="flex min-w-0 items-center overflow-hidden">
-          <span className="px-1.5 text-sm font-medium text-white/70">+</span>
+          <span className="whitespace-nowrap px-1.5 text-sm font-medium text-white/70">
+            +
+          </span>
           <span className="grid size-9 shrink-0 place-items-center rounded-full bg-[#2b7fff] text-[11px] font-semibold text-white">
             You
           </span>
         </span>
       </span>
 
-      <span className="ml-2.5 text-sm font-medium text-white">
+      <span
+        className={cn(
+          "text-sm font-medium text-white transition-[margin] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+          reduceMotion
+            ? "ml-2.5"
+            : "ml-2 group-hover:ml-2.5 group-focus-visible:ml-2.5"
+        )}
+      >
         Book a 30-Min call
       </span>
     </SmoothAnchor>
@@ -165,12 +199,12 @@ export function Hero() {
               <span className="h-3 w-px bg-border" aria-hidden />
               <span className="flex items-center gap-1 text-[12px] font-medium text-foreground">
                 5.0
-                <span className="flex" aria-hidden>
+                <span
+                  className="ml-0.5 flex items-center gap-px text-neutral-950 dark:text-white"
+                  aria-hidden
+                >
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star
-                      key={i}
-                      className="size-3 fill-foreground text-foreground"
-                    />
+                    <SharpStar key={i} />
                   ))}
                 </span>
               </span>

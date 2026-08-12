@@ -45,7 +45,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   const project = getShippedProject(slug);
   if (!project) notFound();
 
-  const { prev, next } = getAdjacentProjects(project.slug);
+  const { prev, next, more } = getAdjacentProjects(project.slug);
   const liveLabel = project.liveUrl ? "Live product" : "Product";
 
   return (
@@ -196,33 +196,14 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </div>
         </section>
 
-        <section
-          className="overflow-hidden rounded-[28px] p-6 md:p-10"
-          style={{
-            background: `radial-gradient(ellipse 70% 80% at 85% 50%, ${project.brand}33, transparent 60%), #111`,
-          }}
-        >
-          <div className="grid items-center gap-8 md:grid-cols-2">
-            <div>
-              <span className="inline-flex rounded-full bg-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-white/70">
-                Growth
-              </span>
-              <h2 className="mt-4 text-[clamp(1.5rem,3vw,2.1rem)] font-semibold tracking-tight text-white">
-                It’s compounding.
-              </h2>
-              <p className="mt-4 max-w-md text-[15px] leading-relaxed text-white/60">
-                {project.growth.story}
-              </p>
-            </div>
-            <GrowthChart
-              color={project.brand}
-              label={project.growth.metricLabel}
-              value={project.growth.metricValue}
-            />
-          </div>
-        </section>
+        <GrowthChart
+          color={project.brand}
+          label={project.growth.metricLabel}
+          value={project.growth.metricValue}
+          story={project.growth.story}
+        />
 
-        <div className="mt-16 flex flex-col items-start justify-between gap-5 pb-8 sm:flex-row sm:items-center md:mt-20">
+        <div className="mt-16 flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center md:mt-20">
           <p className="text-[15px] tracking-tight text-neutral-500">
             Want something like this for your brand?
           </p>
@@ -234,30 +215,30 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             <ArrowRight className="size-3.5" aria-hidden />
           </Link>
         </div>
-      </ProjectsContainer>
 
-      <div className="pointer-events-none fixed inset-x-0 bottom-5 z-40 flex justify-center px-4">
-        <div className="pointer-events-auto flex items-center gap-1 rounded-full border border-black/10 bg-white/90 p-1.5 text-[12px] shadow-[0_10px_40px_rgba(0,0,0,0.12)] backdrop-blur">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-2 pb-10 md:mt-12 md:pb-14">
           <Link
             href={`/projects/${prev.slug}`}
-            className="rounded-full px-3.5 py-2 text-neutral-500 hover:text-neutral-950"
+            className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2.5 text-[12px] font-medium text-neutral-700 shadow-sm hover:text-neutral-950"
           >
+            <ArrowLeft className="size-3.5" aria-hidden />
             {prev.name}
           </Link>
-          <SmoothAnchor
-            href="/work"
-            className="rounded-full bg-neutral-950 px-3.5 py-2 font-medium text-white"
-          >
-            All projects
-          </SmoothAnchor>
           <Link
             href={`/projects/${next.slug}`}
-            className="rounded-full px-3.5 py-2 text-neutral-500 hover:text-neutral-950"
+            className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2.5 text-[12px] font-medium text-neutral-700 shadow-sm hover:text-neutral-950"
           >
             {next.name}
           </Link>
+          <Link
+            href={`/projects/${more.slug}`}
+            className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2.5 text-[12px] font-medium text-neutral-700 shadow-sm hover:text-neutral-950"
+          >
+            {more.name}
+            <ArrowRight className="size-3.5" aria-hidden />
+          </Link>
         </div>
-      </div>
+      </ProjectsContainer>
     </ProjectsShell>
   );
 }

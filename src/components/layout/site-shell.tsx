@@ -15,7 +15,7 @@ type SiteShellProps = {
  */
 export function SiteShell({ children }: SiteShellProps) {
   return (
-    <div className="relative flex min-h-dvh flex-col overflow-x-clip bg-[var(--hero-bg)]">
+    <div className="relative flex min-h-dvh flex-col bg-[var(--hero-bg)]">
       <SiteAtmosphere />
       <SiteHeader />
       <HashScroll />

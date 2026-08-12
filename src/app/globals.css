@@ -496,23 +496,6 @@
   z-index: 1;
 }
 
-@keyframes growth-line {
-  0% {
-    stroke-dashoffset: 420;
-  }
-  45% {
-    stroke-dashoffset: 0;
-  }
-  100% {
-    stroke-dashoffset: -420;
-  }
-}
-
-.growth-line {
-  stroke-dasharray: 420;
-  animation: growth-line 4.8s ease-in-out infinite;
-}
-
 @keyframes faq-dot {
   0%,
   80%,
@@ -526,9 +509,45 @@
   }
 }
 
+@keyframes demand-pill-glow {
+  0%,
+  100% {
+    border-color: rgb(16 185 129 / 0.22);
+    background-color: rgb(16 185 129 / 0.09);
+    box-shadow: 0 0 0 0 rgb(16 185 129 / 0);
+  }
+  50% {
+    border-color: rgb(16 185 129 / 0.38);
+    background-color: rgb(16 185 129 / 0.16);
+    box-shadow: 0 0 0 3px rgb(16 185 129 / 0.08);
+  }
+}
+
+@keyframes demand-dot-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgb(16 185 129 / 0.45);
+  }
+  50% {
+    opacity: 0.88;
+    transform: scale(1.15);
+    box-shadow: 0 0 0 5px rgb(16 185 129 / 0);
+  }
+}
+
+.demand-alive {
+  animation: demand-pill-glow 2.4s ease-in-out infinite;
+}
+
+.demand-alive-dot {
+  animation: demand-dot-pulse 1.6s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .growth-line {
+  .demand-alive,
+  .demand-alive-dot {
     animation: none;
-    stroke-dashoffset: 0;
   }
 }

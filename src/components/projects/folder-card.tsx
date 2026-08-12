@@ -39,25 +39,21 @@ export function FolderCard({
         "font-[family-name:var(--font-inter)] tracking-tight",
         wide
           ? "w-[min(100%,30rem)] max-w-none"
-          : "min-h-[400px] max-w-[260px]",
+          : "max-w-[260px]",
         className
       )}
     >
-      <span
-        className={cn(
-          "relative shrink-0 overflow-hidden bg-neutral-100",
-          wide ? "h-[11rem] sm:h-[12rem]" : "h-[240px]"
-        )}
-      >
+      <span className="relative block w-full shrink-0 overflow-hidden bg-neutral-100">
         <Image
           src={project.cover}
           alt=""
-          fill
-          sizes={wide ? "480px" : "260px"}
-          className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+          width={1600}
+          height={1000}
+          sizes={wide ? "(min-width: 768px) 30rem, 92vw" : "260px"}
+          className="h-auto w-full object-contain object-top"
         />
         <span className="absolute inset-x-3 bottom-3 flex items-center justify-between opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          <span className="rounded-full bg-white px-3 py-1.5 text-[11px] font-medium text-neutral-950 shadow-sm">
+          <span className="rounded-full bg-white/95 px-3 py-1.5 text-[11px] font-medium text-neutral-950 shadow-sm">
             View proof
           </span>
         </span>

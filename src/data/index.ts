@@ -73,17 +73,19 @@ export type {
   IndustryStory,
 } from "./industries-page";
 export {
-  aboutWhoWeAre,
-  aboutMission,
-  aboutVision,
-  aboutBeliefs,
-  aboutValues,
-  aboutHowWeWork,
-  aboutTeam,
-  aboutCulture,
-  aboutTrustPoints,
-  aboutStats,
   aboutPageCopy,
+  aboutExperiencePillars,
+  aboutCapabilities,
+  getAboutStats,
+  aboutVerifiedProductCount,
+  aboutVerifiedIndustries,
+  aboutMetadataDescription,
+} from "./about-page";
+export type {
+  ExperiencePillar,
+  CapabilityItem,
+  PrincipleItem,
+  StatItem,
 } from "./about-page";
 export { whyChooseItems, whyPrinciples, whyComparison } from "./why";
 export type { WhyChooseItem, WhyPrinciple, ComparisonRow } from "./why";

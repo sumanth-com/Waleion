@@ -97,12 +97,16 @@ export function MobileNav() {
                       <li key={item.href}>
                         <SmoothAnchor
                           href={item.href}
+                          title={item.description}
                           className={cn(
                             "block rounded-xl px-3 py-3 text-sm font-medium text-foreground",
                             "hover:bg-foreground/[0.04] dark:hover:bg-white/[0.06]",
                             isActivePath(pathname, item.href) &&
                               "bg-foreground/[0.04] dark:bg-white/[0.06]"
                           )}
+                          aria-current={
+                            isActivePath(pathname, item.href) ? "page" : undefined
+                          }
                           onNavigate={() => setOpen(false)}
                         >
                           {item.label}
@@ -164,6 +168,8 @@ export function MobileNav() {
 
               <SmoothAnchor
                 href={CTA_NAV.href}
+                title={CTA_NAV.description}
+                aria-label={CTA_NAV.description}
                 className={cn(
                   "mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-neutral-950 py-3 pl-5 pr-2",
                   "text-sm font-medium text-white",

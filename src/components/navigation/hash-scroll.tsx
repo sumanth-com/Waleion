@@ -23,12 +23,20 @@ export function HashScroll() {
     scrollToId(section, "auto");
     const frame = window.requestAnimationFrame(() => {
       scrollToId(section, "auto");
+      (window as Window & { __lenis?: { resize: () => void } }).__lenis?.resize();
     });
-    const timer = window.setTimeout(() => scrollToId(section, "auto"), 80);
+    const timer = window.setTimeout(() => {
+      scrollToId(section, "auto");
+      (window as Window & { __lenis?: { resize: () => void } }).__lenis?.resize();
+    }, 80);
+    const later = window.setTimeout(() => {
+      (window as Window & { __lenis?: { resize: () => void } }).__lenis?.resize();
+    }, 700);
 
     return () => {
       window.cancelAnimationFrame(frame);
       window.clearTimeout(timer);
+      window.clearTimeout(later);
     };
   }, [pathname]);
 

@@ -33,7 +33,7 @@ export const homeFaqs: HomeFaq[] = [
     id: "geo",
     question: "Can you work with teams outside India?",
     answer:
-      "Yes. We’re remote-first and serve clients worldwide. Hours are Mon–Fri, 9:00–18:00 IST, with scheduled overlap for North America and Europe. We typically reply within one business day.",
+      "Yes. We’re remote-first and serve clients worldwide. Hours are Mon–Fri, 9:00 AM–6:00 PM IST, with peak weekend availability on Sat & Sun (high demand). We typically reply within one business day.",
   },
   {
     id: "pricing",

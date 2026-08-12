@@ -61,7 +61,7 @@ export function WorkSlideshow({ projects }: WorkSlideshowProps) {
         <ChevronLeft className="size-4" strokeWidth={1.75} />
       </button>
 
-      <div className="relative mx-11 overflow-hidden h-[21rem] sm:mx-12 sm:h-[22.5rem]">
+      <div className="relative mx-11 overflow-hidden h-[25.5rem] sm:mx-12 sm:h-[28rem]">
         {projects.map((project, index) => {
           const offset = wrapOffset(index, active, count);
           const isCenter = offset === 0;
@@ -74,13 +74,12 @@ export function WorkSlideshow({ projects }: WorkSlideshowProps) {
                 "absolute left-1/2 top-1/2 w-[min(92vw,30rem)] will-change-transform",
                 reduceMotion
                   ? "transition-opacity duration-300"
-                  : "transition-[transform,opacity,filter] duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                  : "transition-[transform,opacity] duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]"
               )}
               style={{
-                transform: `translate(-50%, -50%) translateX(${offset * shift}px) scale(${isCenter ? 1 : 0.9})`,
+                transform: `translate(-50%, -50%) translateX(${offset * shift}px) scale(${isCenter ? 1 : 0.92})`,
                 zIndex: isCenter ? 8 : 4 - Math.abs(offset),
-                filter: isCenter || reduceMotion ? "none" : "blur(5px)",
-                opacity: visible ? (isCenter ? 1 : 0.5) : 0,
+                opacity: visible ? (isCenter ? 1 : 0.72) : 0,
                 pointerEvents: visible ? "auto" : "none",
               }}
             >

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, type ReactNode } from "react";
 import { easings } from "@/lib/animations";
 import { isHomeCanvas, sectionForPath } from "@/constants/homepage";
+import { resetPageScroll, shouldSkipPageTransition } from "@/lib/scroll-reset";
 
 const EASE = easings.springSoft;
 
@@ -20,6 +21,24 @@ function Frozen({ children }: { children: ReactNode }) {
   return <>{cache.current}</>;
 }
 
+function useScrollToTop(pathname: string, enabled: boolean) {
+  useEffect(() => {
+    if (!enabled || sectionForPath(pathname)) return;
+
+    resetPageScroll();
+
+    const raf = requestAnimationFrame(resetPageScroll);
+    const timers = [0, 50, 120, 400].map((ms) =>
+      window.setTimeout(resetPageScroll, ms)
+    );
+
+    return () => {
+      cancelAnimationFrame(raf);
+      timers.forEach(window.clearTimeout);
+    };
+  }, [pathname, enabled]);
+}
+
 /**
  * macOS-style window open/close.
  * Pages overlap — the next screen is visible immediately, no empty frame.
@@ -28,21 +47,34 @@ export function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const reduceMotion = useReducedMotion();
   const transitionKey = isHomeCanvas(pathname) ? "home" : pathname;
+  const skipTransition = shouldSkipPageTransition(pathname);
+
+  useScrollToTop(pathname, !sectionForPath(pathname));
 
   useEffect(() => {
     if ("scrollRestoration" in history) history.scrollRestoration = "manual";
   }, []);
 
   useEffect(() => {
-    if (sectionForPath(pathname)) return;
-    window.scrollTo(0, 0);
-  }, [transitionKey, pathname]);
+    const lenis = (window as Window & { __lenis?: { resize: () => void } }).__lenis;
+    const id = window.setTimeout(() => lenis?.resize(), 420);
+    return () => window.clearTimeout(id);
+  }, [transitionKey]);
 
-  if (reduceMotion) return <>{children}</>;
+  if (reduceMotion || skipTransition) {
+    return <div className="w-full">{children}</div>;
+  }
 
   return (
-    <div className="relative min-h-dvh overflow-x-clip">
-      <AnimatePresence initial={false}>
+    <div className="relative w-full">
+      <AnimatePresence
+        initial={false}
+        mode="wait"
+        onExitComplete={() => {
+          resetPageScroll();
+          (window as Window & { __lenis?: { resize: () => void } }).__lenis?.resize();
+        }}
+      >
         <motion.div
           key={transitionKey}
           initial="enter"
@@ -70,7 +102,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
             transformOrigin: { duration: 0 },
           }}
           style={{ transformOrigin: "50% 100%" }}
-          className="min-h-dvh w-full bg-transparent"
+          className="w-full bg-transparent"
         >
           <Frozen>{children}</Frozen>
         </motion.div>

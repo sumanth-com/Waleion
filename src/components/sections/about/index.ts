@@ -1,14 +1,8 @@
 export { AboutHero } from "./about-hero";
 export {
-  AboutWhoWeAre,
-  AboutMissionVision,
-  AboutBeliefs,
-  AboutValues,
-  AboutHowWeWork,
-  AboutTeam,
-  AboutCulture,
-  AboutTrust,
+  AboutStory,
+  AboutExperience,
+  AboutCapabilities,
   AboutStats,
   AboutCommitment,
-  AboutFinalCta,
 } from "./about-sections";

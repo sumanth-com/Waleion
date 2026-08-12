@@ -44,7 +44,7 @@ export const shippedProjects: ShippedProject[] = [
       "Certified refurbished electronics. Warranty on. Doorstep next. Feels new — costs like it shouldn’t.",
     status: "Shipped",
     liveUrl: "https://www.protronics.store/",
-    cover: "/images/projects/procover.png",
+    cover: "/images/projects/protronicscover.png",
     screenshot: "/images/projects/pro1.png",
     brand: "#e11d2e",
     whatItIs:
@@ -93,7 +93,7 @@ export const shippedProjects: ShippedProject[] = [
       "Become the developer companies actually hire. Real projects. An AI mentor. Proof they can open.",
     status: "Shipped",
     liveUrl: "https://www.suprabase.in/",
-    cover: "/images/projects/sucover.png",
+    cover: "/images/projects/supracover.png",
     screenshot: "/images/projects/su1.png",
     brand: "#e24a3b",
     whatItIs:
@@ -149,7 +149,7 @@ export const shippedProjects: ShippedProject[] = [
     promise:
       "Your money, in one quiet view. Balances, spend, the next move — already on screen.",
     status: "Shipped",
-    cover: "/images/projects/zencover.png",
+    cover: "/images/projects/zentracover.png",
     screenshot: "/images/projects/zen1.png",
     brand: "#3b82f6",
     whatItIs:
@@ -197,9 +197,9 @@ export const shippedProjects: ShippedProject[] = [
     promise:
       "Every location. One view. Inventory, tasks, performance — without the spreadsheet fog.",
     status: "Shipped",
-    cover: "/images/solutions/saas.png",
-    screenshot: "/images/solutions/enterprise.png",
-    brand: "#171717",
+    cover: "/images/projects/harborcover.png",
+    screenshot: "/images/projects/ha1.png",
+    brand: "#7c3aed",
     whatItIs:
       "The live ops board for a franchise network. Stores run the day. HQ sees the rollup. Permissions stay by location.",
     whatItsFor:
@@ -211,23 +211,31 @@ export const shippedProjects: ShippedProject[] = [
         title: "The network, in one glance.",
         copy: "Locations. Exceptions. What needs a human today. HQ opens Harbor and the pile of files is already gone.",
         outcome: "Leadership sees the system, not the inbox.",
-        image: "/images/solutions/saas.png",
+        image: "/images/projects/ha1.png",
       },
       {
         index: "02",
         stage: "Conversion",
-        title: "The shift has a list.",
-        copy: "Tasks, inventory, status — where the manager already stands. Local control. Shared standards. The day starts on the first screen.",
-        outcome: "Nobody hunts for the work. It’s waiting.",
-        image: "/images/solutions/enterprise.png",
+        title: "The pitch is the product.",
+        copy: "Revenue. Location health. Activity — already on the first marketing screen. Operators don’t imagine Harbor. They see it running.",
+        outcome: "The demo starts before the call.",
+        image: "/images/projects/ha2.png",
       },
       {
         index: "03",
+        stage: "Engagement",
+        title: "Every store has a place.",
+        copy: "Map. Status. Recent locations. Add one more without losing the rollup. The network stays honest as it grows.",
+        outcome: "Scale doesn’t erase the signal.",
+        image: "/images/projects/ha3.png",
+      },
+      {
+        index: "04",
         stage: "Retention",
-        title: "HQ can see. Stores still run.",
-        copy: "Permissions by location. Autonomy downstairs, honesty upstairs. The network stays because nobody got boxed in.",
-        outcome: "Consistency without the revolt.",
-        image: "/images/solutions/data.png",
+        title: "Help without the ticket maze.",
+        copy: "Phone. Email. Live chat. A message that lands with the team. Support sits inside the product — not on another domain.",
+        outcome: "Operators stay because help stays close.",
+        image: "/images/projects/ha4.png",
       },
     ],
     growth: {
@@ -235,6 +243,70 @@ export const shippedProjects: ShippedProject[] = [
         "Ops left the inbox. Shared visibility first — then the habits that keep every location on the same page.",
       metricLabel: "Ops cycle time",
       metricValue: "3.2×",
+    },
+  },
+  {
+    slug: "emori",
+    name: "Emori",
+    subtitle: "Landing page",
+    category: "Franchise Landing Page · Lab-Grown Diamonds",
+    promise:
+      "A Shark Tank-backed franchise story, clear numbers, and a path to talk — built to convert serious investors.",
+    status: "Shipped",
+    cover: "/images/projects/emoricover.png",
+    screenshot: "/images/projects/lp1.png",
+    brand: "#b8956a",
+    whatItIs:
+      "A live franchise landing page for EMORI Lab-Grown Diamonds. Investment, stores, proof, and eligibility — one calm surface.",
+    whatItsFor:
+      "Investors weighing a premium retail franchise who need the deal, the footprint, and a real next step — not a brochure maze.",
+    experience: [
+      {
+        index: "01",
+        stage: "Acquisition",
+        title: "The deal is on the first screen.",
+        copy: "Franchise opportunity. Shark Tank-backed. Guarantee and fee, already visible. The hero doesn’t explain jewelry — it earns the scroll.",
+        outcome: "Serious buyers stay. Browsers leave clean.",
+        image: "/images/projects/lp1.png",
+      },
+      {
+        index: "02",
+        stage: "Conversion",
+        title: "Proof before the pitch.",
+        copy: "Founder. Equity deal. Named sharks. The trust stack sits where doubt usually lives — so the ask doesn’t have to shout.",
+        outcome: "Credibility does the heavy lift.",
+        image: "/images/projects/lp2.png",
+      },
+      {
+        index: "03",
+        stage: "Engagement",
+        title: "Stores you can picture.",
+        copy: "Gurugram. Noida. Dwarka. Real interiors, real sizes. The next city feels like a continuation — not a leap of faith.",
+        outcome: "Presence turns abstract into place.",
+        image: "/images/projects/lp3.png",
+      },
+      {
+        index: "04",
+        stage: "Differentiation",
+        title: "Numbers without fog.",
+        copy: "2.3 Cr breakdown. 15% guarantee or revenue share. CapEx, deposit, fee — lined up so the math can be argued with, not guessed at.",
+        outcome: "The conversation starts with a model, not a rumor.",
+        image: "/images/projects/lp4.png",
+      },
+      {
+        index: "05",
+        stage: "Retention",
+        title: "Eligibility, one form.",
+        copy: "Name, city, budget, preference. WhatsApp and email sitting next to it. The close is a product conversation — not another brochure download.",
+        outcome: "Interest becomes a lead the same session.",
+        image: "/images/projects/lp5.png",
+      },
+    ],
+    growth: {
+      story:
+        "Hero. Proof. Stores. Numbers. Ask. The page does the sales call before the call — and qualified leads keep coming through.",
+      metricLabel: "Qualified leads",
+      metricValue: "3.8×",
     },
   },
 ];
@@ -245,7 +317,9 @@ export function getShippedProject(slug: string) {
 
 export function getAdjacentProjects(slug: string) {
   const index = shippedProjects.findIndex((project) => project.slug === slug);
-  const prev = shippedProjects[(index - 1 + shippedProjects.length) % shippedProjects.length];
-  const next = shippedProjects[(index + 1) % shippedProjects.length];
-  return { prev, next };
+  const len = shippedProjects.length;
+  const prev = shippedProjects[(index - 1 + len) % len];
+  const next = shippedProjects[(index + 1) % len];
+  const more = shippedProjects[(index + 2) % len];
+  return { prev, next, more };
 }
