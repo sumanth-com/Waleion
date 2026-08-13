@@ -128,12 +128,18 @@ export function FaqChat() {
       <FadeUp className="mx-auto w-full max-w-5xl">
         <div className="rounded-[1.75rem] border border-black/[0.06] bg-white/85 p-4 shadow-[0_16px_40px_rgba(0,0,0,0.05)] backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.06] sm:p-5">
           <div className="flex flex-col gap-3">
-            {homeFaqs.map((item) => {
+            {homeFaqs.map((item, index) => {
               const isOpen = openId === item.id;
 
               return (
-                <div key={item.id} className="flex flex-col gap-2.5">
-                  <div className="ml-auto flex w-fit max-w-[92%] items-center gap-2">
+                <div
+                  key={item.id}
+                  className={cn(
+                    "flex flex-col gap-2.5",
+                    index >= 5 && "max-md:hidden"
+                  )}
+                >
+                  <div className="grid w-full grid-cols-[2rem_minmax(0,1fr)] items-start gap-2 md:ml-auto md:flex md:w-fit md:max-w-[92%] md:items-center">
                     <button
                       type="button"
                       onClick={() => open(item.id)}
@@ -159,7 +165,7 @@ export function FaqChat() {
                       type="button"
                       onClick={() => open(item.id)}
                       className={cn(
-                        "rounded-2xl px-4 py-3 text-left text-[16px] font-medium tracking-tight transition-colors",
+                        "w-full rounded-2xl px-4 py-3 text-left text-[15px] font-medium leading-snug tracking-tight transition-colors md:w-auto md:text-[16px]",
                         isOpen
                           ? "bg-neutral-950 text-white dark:bg-white dark:text-neutral-950"
                           : "bg-neutral-100 text-neutral-700 dark:bg-white/10 dark:text-white/80"
@@ -177,7 +183,7 @@ export function FaqChat() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 6 }}
                         transition={{ duration: 0.28, ease: easings.springSoft }}
-                        className="mr-auto flex w-[88%] items-center gap-2"
+                        className="flex w-full items-start gap-2 max-md:pl-10 md:mr-auto md:w-[88%] md:items-center"
                       >
                         <StudioMark />
                         <div className="min-w-0 flex-1 rounded-2xl rounded-bl-md bg-neutral-50 px-3.5 py-3 dark:bg-white/8">

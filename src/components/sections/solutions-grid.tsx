@@ -42,12 +42,12 @@ function SolutionPreview({ item }: { item: SolutionGridItem }) {
   const [back, front] = item.images;
 
   return (
-    <div className="relative h-[7.25rem] w-[10.5rem]">
+    <div className="relative h-[5.6rem] w-[8.15rem] sm:h-[7.25rem] sm:w-[10.5rem]">
       <PreviewFrame
         src={back}
         alt=""
         className={cn(
-          "left-0 top-5 h-[4.9rem] w-[6.4rem] -rotate-[8deg]",
+          "left-0 top-4 h-[3.75rem] w-[4.9rem] -rotate-[8deg] sm:top-5 sm:h-[4.9rem] sm:w-[6.4rem]",
           "origin-center transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
           "group-hover:-translate-y-1.5 group-hover:-rotate-[12deg]"
         )}
@@ -56,7 +56,7 @@ function SolutionPreview({ item }: { item: SolutionGridItem }) {
         src={front}
         alt={`${item.title} product interface`}
         className={cn(
-          "right-0 top-2 h-[4.9rem] w-[6.4rem] rotate-[8deg]",
+          "right-0 top-1.5 h-[3.75rem] w-[4.9rem] rotate-[8deg] sm:top-2 sm:h-[4.9rem] sm:w-[6.4rem]",
           "origin-center transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
           "group-hover:-translate-y-2 group-hover:rotate-[12deg]"
         )}
@@ -78,12 +78,12 @@ export function SolutionsGrid() {
         className="max-w-3xl"
       />
 
-      <Stagger className="mx-auto grid max-w-4xl grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 lg:grid-cols-3">
+      <Stagger className="mx-auto grid max-w-4xl grid-cols-2 gap-x-3 gap-y-6 sm:gap-x-8 sm:gap-y-7 lg:grid-cols-3">
         {solutionGridItems.map((item) => (
           <StaggerItem key={item.id}>
             <article className="group flex flex-col items-center text-center">
               <SolutionPreview item={item} />
-              <h3 className="mt-2 text-[13px] font-medium tracking-tight text-foreground md:text-sm">
+              <h3 className="mt-1.5 max-w-[9.5rem] text-balance text-[12px] font-medium leading-snug tracking-tight text-foreground sm:mt-2 sm:max-w-none sm:text-[13px] md:text-sm">
                 {item.title}
               </h3>
             </article>

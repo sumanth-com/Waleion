@@ -51,12 +51,12 @@ export function AboutHero() {
           <p className="mt-3 max-w-2xl text-pretty text-sm leading-relaxed text-muted-foreground md:text-[0.9875rem]">
             {hero.supporting}
           </p>
-          <div className="mt-8 flex w-full max-w-sm flex-col items-stretch gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
+          <div className="mt-8 flex w-full max-w-md flex-row items-center justify-center gap-2 sm:max-w-none sm:gap-3">
             <Link
               href="/contact"
               className={cn(
                 buttonVariants({ size: "lg" }),
-                "rounded-full px-6 max-md:w-full dark:bg-white dark:text-neutral-950 dark:hover:bg-white/90"
+                "min-w-0 flex-1 rounded-full px-3 text-[12.5px] sm:flex-none sm:px-6 sm:text-[0.9375rem] dark:bg-white dark:text-neutral-950 dark:hover:bg-white/90"
               )}
             >
               {hero.primaryCta}
@@ -65,7 +65,7 @@ export function AboutHero() {
               href="/work"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
-                "rounded-full border-black/10 bg-white/70 px-6 backdrop-blur-sm hover:bg-white/90 max-md:w-full dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/15"
+                "min-w-0 flex-1 rounded-full border-black/10 bg-white/70 px-3 text-[12.5px] backdrop-blur-sm hover:bg-white/90 sm:flex-none sm:px-6 sm:text-[0.9375rem] dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/15"
               )}
             >
               {hero.secondaryCta}

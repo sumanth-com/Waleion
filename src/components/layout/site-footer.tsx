@@ -61,9 +61,9 @@ export function SiteFooter({ className }: SiteFooterProps) {
   return (
     <footer className={cn("relative z-[1] bg-transparent pb-8 md:pb-10", className)}>
       <Container size="wide">
-        <div className="mx-auto w-full max-w-5xl">
-          <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between md:gap-12">
-            <div className="max-w-[16rem]">
+        <div className="mx-auto w-full">
+          <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between md:gap-16">
+            <div className="max-w-[16rem] shrink-0">
               <Link href="/" className="inline-flex items-center gap-2.5">
                 <span className="grid size-8 place-items-center rounded-full bg-neutral-950 text-[12px] font-semibold text-white dark:bg-white dark:text-neutral-950">
                   {SITE.name.charAt(0)}
@@ -78,8 +78,8 @@ export function SiteFooter({ className }: SiteFooterProps) {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-8 max-[380px]:grid-cols-1 md:grid-cols-3 md:gap-14">
-              <div className="space-y-3">
+            <div className="grid w-full min-w-0 flex-1 grid-cols-3 gap-4 sm:gap-8 md:gap-10 lg:gap-16">
+              <div className="min-w-0 space-y-3">
                 <p className="text-[12px] font-medium text-neutral-950 dark:text-white">
                   Pages
                 </p>
@@ -92,7 +92,7 @@ export function SiteFooter({ className }: SiteFooterProps) {
                 </ul>
               </div>
 
-              <div className="space-y-3">
+              <div className="min-w-0 space-y-3">
                 <p className="text-[12px] font-medium text-neutral-950 dark:text-white">
                   Work
                 </p>
@@ -105,7 +105,7 @@ export function SiteFooter({ className }: SiteFooterProps) {
                 </ul>
               </div>
 
-              <div className="space-y-3">
+              <div className="min-w-0 space-y-3">
                 <p className="text-[12px] font-medium text-neutral-950 dark:text-white">
                   Connect
                 </p>

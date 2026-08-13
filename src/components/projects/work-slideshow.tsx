@@ -25,7 +25,7 @@ export function WorkSlideshow({ projects }: WorkSlideshowProps) {
   const reduceMotion = usePrefersReducedMotion();
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const count = projects.length;
-  const shift = isDesktop ? 250 : 175;
+  const shift = isDesktop ? 250 : 0;
 
   const go = useCallback(
     (dir: -1 | 1) => {
@@ -41,8 +41,9 @@ export function WorkSlideshow({ projects }: WorkSlideshowProps) {
   }, [go, paused, reduceMotion, count]);
 
   const arrowClass = cn(
-    "absolute top-1/2 z-20 grid size-10 -translate-y-1/2 place-items-center sm:size-11",
-    "rounded-full border border-black/[0.06] bg-white text-neutral-600 shadow-[0_6px_20px_rgba(0,0,0,0.06)]",
+    "absolute top-1/2 z-20 grid -translate-y-1/2 place-items-center",
+    "size-9 sm:size-11",
+    "rounded-full border border-black/[0.06] bg-white/95 text-neutral-600 shadow-[0_6px_20px_rgba(0,0,0,0.08)]",
     "transition-colors hover:text-neutral-950"
   );
 
@@ -56,22 +57,23 @@ export function WorkSlideshow({ projects }: WorkSlideshowProps) {
         type="button"
         aria-label="Previous project"
         onClick={() => go(-1)}
-        className={cn(arrowClass, "left-0")}
+        className={cn(arrowClass, "left-2 sm:left-0")}
       >
         <ChevronLeft className="size-4" strokeWidth={1.75} />
       </button>
 
-      <div className="relative mx-8 overflow-hidden h-[22.5rem] sm:mx-12 sm:h-[28rem]">
+      <div className="relative h-[22.5rem] overflow-hidden sm:mx-12 sm:h-[28rem]">
         {projects.map((project, index) => {
           const offset = wrapOffset(index, active, count);
           const isCenter = offset === 0;
-          const visible = Math.abs(offset) <= 1;
+          const visible = isDesktop ? Math.abs(offset) <= 1 : isCenter;
 
           return (
             <div
               key={project.slug}
               className={cn(
-                "absolute left-1/2 top-1/2 w-[min(92vw,30rem)] will-change-transform",
+                "absolute left-1/2 top-1/2 will-change-transform",
+                "w-full px-0 sm:w-[min(92vw,30rem)] sm:px-0",
                 reduceMotion
                   ? "transition-opacity duration-300"
                   : "transition-[transform,opacity] duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]"
@@ -87,7 +89,7 @@ export function WorkSlideshow({ projects }: WorkSlideshowProps) {
                 project={project}
                 wide
                 onSelect={isCenter ? undefined : () => setActive(index)}
-                className="w-[min(92vw,30rem)] hover:!translate-y-0"
+                className="w-full hover:!translate-y-0 sm:w-[min(92vw,30rem)]"
               />
             </div>
           );
@@ -98,7 +100,7 @@ export function WorkSlideshow({ projects }: WorkSlideshowProps) {
         type="button"
         aria-label="Next project"
         onClick={() => go(1)}
-        className={cn(arrowClass, "right-0")}
+        className={cn(arrowClass, "right-2 sm:right-0")}
       >
         <ChevronRight className="size-4" strokeWidth={1.75} />
       </button>

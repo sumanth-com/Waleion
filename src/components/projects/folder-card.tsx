@@ -38,7 +38,7 @@ export function FolderCard({
         "hover:-translate-y-1 hover:border-black/10 hover:shadow-[0_14px_36px_rgba(0,0,0,0.07)]",
         "font-[family-name:var(--font-inter)] tracking-tight",
         wide
-          ? "w-[min(100%,30rem)] max-w-none"
+          ? "w-full max-w-none sm:w-[min(100%,30rem)]"
           : "max-w-[260px]",
         className
       )}
@@ -49,7 +49,7 @@ export function FolderCard({
           alt={`${project.name} product`}
           width={1600}
           height={1000}
-          sizes={wide ? "(min-width: 768px) 30rem, 92vw" : "260px"}
+          sizes={wide ? "(min-width: 768px) 30rem, 100vw" : "260px"}
           className="h-auto w-full object-contain object-top"
         />
         <span className="absolute inset-x-3 bottom-3 flex items-center justify-between opacity-0 transition-opacity duration-300 group-hover:opacity-100">

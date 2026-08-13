@@ -159,7 +159,7 @@ export function GetStarted({ asPage = false }: { asPage?: boolean }) {
       />
 
       <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
-        <div className="relative mx-auto h-[380px] w-full max-w-lg overflow-hidden lg:h-[420px]">
+        <div className="relative mx-auto hidden h-[380px] w-full max-w-lg overflow-hidden lg:block lg:h-[420px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={active}

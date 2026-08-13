@@ -103,7 +103,7 @@ export function SiteHeader({ className }: SiteHeaderProps) {
         </nav>
 
         <div className="ml-auto flex items-center gap-1.5">
-          <NavBookCallCta className="max-md:h-8 max-md:gap-1.5 max-md:pl-1 max-md:pr-1 max-[400px]:[&>span:first-of-type]:hidden" />
+          <NavBookCallCta className="hidden md:inline-flex" />
           <MobileNav />
         </div>
       </Container>

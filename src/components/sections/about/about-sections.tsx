@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Link2 } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { PageSection } from "@/components/layout/page-section";
 import { SectionHeader } from "@/components/layout/section-header";
@@ -16,7 +15,6 @@ import {
 } from "@/components/cards/premium-card";
 import { buttonVariants } from "@/components/ui/button";
 import { CTA_NAV } from "@/constants/navigation";
-import { SITE } from "@/constants/site";
 import {
   aboutCapabilities,
   aboutExperiencePillars,
@@ -34,9 +32,9 @@ export function AboutStory() {
   return (
     <section
       id="story"
-      className="relative scroll-mt-[calc(var(--header-height)+1rem)] overflow-hidden bg-[#ebe3d6] py-20 md:py-28 dark:bg-[#141210]"
+      className="relative scroll-mt-[calc(var(--header-height)+1rem)] bg-transparent py-20 md:overflow-hidden md:bg-[#ebe3d6] md:py-28 md:dark:bg-[#141210]"
     >
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
+      <div className="pointer-events-none absolute inset-0 hidden md:block" aria-hidden>
         <Image
           src={aboutStoryBg}
           alt=""
@@ -47,7 +45,7 @@ export function AboutStory() {
       </div>
 
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#f3ece2]/95 via-[#f3ece2]/78 to-[#f3ece2]/10 dark:from-[#12100e]/94 dark:via-[#12100e]/72 dark:to-[#12100e]/20"
+        className="pointer-events-none absolute inset-0 hidden bg-gradient-to-r from-[#f3ece2]/95 via-[#f3ece2]/78 to-[#f3ece2]/10 dark:from-[#12100e]/94 dark:via-[#12100e]/72 dark:to-[#12100e]/20 md:block"
         aria-hidden
       />
 
@@ -143,10 +141,10 @@ export function AboutCapabilities() {
         title={capabilities.title}
         description={capabilities.description}
       />
-      <Stagger className={cn(ABOUT_WIDTH, "grid gap-4 sm:grid-cols-2 lg:grid-cols-3")}>
+      <Stagger className={cn(ABOUT_WIDTH, "grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3")}>
         {aboutCapabilities.map((item, index) => (
           <StaggerItem key={item.id} className="h-full">
-            <PremiumCard className="h-full p-5 md:p-6" interactive={false}>
+            <PremiumCard className="h-full p-4 sm:p-5 md:p-6" interactive={false}>
               <span className="font-mono text-xs tabular-nums text-muted-foreground">
                 {String(index + 1).padStart(2, "0")}
               </span>
@@ -199,7 +197,7 @@ function AboutActionButtons({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex flex-wrap items-center justify-center gap-2 sm:flex-nowrap sm:gap-3",
+        "flex w-full max-w-md flex-row items-center justify-center gap-2 sm:max-w-none sm:gap-3",
         className
       )}
     >
@@ -207,7 +205,7 @@ function AboutActionButtons({ className }: { className?: string }) {
         href="/contact"
         className={cn(
           buttonVariants({ size: "lg" }),
-          "shrink-0 rounded-full px-4 text-sm sm:px-6 sm:text-base dark:bg-white dark:text-neutral-950 dark:hover:bg-white/90"
+          "min-w-0 flex-1 rounded-full px-3 text-[12.5px] sm:flex-none sm:px-6 sm:text-base dark:bg-white dark:text-neutral-950 dark:hover:bg-white/90"
         )}
       >
         {commitment.primaryCta}
@@ -216,25 +214,11 @@ function AboutActionButtons({ className }: { className?: string }) {
         href={CTA_NAV.href}
         className={cn(
           buttonVariants({ variant: "outline", size: "lg" }),
-          "shrink-0 rounded-full px-4 text-sm sm:px-6 sm:text-base dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
+          "min-w-0 flex-1 rounded-full px-3 text-[12.5px] sm:flex-none sm:px-6 sm:text-base dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
         )}
       >
         {commitment.secondaryCta}
       </Link>
-      {SITE.linkedin ? (
-        <a
-          href={SITE.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={cn(
-            buttonVariants({ variant: "outline", size: "lg" }),
-            "inline-flex shrink-0 items-center gap-1.5 rounded-full px-4 text-sm sm:gap-2 sm:px-6 sm:text-base dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
-          )}
-        >
-          <Link2 className="size-3.5 shrink-0" aria-hidden />
-          Connect with {SITE.name}
-        </a>
-      ) : null}
     </div>
   );
 }
