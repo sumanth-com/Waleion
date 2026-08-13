@@ -7,7 +7,7 @@ import { PageSection } from "@/components/layout/page-section";
 import { SectionHeader } from "@/components/layout/section-header";
 import { FadeUp } from "@/components/animations/reveal";
 import { homeFaqs } from "@/data/faq";
-import { SITE } from "@/constants/site";
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { cn } from "@/lib/utils";
 import { usePrefersReducedMotion } from "@/hooks/use-media-query";
 import { easings } from "@/lib/animations";
@@ -32,11 +32,7 @@ function TypingDots() {
 }
 
 function StudioMark() {
-  return (
-    <span className="grid size-9 shrink-0 place-items-center rounded-full bg-neutral-950 text-[13px] font-semibold text-white dark:bg-white dark:text-neutral-950">
-      {SITE.name.charAt(0)}
-    </span>
-  );
+  return <BrandLogo size={36} alt="" className="size-9 shrink-0 rounded-full" />;
 }
 
 function AnswerBody({

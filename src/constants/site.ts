@@ -13,6 +13,7 @@ export const SITE = {
   businessHours: "Mon–Fri, 9:00 AM–6:00 PM IST",
   responseTime: "We typically reply within 1 business day",
   ogImage: "/og/default.png",
+  logo: "/images/logo.png",
 } as const;
 
 export const CAPABILITIES = [

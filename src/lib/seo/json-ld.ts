@@ -19,7 +19,7 @@ export function organizationJsonLd(): JsonLd {
     logo: {
       "@type": "ImageObject",
       "@id": SCHEMA_IDS.logo,
-      url: absoluteUrl("/images/logo.svg"),
+      url: absoluteUrl(SITE.logo),
     },
     image: { "@id": SCHEMA_IDS.logo },
     description: SITE.description,

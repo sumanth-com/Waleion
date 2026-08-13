@@ -1,8 +1,8 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { CTA_NAV } from "@/constants/navigation";
-import { SITE } from "@/constants/site";
 import { SmoothAnchor } from "@/components/navigation/smooth-anchor";
 import { cn } from "@/lib/utils";
 
@@ -40,12 +40,11 @@ export function NavBookCallCta({
       )}
     >
       {!fullWidth ? (
-        <span
-          aria-hidden
-          className="grid size-7 shrink-0 place-items-center rounded-full bg-white text-[11px] font-bold text-neutral-950 max-md:size-6"
-        >
-          {SITE.name.charAt(0)}
-        </span>
+        <BrandLogo
+          size={28}
+          alt=""
+          className="size-7 shrink-0 rounded-full max-md:size-6"
+        />
       ) : null}
 
       <span

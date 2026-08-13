@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SITE } from "@/constants/site";
 import { FOOTER_NAV, MAIN_NAV } from "@/constants/navigation";
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { Container } from "@/components/layout/container";
 import { SmoothAnchor } from "@/components/navigation/smooth-anchor";
 import { cn } from "@/lib/utils";
@@ -65,9 +66,7 @@ export function SiteFooter({ className }: SiteFooterProps) {
           <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between md:gap-16">
             <div className="mx-auto max-w-[16rem] shrink-0 text-center md:mx-0 md:text-left">
               <Link href="/" className="inline-flex items-center gap-2.5">
-                <span className="grid size-8 place-items-center rounded-full bg-neutral-950 text-[12px] font-semibold text-white dark:bg-white dark:text-neutral-950">
-                  {SITE.name.charAt(0)}
-                </span>
+                <BrandLogo size={32} alt="" className="size-8" />
                 <span className="text-[14px] font-semibold tracking-tight text-neutral-950 dark:text-white">
                   {SITE.name}
                 </span>

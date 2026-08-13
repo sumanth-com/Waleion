@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SITE } from "@/constants/site";
 import { MAIN_NAV } from "@/constants/navigation";
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { Container } from "@/components/layout/container";
 import { MobileNav } from "@/components/navigation/mobile-nav";
 import { NavBookCallCta } from "@/components/navigation/nav-book-call-cta";
@@ -60,17 +61,12 @@ export function SiteHeader({ className }: SiteHeaderProps) {
           aria-label={`${SITE.name} — ${SITE.tagline}`}
           title={`${SITE.name} home`}
         >
-          <span
-            aria-hidden
-            className={cn(
-              "grid size-8 place-items-center rounded-full",
-              "bg-foreground text-xs font-bold text-background",
-              "transition-transform duration-300 group-hover:scale-105",
-              "dark:bg-white dark:text-neutral-950"
-            )}
-          >
-            {SITE.name.charAt(0)}
-          </span>
+          <BrandLogo
+            size={32}
+            priority
+            alt=""
+            className="size-8 transition-transform duration-300 group-hover:scale-105"
+          />
           <span className="truncate">{SITE.name}</span>
         </Link>
 

@@ -6,8 +6,8 @@ import { Container } from "@/components/layout/container";
 import { SmoothAnchor } from "@/components/navigation/smooth-anchor";
 import { WorkShowcase } from "@/components/sections/work-showcase";
 import { usePrefersReducedMotion } from "@/hooks/use-media-query";
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { CTA_NAV } from "@/constants/navigation";
-import { SITE } from "@/constants/site";
 import { cn } from "@/lib/utils";
 import { easings } from "@/lib/animations";
 
@@ -61,12 +61,7 @@ function HeroCta() {
         "dark:bg-neutral-950"
       )}
     >
-      <span
-        aria-hidden
-        className="grid size-9 shrink-0 place-items-center rounded-full bg-white text-[13px] font-bold text-neutral-950"
-      >
-        {SITE.name.charAt(0)}
-      </span>
+      <BrandLogo size={36} alt="" className="size-9 shrink-0 rounded-full" />
 
       <span
         className={cn(
