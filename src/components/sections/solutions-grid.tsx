@@ -79,16 +79,27 @@ export function SolutionsGrid() {
       />
 
       <Stagger className="mx-auto grid max-w-4xl grid-cols-2 gap-x-3 gap-y-6 sm:gap-x-8 sm:gap-y-7 lg:grid-cols-3">
-        {solutionGridItems.map((item) => (
-          <StaggerItem key={item.id}>
-            <article className="group flex flex-col items-center text-center">
-              <SolutionPreview item={item} />
-              <h3 className="mt-1.5 max-w-[9.5rem] text-balance text-[12px] font-medium leading-snug tracking-tight text-foreground sm:mt-2 sm:max-w-none sm:text-[13px] md:text-sm">
-                {item.title}
-              </h3>
-            </article>
-          </StaggerItem>
-        ))}
+        {solutionGridItems.map((item, index) => {
+          const isLastOnTwoCol =
+            index === solutionGridItems.length - 1 &&
+            solutionGridItems.length % 2 === 1;
+
+          return (
+            <StaggerItem
+              key={item.id}
+              className={cn(
+                isLastOnTwoCol && "col-span-2 flex justify-center lg:col-span-1"
+              )}
+            >
+              <article className="group flex flex-col items-center text-center">
+                <SolutionPreview item={item} />
+                <h3 className="mt-1.5 max-w-[9.5rem] text-balance text-[12px] font-medium leading-snug tracking-tight text-foreground sm:mt-2 sm:max-w-none sm:text-[13px] md:text-sm">
+                  {item.title}
+                </h3>
+              </article>
+            </StaggerItem>
+          );
+        })}
       </Stagger>
     </PageSection>
   );

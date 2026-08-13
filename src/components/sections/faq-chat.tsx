@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Minus, Plus } from "lucide-react";
+import { ChevronDown, Minus, Plus } from "lucide-react";
 import { PageSection } from "@/components/layout/page-section";
 import { SectionHeader } from "@/components/layout/section-header";
 import { FadeUp } from "@/components/animations/reveal";
@@ -11,6 +11,8 @@ import { SITE } from "@/constants/site";
 import { cn } from "@/lib/utils";
 import { usePrefersReducedMotion } from "@/hooks/use-media-query";
 import { easings } from "@/lib/animations";
+
+const MOBILE_FAQ_COUNT = 5;
 
 function TypingDots() {
   return (
@@ -67,10 +69,7 @@ function AnswerBody({
 
   return (
     <div className="relative">
-      <p
-        className="invisible text-[16px] leading-relaxed"
-        aria-hidden
-      >
+      <p className="invisible text-[16px] leading-relaxed" aria-hidden>
         {text}
       </p>
       <div className="absolute inset-0 overflow-hidden">
@@ -90,7 +89,7 @@ function AnswerBody({
 }
 
 /**
- * Chat-style FAQ — plus opens a typed studio reply.
+ * FAQ — accordion cards on mobile, chat-style replies on desktop.
  */
 export function FaqChat() {
   const reduceMotion = usePrefersReducedMotion();
@@ -98,7 +97,7 @@ export function FaqChat() {
   const [phase, setPhase] = useState<"idle" | "typing" | "done">("done");
   const typingTimer = useRef<number>(0);
 
-  const open = (id: string) => {
+  const open = (id: string, withTyping: boolean) => {
     window.clearTimeout(typingTimer.current);
 
     if (openId === id) {
@@ -108,13 +107,15 @@ export function FaqChat() {
     }
 
     setOpenId(id);
-    if (reduceMotion) {
+    if (reduceMotion || !withTyping) {
       setPhase("done");
       return;
     }
     setPhase("typing");
     typingTimer.current = window.setTimeout(() => setPhase("done"), 720);
   };
+
+  const mobileFaqs = homeFaqs.slice(0, MOBILE_FAQ_COUNT);
 
   return (
     <PageSection id="faq" spacing="sm" containerClassName="space-y-10">
@@ -126,23 +127,66 @@ export function FaqChat() {
       />
 
       <FadeUp className="mx-auto w-full max-w-5xl">
-        <div className="rounded-[1.75rem] border border-black/[0.06] bg-white/85 p-4 shadow-[0_16px_40px_rgba(0,0,0,0.05)] backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.06] sm:p-5">
+        <div className="space-y-3 md:hidden">
+          {mobileFaqs.map((item) => {
+            const isOpen = openId === item.id;
+
+            return (
+              <article
+                key={item.id}
+                className="overflow-hidden rounded-[1.35rem] border border-black/[0.06] bg-white/90 shadow-[0_8px_24px_rgba(0,0,0,0.04)] dark:border-white/10 dark:bg-white/[0.06]"
+              >
+                <button
+                  type="button"
+                  onClick={() => open(item.id, false)}
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-mobile-${item.id}`}
+                  className="flex w-full items-center justify-between gap-3 px-4 py-4 text-left"
+                >
+                  <span className="text-[15px] font-semibold leading-snug tracking-tight text-foreground">
+                    {item.question}
+                  </span>
+                  <ChevronDown
+                    className={cn(
+                      "size-4 shrink-0 text-muted-foreground transition-transform duration-300",
+                      isOpen && "rotate-180"
+                    )}
+                    aria-hidden
+                  />
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen ? (
+                    <motion.div
+                      id={`faq-mobile-${item.id}`}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.28, ease: easings.outExpo }}
+                      className="overflow-hidden"
+                    >
+                      <div className="mx-4 h-px bg-black/[0.08] dark:bg-white/10" />
+                      <p className="px-4 pb-4 pt-3 text-[14px] leading-relaxed text-muted-foreground">
+                        {item.answer}
+                      </p>
+                    </motion.div>
+                  ) : null}
+                </AnimatePresence>
+              </article>
+            );
+          })}
+        </div>
+
+        <div className="hidden rounded-[1.75rem] border border-black/[0.06] bg-white/85 p-4 shadow-[0_16px_40px_rgba(0,0,0,0.05)] backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.06] md:block sm:p-5">
           <div className="flex flex-col gap-3">
-            {homeFaqs.map((item, index) => {
+            {homeFaqs.map((item) => {
               const isOpen = openId === item.id;
 
               return (
-                <div
-                  key={item.id}
-                  className={cn(
-                    "flex flex-col gap-2.5",
-                    index >= 5 && "max-md:hidden"
-                  )}
-                >
-                  <div className="grid w-full grid-cols-[2rem_minmax(0,1fr)] items-start gap-2 md:ml-auto md:flex md:w-fit md:max-w-[92%] md:items-center">
+                <div key={item.id} className="flex flex-col gap-2.5">
+                  <div className="ml-auto flex w-fit max-w-[92%] items-center gap-2">
                     <button
                       type="button"
-                      onClick={() => open(item.id)}
+                      onClick={() => open(item.id, true)}
                       aria-expanded={isOpen}
                       aria-controls={`faq-${item.id}`}
                       className={cn(
@@ -163,9 +207,9 @@ export function FaqChat() {
                     </button>
                     <button
                       type="button"
-                      onClick={() => open(item.id)}
+                      onClick={() => open(item.id, true)}
                       className={cn(
-                        "w-full rounded-2xl px-4 py-3 text-left text-[15px] font-medium leading-snug tracking-tight transition-colors md:w-auto md:text-[16px]",
+                        "rounded-2xl px-4 py-3 text-left text-[16px] font-medium tracking-tight transition-colors",
                         isOpen
                           ? "bg-neutral-950 text-white dark:bg-white dark:text-neutral-950"
                           : "bg-neutral-100 text-neutral-700 dark:bg-white/10 dark:text-white/80"
@@ -183,7 +227,7 @@ export function FaqChat() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 6 }}
                         transition={{ duration: 0.28, ease: easings.springSoft }}
-                        className="flex w-full items-start gap-2 max-md:pl-10 md:mr-auto md:w-[88%] md:items-center"
+                        className="mr-auto flex w-[88%] items-center gap-2"
                       >
                         <StudioMark />
                         <div className="min-w-0 flex-1 rounded-2xl rounded-bl-md bg-neutral-50 px-3.5 py-3 dark:bg-white/8">
