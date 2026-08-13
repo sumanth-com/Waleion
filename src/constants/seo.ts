@@ -35,7 +35,7 @@ export const PAGE_SEO = {
   about: {
     title: "About Waleion | Digital & Software Product Development Company",
     description:
-      "Waleion combines 10+ years of digital business experience with focused software engineering, product design, and full-stack development — a technology partner for businesses in India and internationally.",
+      "Waleion combines 8+ years of digital business experience with focused software engineering, product design, and AI — a technology partner for businesses in India and internationally.",
     path: "/about",
   },
   contact: {
@@ -101,30 +101,4 @@ export const SCHEMA_SERVICES = [
   "Digital Product Development",
 ] as const;
 
-export const INSIGHT_TOPICS = [
-  {
-    title: "How much does custom software development cost in India?",
-    summary:
-      "What actually drives cost: scope, integrations, team shape, and what “done” means for a first release.",
-  },
-  {
-    title: "How long does it take to build a web application?",
-    summary:
-      "A realistic timeline from discovery to launch, and what slows teams down.",
-  },
-  {
-    title: "Website vs web application: what does a business need?",
-    summary:
-      "When a marketing site is enough, and when you need software people log into.",
-  },
-  {
-    title: "How to choose a software development company in India",
-    summary:
-      "Questions to ask about ownership, communication, and what happens after launch.",
-  },
-  {
-    title: "What should a startup consider before building an MVP?",
-    summary:
-      "How to pick the smallest product that can be used, learned from, and grown.",
-  },
-] as const;
+export { insightTopics as INSIGHT_TOPICS } from "@/data/insights";

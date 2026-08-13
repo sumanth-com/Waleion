@@ -139,7 +139,7 @@ export const aboutExperiencePillars: ExperiencePillar[] = [
   {
     id: "digital",
     index: "01",
-    years: "10+ Years",
+    years: "8+ Years",
     title: "Digital Experience",
     items: [
       "Digital marketing",
@@ -295,7 +295,7 @@ export function getAboutStats(): StatItem[] {
   return [
     {
       id: "digital-years",
-      value: 10,
+      value: 8,
       suffix: "+",
       label: "Years of Digital Experience",
     },
@@ -320,4 +320,4 @@ export function getAboutStats(): StatItem[] {
   ];
 }
 
-export const aboutMetadataDescription = `${SITE.name} combines 10+ years of digital business experience with hands-on software engineering, product design, and AI — a technology partner built on understanding growth and building what powers it.`;
+export const aboutMetadataDescription = `${SITE.name} combines 8+ years of digital business experience with hands-on software engineering, product design, and AI — a technology partner built on understanding growth and building what powers it.`;

@@ -55,6 +55,7 @@ export function SiteHeader({ className }: SiteHeaderProps) {
       >
         <Link
           href="/"
+          scroll={false}
           className="group flex min-w-0 shrink-0 items-center gap-2 md:gap-2.5 text-[0.9375rem] font-semibold tracking-tight text-foreground md:text-[0.9875rem]"
           aria-label={`${SITE.name} — ${SITE.tagline}`}
           title={`${SITE.name} home`}

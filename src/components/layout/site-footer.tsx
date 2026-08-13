@@ -31,7 +31,7 @@ function FooterLink({
   }
 
   return (
-    <Link href={href} className={className}>
+    <Link href={href} scroll={false} className={className}>
       {children}
     </Link>
   );

@@ -10,6 +10,7 @@ import {
 import { SITE } from "@/constants/site";
 
 export const metadata: Metadata = createPageMetadata(PAGE_SEO.terms);
+export const revalidate = 86400;
 
 const SECTIONS = [
   { id: "agreement", title: "Agreement to these terms" },
@@ -42,8 +43,6 @@ export default function TermsPage() {
       />
       <LegalDocument
         title="Terms of Use"
-        updated="Last updated 12 August 2026"
-        effective="12 August 2026"
         summary={`These Terms of Use govern your access to and use of the ${SITE.name} website. Please read them carefully before using the Site or submitting an inquiry.`}
         sections={[...SECTIONS]}
         related={[

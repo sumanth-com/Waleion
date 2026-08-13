@@ -64,7 +64,7 @@ export function SmoothAnchor({
         return;
       }
 
-      router.push(home.path);
+      router.push(home.path, { scroll: false });
     },
     [home, onNavigate, pathname, router]
   );
@@ -72,6 +72,7 @@ export function SmoothAnchor({
   return (
     <Link
       href={href}
+      scroll={false}
       onClick={onClick}
       className={cn(className)}
       title={title}

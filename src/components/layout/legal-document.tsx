@@ -9,13 +9,22 @@ export type LegalSection = {
 
 type LegalDocumentProps = {
   title: string;
-  updated: string;
+  updated?: string;
   effective?: string;
   summary?: string;
   sections?: LegalSection[];
   related?: { label: string; href: string }[];
   children: ReactNode;
 };
+
+function todayInIst() {
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "Asia/Kolkata",
+  }).format(new Date());
+}
 
 /**
  * Legal page shell — Suprabase-style centered document card.
@@ -29,14 +38,18 @@ export function LegalDocument({
   related,
   children,
 }: LegalDocumentProps) {
+  const today = todayInIst();
+  const updatedLabel = updated ?? `Last updated ${today}`;
+  const effectiveLabel = effective ?? today;
+
   return (
     <section className="relative bg-transparent">
       <Container
         size="wide"
         className="relative z-10 py-[calc(var(--header-height)+2rem)] pb-16 md:pb-24"
       >
-        <article className="mx-auto w-full max-w-[42rem] rounded-[1.75rem] border border-black/[0.06] bg-white/90 px-6 py-10 shadow-[0_20px_60px_rgba(0,0,0,0.05)] backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.05] sm:rounded-[2rem] sm:px-10 sm:py-12 md:px-14 md:py-14">
-          <header className="mx-auto max-w-xl text-center">
+        <article className="mx-auto w-full max-w-[68rem] rounded-[1.75rem] border border-black/[0.06] bg-white/90 px-6 py-10 shadow-[0_20px_60px_rgba(0,0,0,0.05)] backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.05] sm:rounded-[2rem] sm:px-10 sm:py-12 md:px-16 md:py-14 lg:px-20">
+          <header className="mx-auto max-w-3xl text-center">
             <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
               Legal
             </p>
@@ -49,8 +62,8 @@ export function LegalDocument({
               </p>
             ) : null}
             <p className="mt-4 text-[12.5px] text-muted-foreground">
-              {updated}
-              {effective ? ` · Effective ${effective}` : null}
+              {updatedLabel}
+              {effectiveLabel ? ` · Effective ${effectiveLabel}` : null}
             </p>
             {related && related.length > 0 ? (
               <div className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">

@@ -25,14 +25,18 @@ export function CountUp({
   duration = durations.count,
 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const inView = useInView(ref, { once: false, amount: 0.6, margin: "-8% 0px" });
   const reduced = usePrefersReducedMotion();
   const [display, setDisplay] = useState(reduced ? value : 0);
 
   useEffect(() => {
-    if (!inView) return;
     if (reduced) {
       setDisplay(value);
+      return;
+    }
+
+    if (!inView) {
+      setDisplay(0);
       return;
     }
 

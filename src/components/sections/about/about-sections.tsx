@@ -25,6 +25,9 @@ import {
 } from "@/data/about-page";
 import { cn } from "@/lib/utils";
 
+/** Shared About content width — matches the experience 3-card row. */
+const ABOUT_WIDTH = "mx-auto w-full max-w-6xl";
+
 export function AboutStory() {
   const { story } = aboutPageCopy;
 
@@ -49,32 +52,34 @@ export function AboutStory() {
       />
 
       <Container size="wide" className="relative z-10">
-        <div className="max-w-xl">
-          <SectionHeader
-            align="left"
-            narrow={false}
-            className="max-w-none"
-            label={story.label}
-            title={
-              <>
-                {story.titleLines.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </>
-            }
-          />
-          <FadeUp className="mt-8 space-y-4">
-            {story.paragraphs.map((paragraph) => (
-              <p
-                key={paragraph.slice(0, 32)}
-                className="text-sm leading-relaxed text-foreground/85 md:text-[0.9875rem]"
-              >
-                {paragraph}
-              </p>
-            ))}
-          </FadeUp>
+        <div className={ABOUT_WIDTH}>
+          <div className="max-w-xl">
+            <SectionHeader
+              align="left"
+              narrow={false}
+              className="max-w-none"
+              label={story.label}
+              title={
+                <>
+                  {story.titleLines.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </>
+              }
+            />
+            <FadeUp className="mt-8 space-y-4">
+              {story.paragraphs.map((paragraph) => (
+                <p
+                  key={paragraph.slice(0, 32)}
+                  className="text-sm leading-relaxed text-foreground/85 md:text-[0.9875rem]"
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </FadeUp>
+          </div>
         </div>
       </Container>
     </section>
@@ -91,7 +96,7 @@ export function AboutExperience() {
         title={experience.title}
         description={experience.supporting}
       />
-      <Stagger className="mx-auto grid max-w-6xl gap-5 md:grid-cols-2 xl:grid-cols-3">
+      <Stagger className={cn(ABOUT_WIDTH, "grid gap-5 md:grid-cols-2 xl:grid-cols-3")}>
         {aboutExperiencePillars.map((pillar) => (
           <StaggerItem key={pillar.id} className="h-full">
             <PremiumCard className="flex h-full flex-col p-6 md:p-8" interactive={false}>
@@ -138,7 +143,7 @@ export function AboutCapabilities() {
         title={capabilities.title}
         description={capabilities.description}
       />
-      <Stagger className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <Stagger className={cn(ABOUT_WIDTH, "grid gap-4 sm:grid-cols-2 lg:grid-cols-3")}>
         {aboutCapabilities.map((item, index) => (
           <StaggerItem key={item.id} className="h-full">
             <PremiumCard className="h-full p-5 md:p-6" interactive={false}>
@@ -168,7 +173,7 @@ export function AboutStats() {
         title={stats.title}
         description={stats.description}
       />
-      <Stagger className="mx-auto grid max-w-4xl grid-cols-2 gap-6 md:grid-cols-4">
+      <Stagger className={cn(ABOUT_WIDTH, "grid grid-cols-2 gap-6 md:grid-cols-4")}>
         {items.map((stat) => (
           <StaggerItem key={stat.id} className="text-center">
             <p className="text-[clamp(1.75rem,4vw,2.5rem)] font-semibold tracking-tight text-foreground">
@@ -240,7 +245,10 @@ export function AboutCommitment() {
   return (
     <PageSection id="commitment" spacing="sm">
       <FadeUp
-        className="mx-auto flex max-w-3xl flex-col items-center gap-6 rounded-[1.75rem] border border-black/[0.06] bg-white/90 px-6 py-12 text-center shadow-[0_20px_50px_rgba(0,0,0,0.05)] backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.06] md:px-10 md:py-14"
+        className={cn(
+          ABOUT_WIDTH,
+          "flex flex-col items-center gap-6 rounded-[1.75rem] border border-black/[0.06] bg-white/90 px-6 py-12 text-center shadow-[0_20px_50px_rgba(0,0,0,0.05)] backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.06] md:px-10 md:py-14"
+        )}
       >
         <div className="space-y-4">
           <h2 className="text-balance font-semibold tracking-[var(--tracking-tight)] text-[clamp(1.5rem,3.2vw,2.35rem)] leading-[1.14] text-foreground">

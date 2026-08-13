@@ -10,6 +10,7 @@ import {
 import { SITE } from "@/constants/site";
 
 export const metadata: Metadata = createPageMetadata(PAGE_SEO.privacy);
+export const revalidate = 86400;
 
 const SECTIONS = [
   { id: "introduction", title: "Introduction" },
@@ -42,8 +43,6 @@ export default function PrivacyPage() {
       />
       <LegalDocument
         title="Privacy Policy"
-        updated="Last updated 12 August 2026"
-        effective="12 August 2026"
         summary={`${SITE.name} respects the information you share with us. This Privacy Policy explains what we collect through this website, why we collect it, how we use it, and the choices available to you.`}
         sections={[...SECTIONS]}
         related={[

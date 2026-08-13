@@ -99,3 +99,5 @@ export { testimonials } from "./testimonials";
 export type { Testimonial } from "./testimonials";
 export { finalCtaSteps } from "./final-cta";
 export type { NextStep } from "./final-cta";
+export { insightTopics } from "./insights";
+export type { InsightTopic } from "./insights";

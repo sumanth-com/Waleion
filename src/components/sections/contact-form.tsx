@@ -34,7 +34,10 @@ export function ContactForm() {
   const [countryIso, setCountryIso] = useState("IN");
   const [phoneDigits, setPhoneDigits] = useState("");
   const [phoneError, setPhoneError] = useState("");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(() => {
+    const topic = searchParams.get("topic")?.trim();
+    return topic ? `I’d like to talk about: ${topic}` : "";
+  });
   const [utm, setUtm] = useState({
     source: "Contact Page",
     utm_source: "",
