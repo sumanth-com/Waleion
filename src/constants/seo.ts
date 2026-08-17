@@ -70,10 +70,16 @@ export const PAGE_SEO = {
     path: "/insights",
   },
   privacy: {
-    title: "Privacy Policy | Waleion",
+    title: "Privacy Notice | Waleion",
     description:
-      "Read how Waleion collects, uses, retains, and protects personal information submitted through our website and contact forms.",
+      "How Waleion handles personal data submitted through the website enquiry and data-rights forms, based on the current implementation.",
     path: "/privacy",
+  },
+  dataRights: {
+    title: "Data rights request | Waleion",
+    description:
+      "Submit an access, correction, erasure, consent-withdrawal, or grievance request relating to personal data collected through the Waleion website.",
+    path: "/privacy/data-rights",
   },
   terms: {
     title: "Terms of Use | Waleion",

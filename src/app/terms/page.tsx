@@ -8,6 +8,8 @@ import {
   LegalSectionBlock,
 } from "@/components/layout/legal-document";
 import { SITE } from "@/constants/site";
+import { LegalReviewBanner } from "@/components/privacy/legal-review-banner";
+import { PRIVACY_NOTICE_LABEL, PRIVACY_NOTICE_VERSION } from "@/constants/privacy";
 
 export const metadata: Metadata = createPageMetadata(PAGE_SEO.terms);
 export const revalidate = 86400;
@@ -19,6 +21,7 @@ const SECTIONS = [
   { id: "acceptable-use", title: "Acceptable use" },
   { id: "intellectual-property", title: "Intellectual property" },
   { id: "inquiries", title: "Inquiries and proposals" },
+  { id: "personal-data", title: "Personal data" },
   { id: "no-reliance", title: "No reliance; no warranties" },
   { id: "limitation", title: "Limitation of liability" },
   { id: "indemnity", title: "Indemnity" },
@@ -43,13 +46,17 @@ export default function TermsPage() {
       />
       <LegalDocument
         title="Terms of Use"
+        updated={`Version ${PRIVACY_NOTICE_VERSION} · ${PRIVACY_NOTICE_LABEL}`}
+        effective={PRIVACY_NOTICE_LABEL}
         summary={`These Terms of Use govern your access to and use of the ${SITE.name} website. Please read them carefully before using the Site or submitting an inquiry.`}
         sections={[...SECTIONS]}
         related={[
-          { label: "Privacy Policy", href: "/privacy" },
+          { label: "Privacy Notice", href: "/privacy" },
           { label: "Contact", href: "/contact" },
         ]}
       >
+        <LegalReviewBanner />
+
         <LegalSectionBlock id="agreement" title="1. Agreement to these terms">
           <p>
             These Terms of Use (“Terms”) are a legally binding agreement between
@@ -62,11 +69,15 @@ export default function TermsPage() {
             domain (collectively, the “Site”).
           </p>
           <p>
-            By accessing or using the Site, you agree to these Terms and to our{" "}
+            By accessing or using the Site, you agree to these Terms. Personal
+            data handling is described in our{" "}
             <Link href="/privacy" className={linkClass}>
-              Privacy Policy
+              Privacy Notice
             </Link>
-            . If you do not agree, do not use the Site.
+            . If you do not agree, do not use the Site.{" "}
+            <span className="font-medium text-foreground">
+              REQUIRES LEGAL REVIEW.
+            </span>
           </p>
         </LegalSectionBlock>
 
@@ -174,7 +185,7 @@ export default function TermsPage() {
           <p>
             Information you send in an inquiry is handled under our{" "}
             <Link href="/privacy" className={linkClass}>
-              Privacy Policy
+              Privacy Notice
             </Link>
             . Do not send confidential product details you are not prepared to
             share for evaluation purposes until a non-disclosure agreement is in
@@ -182,9 +193,44 @@ export default function TermsPage() {
           </p>
         </LegalSectionBlock>
 
+        <LegalSectionBlock id="personal-data" title="7. Personal data">
+          <p>
+            <span className="font-medium text-foreground">
+              REQUIRES LEGAL REVIEW.
+            </span>{" "}
+            Personal data submitted through the Site is described in the{" "}
+            <Link href="/privacy" className={linkClass}>
+              Privacy Notice
+            </Link>
+            . Do not treat that notice as a certified DPDP compliance statement
+            until it has been reviewed by qualified counsel.
+          </p>
+          <p>
+            Project enquiries are accepted only after an unticked opt-in that
+            the submitted details may be processed to review and respond to that
+            enquiry. Unrelated marketing is not an implemented purpose of the
+            contact form.
+          </p>
+          <p>
+            Data-principal requests (access, correction, erasure, withdrawal of
+            consent, grievance) may be submitted through the{" "}
+            <Link href="/privacy/data-rights" className={linkClass}>
+              data rights request form
+            </Link>
+            . Submitting a request does not cause stored personal data to be
+            displayed in the browser.
+          </p>
+          <p>
+            You must not submit another person’s personal data through the Site
+            unless you are authorised to do so. You must not use the forms to
+            send special-category or sensitive identifiers such as government ID
+            numbers, payment card data, or passwords.
+          </p>
+        </LegalSectionBlock>
+
         <LegalSectionBlock
           id="no-reliance"
-          title="7. No reliance; no warranties"
+          title="8. No reliance; no warranties"
         >
           <p>
             The Site is provided on an “as is” and “as available” basis. To the
@@ -201,7 +247,7 @@ export default function TermsPage() {
           </p>
         </LegalSectionBlock>
 
-        <LegalSectionBlock id="limitation" title="8. Limitation of liability">
+        <LegalSectionBlock id="limitation" title="9. Limitation of liability">
           <p>
             To the fullest extent permitted by law, {SITE.name} and its
             principals, contractors, and suppliers will not be liable for any
@@ -225,7 +271,7 @@ export default function TermsPage() {
           </p>
         </LegalSectionBlock>
 
-        <LegalSectionBlock id="indemnity" title="9. Indemnity">
+        <LegalSectionBlock id="indemnity" title="10. Indemnity">
           <p>
             You agree to defend, indemnify, and hold harmless {SITE.name} and
             its principals and contractors from and against claims, damages,
@@ -236,7 +282,7 @@ export default function TermsPage() {
           </p>
         </LegalSectionBlock>
 
-        <LegalSectionBlock id="third-parties" title="10. Third-party links">
+        <LegalSectionBlock id="third-parties" title="11. Third-party links">
           <p>
             The Site may link to third-party websites or resources. We are not
             responsible for their content, policies, or practices. Your use of
@@ -244,7 +290,7 @@ export default function TermsPage() {
           </p>
         </LegalSectionBlock>
 
-        <LegalSectionBlock id="governing-law" title="11. Governing law">
+        <LegalSectionBlock id="governing-law" title="12. Governing law">
           <p>
             These Terms are governed by the laws of India, without regard to
             conflict-of-law principles. Courts in India shall have exclusive
@@ -259,7 +305,7 @@ export default function TermsPage() {
           </p>
         </LegalSectionBlock>
 
-        <LegalSectionBlock id="changes" title="12. Changes">
+        <LegalSectionBlock id="changes" title="13. Changes">
           <p>
             We may revise these Terms from time to time. The “Last updated” date
             indicates when changes were published. Continued use of the Site
@@ -269,7 +315,7 @@ export default function TermsPage() {
           </p>
         </LegalSectionBlock>
 
-        <LegalSectionBlock id="contact" title="13. Contact">
+        <LegalSectionBlock id="contact" title="14. Contact">
           <p>Questions about these Terms:</p>
           <p>
             {SITE.legalName}

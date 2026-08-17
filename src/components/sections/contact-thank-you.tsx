@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useMemo } from "react";
-import { useSearchParams } from "next/navigation";
 import {
   motion,
   useReducedMotion,
@@ -143,10 +142,7 @@ function SuccessBurst({ reduced }: { reduced: boolean }) {
 }
 
 function ContactThankYouContent() {
-  const searchParams = useSearchParams();
   const reduced = useReducedMotion();
-  const rawName = searchParams.get("name")?.trim() ?? "";
-  const firstName = rawName.split(/\s+/)[0]?.slice(0, 32) ?? "";
 
   return (
     <section className="relative min-h-[calc(100dvh-var(--header-height))] overflow-hidden bg-transparent">
@@ -189,17 +185,7 @@ function ContactThankYouContent() {
             animate="visible"
             custom={0.62}
           >
-            {firstName ? (
-              <>
-                You&apos;re in,{" "}
-                <span className="text-emerald-600 dark:text-emerald-400">
-                  {firstName}
-                </span>
-                .
-              </>
-            ) : (
-              "You're officially on our radar."
-            )}
+            You&apos;re in.
           </motion.h1>
 
           <motion.p

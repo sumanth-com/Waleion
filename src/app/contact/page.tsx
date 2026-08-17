@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Suspense } from "react";
 import { Clock, Mail, MapPin } from "lucide-react";
 import { createPageMetadata, webPageJsonLd, breadcrumbJsonLd } from "@/lib/seo";
@@ -8,7 +7,6 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { SITE } from "@/constants/site";
 import { Container } from "@/components/layout/container";
 import { ContactForm } from "@/components/sections/contact-form";
-import aboutHeroBg from "@/assets/about.png";
 
 export const metadata: Metadata = createPageMetadata(PAGE_SEO.contact);
 
@@ -122,7 +120,7 @@ function InquiryForm() {
 
 export default function ContactPage() {
   return (
-    <section className="relative box-border flex min-h-svh w-full flex-col overflow-hidden bg-[#f5f0e8] dark:bg-[#12100e]">
+    <section className="relative box-border flex min-h-svh w-full flex-col overflow-hidden bg-transparent">
       <JsonLd
         data={webPageJsonLd({ ...PAGE_SEO.contact, type: "ContactPage" })}
       />
@@ -131,21 +129,6 @@ export default function ContactPage() {
           { name: "Home", path: "/" },
           { name: "Contact", path: "/contact" },
         ])}
-      />
-
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <Image
-          src={aboutHeroBg}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center dark:brightness-[0.92]"
-        />
-      </div>
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_75%_60%_at_50%_45%,rgba(255,252,247,0.55),transparent_68%)] dark:bg-[radial-gradient(ellipse_75%_60%_at_50%_45%,rgba(18,16,14,0.45),transparent_68%)]"
-        aria-hidden
       />
 
       <Container

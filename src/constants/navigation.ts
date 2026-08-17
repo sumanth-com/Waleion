@@ -51,5 +51,6 @@ export const FOOTER_NAV = {
   legal: [
     { label: "Privacy", href: "/privacy" },
     { label: "Terms", href: "/terms" },
+    { label: "Data rights", href: "/privacy/data-rights" },
   ],
 } as const;

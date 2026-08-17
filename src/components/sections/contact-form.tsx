@@ -14,7 +14,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { buttonVariants } from "@/components/ui/button";
+import { SITE } from "@/constants/site";
 import { DIAL_COUNTRIES, getDialCountry } from "@/data/dial-codes";
+import {
+  ConsentCheckbox,
+  NoticeVersionNote,
+  PrivacyNoticeLink,
+} from "@/components/privacy/consent-checkbox";
 import { cn } from "@/lib/utils";
 
 const MESSAGE_MAX = 1000;
@@ -134,7 +140,7 @@ export function ContactForm() {
     <form
       action="/api/contact"
       method="post"
-      className="flex h-full min-h-0 flex-col gap-4"
+      className="relative flex h-full min-h-0 flex-col gap-4"
       onSubmit={onSubmit}
       noValidate={false}
     >
@@ -148,6 +154,16 @@ export function ContactForm() {
       <input type="hidden" name="referrer" value={utm.referrer} />
       <input type="hidden" name="country_code" value={country.dial} />
       <input type="hidden" name="phone" value={fullPhone} />
+      <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden>
+        <label htmlFor="website">Website</label>
+        <input
+          id="website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1.5">
@@ -325,13 +341,29 @@ export function ContactForm() {
                 ? "Enter a valid phone number for the selected country."
                 : error === "message"
                   ? "Message must be 1000 characters or fewer."
-                  : error === "config"
-                    ? "Form isn’t configured yet. Email us directly for now."
-                    : "Something went wrong. Please try again or email us."}
+                  : error === "consent"
+                    ? "Please confirm that we may process this enquiry in order to respond."
+                    : error === "rate"
+                      ? "Too many attempts from this network. Please wait a few minutes and try again."
+                      : error === "config"
+                        ? "Form isn’t configured yet. Email us directly for now."
+                        : "Something went wrong. Please try again or email us."}
         </p>
       ) : null}
 
       <div className="mt-auto space-y-3 pt-1">
+        <ConsentCheckbox
+          id="consent_enquiry"
+          name="consent_enquiry"
+          error={error === "consent"}
+        >
+          I agree to {SITE.name} processing my name, work email, optional phone
+          and company, enquiry message, and any campaign/page details included
+          with this form, so the team can review and respond to this enquiry.{" "}
+          <PrivacyNoticeLink /> <NoticeVersionNote />. This is not consent for
+          unrelated marketing.
+        </ConsentCheckbox>
+
         <button
           type="submit"
           disabled={pending}
@@ -355,14 +387,8 @@ export function ContactForm() {
         </button>
 
         <p className="text-center text-[12px] leading-relaxed text-muted-foreground">
-          We typically reply within 1 business day. By sending, you agree to our{" "}
-          <Link
-            href="/privacy"
-            className="text-foreground/80 underline-offset-2 hover:underline"
-          >
-            Privacy Policy
-          </Link>{" "}
-          and{" "}
+          We typically reply within 1 business day. Site use is also subject to
+          our{" "}
           <Link
             href="/terms"
             className="text-foreground/80 underline-offset-2 hover:underline"

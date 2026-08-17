@@ -7,29 +7,45 @@ import {
   LegalDocument,
   LegalSectionBlock,
 } from "@/components/layout/legal-document";
+import { LegalReviewBanner } from "@/components/privacy/legal-review-banner";
 import { SITE } from "@/constants/site";
+import {
+  PRIVACY_NOTICE_LABEL,
+  PRIVACY_NOTICE_VERSION,
+  UNCONFIRMED,
+} from "@/constants/privacy";
 
 export const metadata: Metadata = createPageMetadata(PAGE_SEO.privacy);
 export const revalidate = 86400;
 
 const SECTIONS = [
-  { id: "introduction", title: "Introduction" },
+  { id: "legal-status", title: "Status of this notice" },
+  { id: "who-we-are", title: "Who we are" },
   { id: "scope", title: "Scope" },
-  { id: "information-we-collect", title: "Information we collect" },
-  { id: "how-we-use", title: "How we use information" },
-  { id: "sharing", title: "Sharing and processors" },
-  { id: "cookies", title: "Cookies and analytics" },
+  { id: "categories", title: "Categories of personal data" },
+  { id: "purposes", title: "Purposes of processing" },
+  { id: "how-handled", title: "How data is handled" },
+  { id: "consent", title: "Consent and withdrawal" },
   { id: "retention", title: "Retention" },
-  { id: "security", title: "Security" },
-  { id: "international", title: "International transfers" },
-  { id: "your-rights", title: "Your rights" },
+  { id: "third-parties", title: "Third parties and processors" },
+  { id: "cookies", title: "Cookies and similar technologies" },
+  { id: "rights", title: "Rights of data principals" },
+  { id: "grievance", title: "Grievance and contact" },
   { id: "children", title: "Children" },
+  { id: "security", title: "Security (technical)" },
   { id: "changes", title: "Changes" },
-  { id: "contact", title: "Contact" },
 ] as const;
 
 const linkClass =
   "font-medium text-foreground underline-offset-4 hover:underline";
+
+function Placeholder({ children }: { children: string }) {
+  return (
+    <span className="rounded-md bg-black/[0.04] px-1 py-0.5 font-medium text-foreground dark:bg-white/10">
+      {children}
+    </span>
+  );
+}
 
 export default function PrivacyPage() {
   return (
@@ -38,262 +54,432 @@ export default function PrivacyPage() {
       <JsonLd
         data={breadcrumbJsonLd([
           { name: "Home", path: "/" },
-          { name: "Privacy Policy", path: "/privacy" },
+          { name: "Privacy Notice", path: "/privacy" },
         ])}
       />
       <LegalDocument
-        title="Privacy Policy"
-        summary={`${SITE.name} respects the information you share with us. This Privacy Policy explains what we collect through this website, why we collect it, how we use it, and the choices available to you.`}
+        title="Privacy Notice"
+        updated={`Version ${PRIVACY_NOTICE_VERSION} · ${PRIVACY_NOTICE_LABEL}`}
+        effective={PRIVACY_NOTICE_LABEL}
+        summary={`${SITE.name} publishes this notice to describe personal data handling that is visible in the current website codebase. It is a technical draft for DPDP readiness, not a certified privacy policy.`}
         sections={[...SECTIONS]}
         related={[
           { label: "Terms of Use", href: "/terms" },
+          { label: "Data rights request", href: "/privacy/data-rights" },
           { label: "Contact", href: "/contact" },
         ]}
       >
-        <LegalSectionBlock id="introduction" title="1. Introduction">
-          <p>
-            This Privacy Policy applies to the website operated by {SITE.name}{" "}
-            at{" "}
-            <a href="https://waleion.com" className={linkClass}>
-              waleion.com
-            </a>{" "}
-            (the “Site”). When we say “{SITE.name},” “we,” “us,” or “our,” we
-            mean the team operating this Site and responding to inquiries
-            submitted through it.
-          </p>
-          <p>
-            By using the Site or submitting information through our forms, you
-            acknowledge that you have read this Policy. If you do not agree,
-            please do not submit personal information through the Site.
-          </p>
-        </LegalSectionBlock>
+        <LegalReviewBanner />
 
-        <LegalSectionBlock id="scope" title="2. Scope">
-          <p>This Policy covers information collected:</p>
-          <ul className="list-disc space-y-1.5 pl-5">
-            <li>when you browse the Site;</li>
-            <li>when you submit a project inquiry or contact form;</li>
-            <li>
-              when you email us at{" "}
-              <a href={`mailto:${SITE.email}`} className={linkClass}>
-                {SITE.email}
-              </a>
-              ; and
-            </li>
-            <li>
-              when you interact with links that include campaign or referral
-              parameters (for example UTM fields).
-            </li>
-          </ul>
-          <p>
-            It does not cover third-party websites, apps, or services that we
-            may link to, or products we build for clients under separate
-            agreements. Client project work is governed by the contract for that
-            engagement.
-          </p>
-        </LegalSectionBlock>
-
-        <LegalSectionBlock
-          id="information-we-collect"
-          title="3. Information we collect"
-        >
+        <LegalSectionBlock id="legal-status" title="1. Status of this notice">
           <p>
             <span className="font-medium text-foreground">
-              Information you provide.
+              REQUIRES LEGAL REVIEW.
             </span>{" "}
-            When you use the contact or project inquiry form, we may receive:
-            your name, work email, phone number (optional), company name
-            (optional), and the content of your message. If you contact us by
-            email, we receive whatever you include in that correspondence.
+            This notice is written from the current implementation only. It does
+            not invent legal entity details, retention periods, processor
+            contracts, or grievance-officer appointments.
           </p>
           <p>
+            Notice version stored with consent records:{" "}
             <span className="font-medium text-foreground">
-              Technical and usage data.
-            </span>{" "}
-            Like most websites, our hosting and security providers may process
-            standard server logs such as IP address, browser type, device type,
-            referring URL, pages requested, and timestamps. This data is used
-            for security, reliability, and basic traffic understanding.
-          </p>
-          <p>
-            <span className="font-medium text-foreground">
-              Attribution data.
-            </span>{" "}
-            If you arrive from a campaign URL, optional parameters (such as
-            source, medium, or campaign identifiers) may be stored with your
-            inquiry so we understand how you found us.
-          </p>
-          <p>
-            We do not intentionally collect special-category sensitive data
-            through the Site. Please do not submit passwords, payment card
-            numbers, government IDs, or health information in the contact form.
+              {PRIVACY_NOTICE_VERSION}
+            </span>
+            .
           </p>
         </LegalSectionBlock>
 
-        <LegalSectionBlock id="how-we-use" title="4. How we use information">
-          <p>We use the information described above to:</p>
-          <ul className="list-disc space-y-1.5 pl-5">
-            <li>respond to your inquiry and continue a product conversation;</li>
-            <li>
-              evaluate fit for a potential engagement and prepare a proposal when
-              appropriate;
-            </li>
-            <li>operate, secure, and improve the Site;</li>
-            <li>
-              understand which channels introduce serious inquiries (when UTM or
-              similar data is present); and
-            </li>
-            <li>
-              comply with legal obligations and enforce our{" "}
-              <Link href="/terms" className={linkClass}>
-                Terms of Use
-              </Link>
-              .
-            </li>
-          </ul>
+        <LegalSectionBlock id="who-we-are" title="2. Who we are">
           <p>
-            We do not sell your personal information. We do not use contact-form
-            submissions for unrelated mass marketing lists.
-          </p>
-        </LegalSectionBlock>
-
-        <LegalSectionBlock id="sharing" title="5. Sharing and processors">
-          <p>
-            We may share information with service providers who process it on
-            our behalf, solely to operate the Site and our inquiry workflow. That
-            may include:
-          </p>
-          <ul className="list-disc space-y-1.5 pl-5">
-            <li>website hosting and content delivery;</li>
-            <li>
-              form delivery tools (for example spreadsheet or automation
-              endpoints used to capture inquiries); and
-            </li>
-            <li>email and collaboration tools used to reply to you.</li>
-          </ul>
-          <p>
-            These providers are instructed to process information only as needed
-            to perform their services. We may also disclose information if
-            required by law, regulation, legal process, or to protect the
-            rights, safety, or integrity of {SITE.name}, our users, or others.
-          </p>
-          <p>
-            If we ever transfer business assets in a reorganization or sale,
-            inquiry records may be part of that transfer under appropriate
-            confidentiality.
-          </p>
-        </LegalSectionBlock>
-
-        <LegalSectionBlock id="cookies" title="6. Cookies and analytics">
-          <p>
-            The Site may use essential cookies or similar technologies required
-            for security, session continuity, or preference storage (such as
-            theme). If we enable analytics in the future, we will update this
-            Policy to describe those tools and any choices available to you.
-          </p>
-          <p>
-            You can control cookies through your browser settings. Blocking
-            essential cookies may affect Site functionality.
-          </p>
-        </LegalSectionBlock>
-
-        <LegalSectionBlock id="retention" title="7. Retention">
-          <p>
-            We retain inquiry information for as long as needed to respond,
-            evaluate a potential engagement, maintain business records, and meet
-            legal or accounting requirements. When information is no longer
-            needed, we delete or de-identify it within a commercially reasonable
-            period, subject to backup and archival systems.
-          </p>
-        </LegalSectionBlock>
-
-        <LegalSectionBlock id="security" title="8. Security">
-          <p>
-            We use commercially reasonable administrative, technical, and
-            organizational measures appropriate to the nature of the information
-            we handle through this Site. No method of transmission or storage is
-            completely secure. If you believe your interaction with us has been
-            compromised, contact us promptly at{" "}
+            The website is operated under the brand name {SITE.name}. The public
+            site email published in code is{" "}
             <a href={`mailto:${SITE.email}`} className={linkClass}>
               {SITE.email}
             </a>
             .
           </p>
+          <p>
+            Legal entity: <Placeholder>{UNCONFIRMED.legalEntity}</Placeholder>
+          </p>
+          <p>
+            Address:{" "}
+            <Placeholder>{UNCONFIRMED.registeredAddress}</Placeholder>
+          </p>
+          <p>
+            Whether {SITE.name} is a Data Fiduciary for website enquiries, and
+            whether any Significant Data Fiduciary obligations apply,{" "}
+            <span className="font-medium text-foreground">
+              REQUIRES LEGAL REVIEW
+            </span>
+            .
+          </p>
+        </LegalSectionBlock>
+
+        <LegalSectionBlock id="scope" title="3. Scope">
+          <p>This notice covers personal data processed when you:</p>
+          <ul className="list-disc space-y-1.5 pl-5">
+            <li>browse this website;</li>
+            <li>
+              submit the project enquiry form on{" "}
+              <Link href="/contact" className={linkClass}>
+                /contact
+              </Link>
+              ;
+            </li>
+            <li>
+              submit a data-rights request on{" "}
+              <Link href="/privacy/data-rights" className={linkClass}>
+                /privacy/data-rights
+              </Link>
+              ; or
+            </li>
+            <li>
+              email the published address{" "}
+              <a href={`mailto:${SITE.email}`} className={linkClass}>
+                {SITE.email}
+              </a>{" "}
+              from your own email client (the website does not operate that
+              mailbox; mailbox retention is not in this codebase).
+            </li>
+          </ul>
+          <p>
+            It does not cover client products built for other organisations,
+            third-party websites linked from this Site, or offline sales
+            processes that are not implemented here.
+          </p>
         </LegalSectionBlock>
 
         <LegalSectionBlock
-          id="international"
-          title="9. International transfers"
+          id="categories"
+          title="4. Categories of personal data"
         >
           <p>
-            {SITE.name} operates as a remote-first team serving clients
-            worldwide. Information you submit may be processed in India and in
-            other countries where our service providers operate. Those locations
-            may have different data-protection laws than your home country. By
-            submitting information through the Site, you understand that your
-            information may be transferred internationally for the purposes
-            described in this Policy.
+            The website does not collect account passwords, payment card data,
+            government identifiers, file uploads, or precise geolocation through
+            any implemented form.
+          </p>
+          <p className="font-medium text-foreground">Enquiry form</p>
+          <ul className="list-disc space-y-1.5 pl-5">
+            <li>Full name (required)</li>
+            <li>Work email (required)</li>
+            <li>Phone number (optional)</li>
+            <li>Company name (optional)</li>
+            <li>Enquiry message (required)</li>
+            <li>
+              Optional campaign parameters if present in the URL: source, UTM
+              source/medium/campaign/term/content
+            </li>
+            <li>Page URL at submit time; browser document referrer if present</li>
+            <li>
+              Consent flag, consent timestamp (set on the server), notice
+              version, and form identifier
+            </li>
+          </ul>
+          <p className="font-medium text-foreground">Data-rights form</p>
+          <ul className="list-disc space-y-1.5 pl-5">
+            <li>Full name</li>
+            <li>Email</li>
+            <li>Request type</li>
+            <li>Free-text details</li>
+            <li>Consent metadata as above</li>
+          </ul>
+          <p className="font-medium text-foreground">
+            Technical data not collected by application code
+          </p>
+          <p>
+            This repository does not implement application-level IP logging.
+            Hosting, CDN, or Google infrastructure may still process IP
+            addresses, user-agent strings, and request metadata as part of
+            delivering the Site. Those logs are not configured in this codebase.{" "}
+            <Placeholder>{UNCONFIRMED.hostingRegion}</Placeholder>
           </p>
         </LegalSectionBlock>
 
-        <LegalSectionBlock id="your-rights" title="10. Your rights">
+        <LegalSectionBlock id="purposes" title="5. Purposes of processing">
           <p>
-            Depending on where you live, you may have rights to access, correct,
-            update, or delete personal information we hold about you, or to
-            object to or restrict certain processing. To make a request, email{" "}
-            <a href={`mailto:${SITE.email}`} className={linkClass}>
-              {SITE.email}
-            </a>{" "}
-            with enough detail for us to verify and respond. We may need to
-            confirm your identity before acting on a request.
+            From the implemented forms, personal data is used to:
+          </p>
+          <ul className="list-disc space-y-1.5 pl-5">
+            <li>
+              review and respond to a project enquiry (purpose id{" "}
+              <span className="font-medium text-foreground">
+                enquiry_response
+              </span>
+              ); and
+            </li>
+            <li>
+              receive, verify, and handle a data-principal request (purpose id{" "}
+              <span className="font-medium text-foreground">
+                data_rights_request
+              </span>
+              ).
+            </li>
+          </ul>
+          <p>
+            Attribution fields are stored with an enquiry when present so the
+            operator can see how that enquiry arrived. There is no analytics,
+            advertising pixel, or marketing-list feature in this codebase.
+            Unrelated marketing is not an implemented purpose.
           </p>
           <p>
-            If your request relates to a client product we built for another
-            organization, that organization is typically the controller of that
-            product’s data. We will point you to the right contact when
-            applicable.
-          </p>
-        </LegalSectionBlock>
-
-        <LegalSectionBlock id="children" title="11. Children">
-          <p>
-            The Site is intended for business and professional use. It is not
-            directed to children under 16, and we do not knowingly collect
-            personal information from children. If you believe a child has
-            submitted information to us, contact us and we will take appropriate
-            steps to delete it.
-          </p>
-        </LegalSectionBlock>
-
-        <LegalSectionBlock id="changes" title="12. Changes">
-          <p>
-            We may update this Privacy Policy from time to time. The “Last
-            updated” date at the top of this page will change when we do. Material
-            changes will be reflected on this page. Continued use of the Site
-            after an update constitutes acceptance of the revised Policy where
-            permitted by law.
+            Lawful basis mapping (consent vs other DPDP grounds){" "}
+            <span className="font-medium text-foreground">
+              REQUIRES LEGAL REVIEW
+            </span>
+            . The website collects an unticked opt-in for the enquiry and
+            request purposes above; that is a technical control, not a legal
+            conclusion.
           </p>
         </LegalSectionBlock>
 
-        <LegalSectionBlock id="contact" title="13. Contact">
+        <LegalSectionBlock id="how-handled" title="6. How data is handled">
+          <p>Implemented path:</p>
+          <ol className="list-decimal space-y-1.5 pl-5">
+            <li>
+              The browser submits a same-origin POST to this website’s API
+              route.
+            </li>
+            <li>
+              The API validates fields and, if configured, forwards JSON to a
+              Google Apps Script web app URL stored in server environment
+              variable <span className="font-medium text-foreground">GOOGLE_APPS_SCRIPT_URL</span>.
+            </li>
+            <li>
+              The Apps Script appends a row to a Google Sheet tab named{" "}
+              <span className="font-medium text-foreground">Leads</span>{" "}
+              (enquiries) or{" "}
+              <span className="font-medium text-foreground">
+                DataRightsRequests
+              </span>{" "}
+              (rights requests), as implemented in{" "}
+              <span className="font-medium text-foreground">
+                scripts/google-apps-script.js
+              </span>
+              .
+            </li>
+          </ol>
           <p>
-            For privacy questions or requests, contact:
+            There is no application database, user login, or in-app deletion
+            UI. Correction and erasure, if required, are operational actions on
+            the Sheet (and any copies people make of it).{" "}
+            <Placeholder>{UNCONFIRMED.googleWorkspaceAccount}</Placeholder>
+          </p>
+        </LegalSectionBlock>
+
+        <LegalSectionBlock id="consent" title="7. Consent and withdrawal">
+          <p>
+            Enquiry submission requires a checkbox that is off by default. The
+            checkbox covers responding to that enquiry only. It is not bundled
+            with marketing.
           </p>
           <p>
-            {SITE.legalName}
-            <br />
-            Email:{" "}
+            Data-rights submission requires a separate checkbox, off by default,
+            covering handling of that request only.
+          </p>
+          <p>
+            To withdraw consent or ask for erasure, use the{" "}
+            <Link href="/privacy/data-rights" className={linkClass}>
+              data rights request form
+            </Link>{" "}
+            or email{" "}
             <a href={`mailto:${SITE.email}`} className={linkClass}>
               {SITE.email}
             </a>
-            <br />
-            Web:{" "}
-            <Link href="/contact" className={linkClass}>
-              Contact page
-            </Link>
+            . There is no self-service toggle that immediately deletes Sheet
+            rows. Whether a particular withdrawal must stop all processing{" "}
+            <span className="font-medium text-foreground">
+              REQUIRES LEGAL REVIEW
+            </span>
+            .
+          </p>
+        </LegalSectionBlock>
+
+        <LegalSectionBlock id="retention" title="8. Retention">
+          <p>
+            The application does not delete enquiry or request rows on a timer.
+            Google Sheets rows remain until someone with access to the Sheet
+            deletes them.
           </p>
           <p>
-            Business hours: {SITE.businessHours}. {SITE.responseTime}.
+            Enquiry retention:{" "}
+            <Placeholder>{UNCONFIRMED.enquiryRetention}</Placeholder>
+          </p>
+          <p>
+            Data-rights request retention:{" "}
+            <Placeholder>{UNCONFIRMED.rightsRetention}</Placeholder>
+          </p>
+          <p>
+            <span className="font-medium text-foreground">
+              REQUIRES LEGAL REVIEW
+            </span>{" "}
+            — DPDP retention must be purpose-limited; a period cannot be invented
+            in engineering copy.
+          </p>
+        </LegalSectionBlock>
+
+        <LegalSectionBlock
+          id="third-parties"
+          title="9. Third parties and processors"
+        >
+          <p>
+            The following services appear in code or deployment configuration.
+            Contractual processor status{" "}
+            <span className="font-medium text-foreground">
+              REQUIRES LEGAL REVIEW
+            </span>
+            .
+          </p>
+          <ul className="list-disc space-y-1.5 pl-5">
+            <li>
+              <span className="font-medium text-foreground">
+                Google Apps Script / Google Sheets
+              </span>{" "}
+              — stores enquiry and data-rights rows when the webhook URL is
+              configured.
+            </li>
+            <li>
+              <span className="font-medium text-foreground">
+                Hosting / Next.js production runtime
+              </span>{" "}
+              — environment comments refer to Vercel for production. Confirm
+              the live host and region operationally.{" "}
+              <Placeholder>{UNCONFIRMED.hostingRegion}</Placeholder>
+            </li>
+            <li>
+              <span className="font-medium text-foreground">
+                Email mailbox for {SITE.email}
+              </span>{" "}
+              — used if a person emails that address; provider not specified in
+              this repo.
+            </li>
+          </ul>
+          <p>
+            Not found in this codebase: advertising pixels, Google Analytics /
+            gtag, Meta Pixel, Hotjar, Mixpanel, PostHog, WhatsApp Business API,
+            payment processors, CAPTCHA vendors, CRM SDKs, or auth providers.
+          </p>
+          <p>
+            LinkedIn is linked as an outbound company page URL. That is not a
+            tracking pixel in this repository.
+          </p>
+        </LegalSectionBlock>
+
+        <LegalSectionBlock
+          id="cookies"
+          title="10. Cookies and similar technologies"
+        >
+          <p>
+            No analytics, advertising, or non-essential tracking cookies are
+            implemented in application code. No cookie consent banner is
+            therefore gating third-party trackers, because none were found.
+          </p>
+          <p>
+            <span className="font-medium text-foreground">next-themes</span> is
+            mounted in the root provider and, by library default, may persist a
+            theme preference in browser localStorage. That is not a marketing
+            cookie. The theme toggle component exists but is not rendered in the
+            current header/footer.
+          </p>
+          <p>
+            Fonts are loaded through <span className="font-medium text-foreground">next/font</span>,
+            which self-hosts at build time rather than calling Google Fonts in
+            the visitor’s browser from this app code.
+          </p>
+          <p>
+            The hosting platform may still set essential cookies for security
+            or routing. Those are not declared in this repository. If marketing
+            or analytics tags are added later, they must be gated and this
+            notice updated.
+          </p>
+        </LegalSectionBlock>
+
+        <LegalSectionBlock id="rights" title="11. Rights of data principals">
+          <p>
+            <span className="font-medium text-foreground">
+              REQUIRES LEGAL REVIEW.
+            </span>{" "}
+            Under the Digital Personal Data Protection Act, 2023, a Data
+            Principal may have rights including access to information about
+            processing, correction and erasure, withdrawal of consent where
+            processing is based on consent, and grievance redressal. Nomination
+            and other rights may also apply under the Act and Rules. This
+            paragraph is a pointer to the statute, not a complete statement of
+            law.
+          </p>
+          <p>
+            Technical channel implemented:{" "}
+            <Link href="/privacy/data-rights" className={linkClass}>
+              /privacy/data-rights
+            </Link>
+            . The form does not automatically expose stored personal data.
+          </p>
+        </LegalSectionBlock>
+
+        <LegalSectionBlock id="grievance" title="12. Grievance and contact">
+          <p>
+            Public website contact currently published in code:{" "}
+            <a href={`mailto:${SITE.email}`} className={linkClass}>
+              {SITE.email}
+            </a>
+            . This is the enquiry mailbox, not a confirmed statutory grievance
+            officer.
+          </p>
+          <p>
+            Grievance officer name:{" "}
+            <Placeholder>{UNCONFIRMED.grievanceOfficerName}</Placeholder>
+          </p>
+          <p>
+            Grievance officer contact:{" "}
+            <Placeholder>{UNCONFIRMED.grievanceOfficerContact}</Placeholder>
+          </p>
+          <p>
+            That placeholder is not repeated in the site footer until the
+            business confirms the correct contact.{" "}
+            <span className="font-medium text-foreground">
+              REQUIRES LEGAL REVIEW
+            </span>{" "}
+            and business confirmation before it is published as an official
+            DPDP grievance channel.
+          </p>
+        </LegalSectionBlock>
+
+        <LegalSectionBlock id="children" title="13. Children">
+          <p>
+            The Site is presented as a business / professional enquiry channel.
+            The DPDP Act defines a child as a person who has not completed
+            eighteen years of age. Whether additional verifiable-consent or
+            restriction duties apply to this Site{" "}
+            <span className="font-medium text-foreground">
+              REQUIRES LEGAL REVIEW
+            </span>
+            .
+          </p>
+          <p>
+            The forms do not implement age verification. Do not submit a child’s
+            personal data through the enquiry form.
+          </p>
+        </LegalSectionBlock>
+
+        <LegalSectionBlock id="security" title="14. Security (technical)">
+          <p>
+            Implemented in this audit branch: same-origin checks, in-memory rate
+            limits, honeypot field, server-side validation, optional webhook
+            secret, and basic security headers. No method of transmission or
+            storage is guaranteed secure. A personal-data incident should follow
+            the organisation’s breach process once that process is confirmed
+            with counsel.
+          </p>
+        </LegalSectionBlock>
+
+        <LegalSectionBlock id="changes" title="15. Changes">
+          <p>
+            When this notice changes, the version string{" "}
+            <span className="font-medium text-foreground">
+              {PRIVACY_NOTICE_VERSION}
+            </span>{" "}
+            should be updated in code so new consent records point to the new
+            text. Automatically changing a “last updated” date every day without
+            a policy change is not used for this page.
           </p>
         </LegalSectionBlock>
       </LegalDocument>
