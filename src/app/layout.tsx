@@ -9,11 +9,8 @@ import "./globals.css";
 export const metadata: Metadata = defaultMetadata;
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafaf8" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b1220" },
-  ],
-  colorScheme: "dark light",
+  themeColor: "#fafaf8",
+  colorScheme: "light",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -28,7 +25,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${inter.variable}`}
+      className={`light ${geistSans.variable} ${geistMono.variable} ${inter.variable}`}
+      style={{ colorScheme: "light" }}
       suppressHydrationWarning
     >
       <head>
